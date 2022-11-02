@@ -33,16 +33,17 @@ steps:
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
     allowTelemetryCollection: false
-    terraformVersion: '1.0.0'
+    terraformVersion: '1.3.0'
 
 - task: TerraformCLI@0 
   displayName: 'Terraform Plan'
   inputs:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-    commandOptions: '-var-file="prod.tfvars"' 
+    commandOptions: '-var-file="prod.tfvars" -out="bank-prod.tfplan"' 
     allowTelemetryCollection: false
     publishPlanResults: 'bank-prod.tfplan'
+
 - task: TerraformCLI@0
   displayName: 'Terraform Apply'
   inputs:
