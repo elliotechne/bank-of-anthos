@@ -1,2 +1,2 @@
 region="us-east-2"
-bucket_name="wayofthesys-tmp"
+bucket_name="wayofthesys-tmp2"
