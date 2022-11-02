@@ -31,7 +31,7 @@ steps:
   displayName: 'Terraform Plan'
   inputs:
     command: 'plan'
-    commandOptions: '-var=region="us-east-2"'
+    commandOptions: '-var=region="us-east-2" -var"access_key=$(access_key)" -var"secret_key=$(secret_key)"'
     allowTelemetryCollection: false
     publishPlanResults: 'bank-prod.tfplan'
 - task: TerraformCLI@0
