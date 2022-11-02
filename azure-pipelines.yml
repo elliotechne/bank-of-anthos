@@ -1,0 +1,54 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: '1.0.0'
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
+    backendType: 'aws'
+    allowTelemetryCollection: true
+    backendAwsRegion: 'us-east-2'
+    backendAwsBucket: 'wayofthesys'
+    backendAwsKey: 'terraform.tfstate'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
+    allowTelemetryCollection: false
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'plan'
+    commandOptions: '-var=region="us-east-2"'
+    allowTelemetryCollection: false
+    publishPlanResults: 'bank-prod.tfplan'
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
+    commandOptions: 'bank-prod.tfplan'
+    allowTelemetryCollection: false
+    providerServiceAws: 'WayOfTheSys'
+    providerAwsRegion: 'us-east-2'
+
