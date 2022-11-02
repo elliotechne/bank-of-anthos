@@ -9,7 +9,13 @@ trigger:
 pool: MBP
 
 steps:
+
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: '1.0.0'
+    
 - task: TerraformCLI@0
+  displayName: 'Terraform Init'
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
@@ -20,12 +26,14 @@ steps:
     backendAwsBucket: 'wayofthesys'
     backendAwsKey: 'bank-prod.tfstate'
 
+
 - task: TerraformCLI@0
   displayName: 'Terraform Validate'
   inputs:
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
     allowTelemetryCollection: false
+    terraformVersion: '1.0.0'
 
 - task: TerraformCLI@0 
   displayName: 'Terraform Plan'
