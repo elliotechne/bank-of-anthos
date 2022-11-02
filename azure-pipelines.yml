@@ -39,6 +39,7 @@ steps:
   displayName: 'Terraform Plan'
   inputs:
     command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
     commandOptions: '-var-file="prod.tfvars"' 
     allowTelemetryCollection: false
     publishPlanResults: 'bank-prod.tfplan'
