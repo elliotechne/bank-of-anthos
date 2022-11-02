@@ -10,15 +10,15 @@ pool: MBP
 
 steps:
 - task: TerraformCLI@0
-  displayName: 'Terraform Init'
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
     backendType: 'aws'
-    allowTelemetryCollection: true
+    allowTelemetryCollection: false
+    backendServiceAws: 'WayOfTheSys'
     backendAwsRegion: 'us-east-2'
     backendAwsBucket: 'wayofthesys'
-    backendAwsKey: 'terraform.tfstate'
+    backendAwsKey: 'bank-prod.tfstate'
 
 - task: TerraformCLI@0
   displayName: 'Terraform Validate'
