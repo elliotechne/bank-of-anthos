@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: TerraformCLI@0
+  displayName: 'Terraform Init'
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
@@ -21,18 +22,21 @@ steps:
     backendAwsKey: 'terraform.tfstate'
 
 - task: TerraformCLI@0
+  displayName: 'Terraform Validate'
   inputs:
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
     allowTelemetryCollection: false
 
-- task: TerraformCLI@0
+- task: TerraformCLI@0 
+  displayName: 'Terraform Plan'
   inputs:
     command: 'plan'
     commandOptions: '-var=region="us-east-2"'
     allowTelemetryCollection: false
     publishPlanResults: 'bank-prod.tfplan'
 - task: TerraformCLI@0
+  displayName: 'Terraform Apply'
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
