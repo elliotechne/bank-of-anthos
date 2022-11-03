@@ -49,7 +49,7 @@ steps:
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-    commandOptions: 'bank-prod.plan -var-file=prod.tfvars -var=region="us-east-2"'
+    commandOptions: 'bank-prod.plan -var-file=prod.tfvars'
     allowTelemetryCollection: false
     providerServiceAws: 'WayOfTheSys'
     providerAwsRegion: 'us-east-2'
