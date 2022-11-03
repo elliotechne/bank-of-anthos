@@ -51,5 +51,3 @@ steps:
     commandOptions: 'bank-prod.plan'
     allowTelemetryCollection: false
     providerServiceAws: 'WayOfTheSys'
-    providerAwsRegion: 'us-east-2'
-
