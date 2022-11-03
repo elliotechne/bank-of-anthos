@@ -41,7 +41,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
     commandOptions: '-var-file="prod.tfvars" -out="bank-prod.out" -detailed-exitcode' 
     allowTelemetryCollection: false
-    publishPlanResults: 'bank-prod.out'
+    # publishPlanResults: 'bank-prod.out'
     providerAwsRegion: 'us-east-2'
 
 - task: TerraformCLI@0
