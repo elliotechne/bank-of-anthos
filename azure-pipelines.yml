@@ -51,3 +51,4 @@ steps:
     commandOptions: 'bank-prod.plan -var-file=prod.tfvars -var=region="us-east-2"'
     allowTelemetryCollection: false
     providerServiceAws: 'WayOfTheSys'
+    regionName: 'us-east-2'
