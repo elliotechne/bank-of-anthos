@@ -49,7 +49,7 @@ steps:
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-    commandOptions: 'bank-prod.out'
+    commandOptions: '"bank-prod.out"'
     allowTelemetryCollection: false
     providerServiceAws: 'WayOfTheSys'
     providerAwsRegion: 'us-east-2'
