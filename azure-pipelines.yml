@@ -39,7 +39,7 @@ steps:
   inputs:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-    commandOptions: '-var-file="prod.tfvars" -out=bank-prod.plan -detailed-exitcode"' 
+    commandOptions: '-var-file="prod.tfvars" -out="bank-prod.plan" -detailed-exitcode' 
     allowTelemetryCollection: false
     publishPlanResults: 'bank-prod.plan'
     providerAwsRegion: 'us-east-2'
