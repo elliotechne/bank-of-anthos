@@ -41,7 +41,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
     commandOptions: '-var-file="prod.tfvars" -out="bank-prod.plan" -detailed-exitcode' 
     allowTelemetryCollection: false
-    publishPlanResults: 'bank-prod.plan'
+    publishPlanResults: 'bank-prod.out'
     providerAwsRegion: 'us-east-2'
 
 - task: TerraformCLI@0
@@ -49,7 +49,7 @@ steps:
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-    commandOptions: 'bank-prod.plan'
+    commandOptions: 'bank-prod.out'
     allowTelemetryCollection: false
     providerServiceAws: 'WayOfTheSys'
     providerAwsRegion: 'us-east-2'
