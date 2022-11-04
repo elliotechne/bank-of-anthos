@@ -12,3 +12,8 @@ variable "zerossl_eab_hmac_key" {
     description = "ZeroSSL eab hmac key"
     type = string
 }
+
+variable "zerossl_email" {
+    description = "ZeroSSL email"
+    type = string
+}
