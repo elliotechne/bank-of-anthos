@@ -2,7 +2,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 18.0"
 
-  cluster_name    = "tf-operator"
+  cluster_name    = "prod"
   cluster_version = "1.22"
 
   cluster_endpoint_private_access = true
