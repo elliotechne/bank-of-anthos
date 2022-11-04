@@ -39,7 +39,7 @@ steps:
   inputs:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-    commandOptions: '-var-file="prod.tfvars" -out="bank-prod.out" -detailed-exitcode' 
+    commandOptions: '-var-file="prod.tfvars" -out="bank-prod.out" -var="ZEROSSL_EAB_KEY_ID"=$(ZEROSSL_EAB_KEY_ID) -var="ZEROSSL_EAB_HMAC_KEY"=$(ZEROSSL_EAB_HMAC_KEY) -detailed-exitcode' 
     allowTelemetryCollection: false
     # publishPlanResults: 'bank-prod.out'
     providerAwsRegion: 'us-east-2'
