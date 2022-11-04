@@ -48,6 +48,11 @@ module "eks" {
       username = "badams"
       groups   = ["system:masters"]
     },
+    {
+      userarn  = "arn:aws:iam::233510574809:user/azuredevops"
+      username = "azuredevops"
+      groups   = ["system:masters"]
+    },
   ]
 
   aws_auth_accounts = [
