@@ -1,5 +1,5 @@
 resource "helm_release" "cluster-issuer" {
-  provider  = helm.cinema
+  provider  = helm
   name      = "cluster-issuer"
   chart     = "charts/cluster-issuer"
   namespace = "kube-system"
