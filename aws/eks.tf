@@ -58,3 +58,4 @@ module "eks" {
     Environment = "prod"
     Terraform   = "true"
   }
+}
