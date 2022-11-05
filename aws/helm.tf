@@ -42,6 +42,16 @@ resource "helm_release" "cert-manager" {
   }
 }
 
+resource "helm_release" "metrics-server" {
+  provider        = helm
+  repository      = local.istio-repo
+  name            = "metrics-server"
+  chart           = "metrics-server"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "kube-system" 
+}
+
 resource "helm_release" "istio-base" {
   provider        = helm
   repository      = local.istio-repo
@@ -50,7 +60,7 @@ resource "helm_release" "istio-base" {
   cleanup_on_fail = true
   force_update    = true
   namespace       = kubernetes_namespace.istio-system.metadata.0.name
-  depends_on      = [kubernetes_namespace.istio-system]
+  depends_on      = [kubernetes_namespace.istio-system, helm_release.metrics-server]
 }
 
 resource "helm_release" "istiod" {
@@ -93,5 +103,5 @@ resource "helm_release" "istio-ingress" {
   cleanup_on_fail = true
   force_update    = true
   namespace       = kubernetes_namespace.istio-system.metadata.0.name
-  depends_on      = [helm_release.istiod]
+  depends_on      = [helm_release.istiod, helm_release.istio-base]
 }
