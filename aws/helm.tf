@@ -95,6 +95,7 @@ resource "helm_release" "istiod" {
 }
 
 
+/*
 resource "helm_release" "istio-ingress" {
   provider        = helm
   repository      = local.istio-repo
@@ -105,3 +106,4 @@ resource "helm_release" "istio-ingress" {
   namespace       = kubernetes_namespace.istio-ingress.metadata.0.name
   depends_on      = [helm_release.istiod, helm_release.istio-base, kubernetes_namespace.istio-ingress]
 }
+*/
