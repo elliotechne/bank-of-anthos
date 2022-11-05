@@ -2,7 +2,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 18.0"
 
-  cluster_name    = "prod-bank"
+  cluster_name    = "prod"
   cluster_version = "1.23"
 
   cluster_endpoint_private_access = true
