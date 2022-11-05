@@ -1,11 +1,11 @@
 resource "helm_release" "cluster-issuer" {
   provider  = helm
-  depends_on = helm_release.cert-manager
   name      = "cluster-issuer"
   chart     = "charts/cluster-issuer"
   namespace = "kube-system"
   depends_on = [
-    module.eks
+    module.eks,
+    helm_release.cert-manager
   ]
   set_sensitive {
     name  = "zerossl_email"
