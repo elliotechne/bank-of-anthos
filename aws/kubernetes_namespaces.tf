@@ -21,3 +21,14 @@ resource "kubernetes_namespace" "istio-system" {
     name = "istio-system"
   }
 }
+
+resource "kubernetes_namespace" "istio-ingress" {
+  depends_on = [module.eks]
+  provider   = kubernetes
+  metadata {
+    annotations = {
+      istio-injection = "enabled"
+    }
+    name = "istio-ingress"
+  }
+}

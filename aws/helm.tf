@@ -102,6 +102,6 @@ resource "helm_release" "istio-ingress" {
   chart           = "gateway"
   cleanup_on_fail = true
   force_update    = true
-  namespace       = kubernetes_namespace.istio-system.metadata.0.name
-  depends_on      = [helm_release.istiod, helm_release.istio-base]
+  namespace       = kubernetes_namespace.istio-ingress.metadata.0.name
+  depends_on      = [helm_release.istiod, helm_release.istio-base, kubernetes_namespace.istio-ingress]
 }
