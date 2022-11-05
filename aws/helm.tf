@@ -5,18 +5,20 @@ resource "helm_release" "cluster-issuer" {
   namespace = "kube-system"
   depends_on = [
     module.eks,
-    helm_release.cert-manager
+    helm_release.cert-manager,
+    kubernetes_secret.zerossl_eab_hmac_key,
+    kubernetes_secret.zerossl_eab_key_id
   ]
   set_sensitive {
-    name  = "zerossl-email"
+    name  = "zerossl_email"
     value = var.zerossl_email
   }
   set_sensitive {
-    name  = "zerossl-eab-hmac-key"
+    name  = "zerossl_eab_hmac_key"
     value = var.zerossl_eab_hmac_key
   }
   set_sensitive {
-    name  = "zerossl-eab-key-id"
+    name  = "zerossl_eab_key_id"
     value = var.zerossl_eab_key_id
   }
 }
