@@ -8,6 +8,8 @@ module "eks" {
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 
+  enable_irsa = true 
+
   cluster_addons = {
     coredns = {
       resolve_conflicts = "OVERWRITE"
