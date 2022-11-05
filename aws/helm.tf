@@ -91,7 +91,7 @@ resource "helm_release" "istiod" {
     name  = "tracing.enabled"
     value = "true"
   }
-  depends_on = [helm_release.istio-base]
+  depends_on = [helm_release.istio-base, helm_release.istio-cni]
 }
 
 /*
