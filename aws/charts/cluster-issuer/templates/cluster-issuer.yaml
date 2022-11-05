@@ -4,10 +4,10 @@ metadata:
   name: zerossl 
 spec:
   acme:
-    email: {{ .Values.zerossl_email }}
+    email: {{ .Values.zerossl-email }}
     server: https://acme.zerossl.com/v2/DV90
     externalAccountBinding:
-      keyID: {{ .Values.zerossl_eab_key_id }}
+      keyID: {{ .Values.zerossl-eab-key-id }}
       keySecretRef:
         name: zerossl-eab-hmac-key 
         key: secret

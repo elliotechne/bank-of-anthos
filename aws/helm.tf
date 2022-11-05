@@ -8,7 +8,7 @@ resource "helm_release" "cluster-issuer" {
     helm_release.cert-manager
   ]
   set_sensitive {
-    name  = "zerossl_email"
+    name  = "zerossl-email"
     value = var.zerossl_email
   }
   set_sensitive {
