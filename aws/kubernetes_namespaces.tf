@@ -1,6 +1,6 @@
 resource "kubernetes_namespace" "cert-manager" {
   depends_on = [module.eks]
-  provider   = kubernetes.cinema
+  provider   = kubernetes
   metadata {
     name = "cert-manager"
     labels = {
@@ -11,7 +11,7 @@ resource "kubernetes_namespace" "cert-manager" {
 
 resource "kubernetes_namespace" "external-dns" {
   depends_on = [module.eks]
-  provider   = kubernetes.cinema
+  provider   = kubernetes
   metadata {
     name = "external-dns"
   }
