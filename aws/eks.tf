@@ -2,7 +2,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 18.0"
 
-  cluster_name    = "production"
+  cluster_name    = "prod-bank"
   cluster_version = "1.23"
 
   cluster_endpoint_private_access = true
@@ -21,7 +21,7 @@ module "eks" {
   }
 
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = [ module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.public_subnets[2], module.vpc.private_subnets[0], module.vpc.private_subnets[1], module.vpc.private_subnets[2]]
+  subnet_ids = flatten([module.vpc.private_subnets, module.vpc.public_subnets]) 
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
