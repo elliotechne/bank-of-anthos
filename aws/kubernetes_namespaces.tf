@@ -3,9 +3,6 @@ resource "kubernetes_namespace" "cert-manager" {
   provider   = kubernetes
   metadata {
     name = "cert-manager"
-    labels = {
-      "istio.io/rev" = "asm-managed-regular"
-    }
   }
 }
 
@@ -14,5 +11,13 @@ resource "kubernetes_namespace" "external-dns" {
   provider   = kubernetes
   metadata {
     name = "external-dns"
+  }
+}
+
+resource "kubernetes_namespace" "istio-system" {
+  depends_on = [module.eks]
+  provider   = kubernetes
+  metadata {
+    name = "istio-system"
   }
 }
