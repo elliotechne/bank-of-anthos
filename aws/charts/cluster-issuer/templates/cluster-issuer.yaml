@@ -18,8 +18,3 @@ spec:
     - http01:
         ingress:
           class: istio
-    - dns01:
-        digitalocean:
-          tokenSecretRef:
-            name: digital-ocean-secret 
-            key: token 

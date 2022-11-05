@@ -10,15 +10,15 @@ resource "helm_release" "cluster-issuer" {
     kubernetes_secret.zerossl_eab_key_id
   ]
   set_sensitive {
-    name  = "zerossl_email"
+    name  = "zerossl-email"
     value = var.zerossl_email
   }
   set_sensitive {
-    name  = "zerossl_eab_hmac_key"
+    name  = "zerossl-eab-hmac-key"
     value = var.zerossl_eab_hmac_key
   }
   set_sensitive {
-    name  = "zerossl_eab_key_id"
+    name  = "zerossl-eab-key-id"
     value = var.zerossl_eab_key_id
   }
 }
