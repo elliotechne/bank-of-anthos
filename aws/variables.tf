@@ -17,3 +17,9 @@ variable "zerossl_email" {
     description = "ZeroSSL email"
     type = string
 }
+
+variable "domain_name" {
+    description = "Primary domain name"
+    type = list
+    default = ["wayofthesys.com"]
+}
