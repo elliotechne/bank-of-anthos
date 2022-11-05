@@ -4,7 +4,30 @@ module "external_dns_without_irsa_policy" {
 
   enabled = true
 
-  irsa_policy_enabled              = false
+  helm_release_name = "external-dns"
+  namespace         = "external-dns"
+
+  values = yamlencode({
+    "LogLevel" : "debug"
+    "provider" : "aws"
+    "registry" : "txt"
+    "txtOwnerId" : "eks-cluster"
+    "txtPrefix" : "external-dns"
+    "policy" : "sync"
+    "domainFilters" : [
+      var.domain_name[0]
+    ]
+    "publishInternalServices" : "true"
+    "triggerLoopOnEvent" : "true"
+    "interval" : "5s"
+    "podLabels" : {
+      "app" : "aws-external-dns-helm"
+    }
+  })
+
+  helm_timeout = 240
+  helm_wait    = true
+
   cluster_identity_oidc_issuer     = module.eks.cluster_oidc_issuer_url
   cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
 }
