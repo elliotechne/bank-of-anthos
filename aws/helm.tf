@@ -95,18 +95,3 @@ resource "helm_release" "istio-ingress" {
   namespace       = kubernetes_namespace.istio-system.metadata.0.name
   depends_on      = [helm_release.istiod]
 }
-
-resource "helm_release" "istio-egress" {
-  provider        = helm
-  repository      = local.istio-repo
-  name            = "istio-egressgateway"
-  chart           = "gateway"
-  cleanup_on_fail = true
-  force_update    = true
-  namespace       = kubernetes_namespace.istio-system.metadata.0.name
-  set {
-    name  = "service.type"
-    value = "ClusterIP"
-  }
-  depends_on = [helm_release.istiod]
-}
