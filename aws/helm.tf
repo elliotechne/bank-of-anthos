@@ -44,7 +44,7 @@ resource "helm_release" "cert-manager" {
 
 resource "helm_release" "metrics-server" {
   provider        = helm
-  repository      = local.istio-repo
+  repository      = local.metrics-server
   name            = "metrics-server"
   chart           = "metrics-server"
   cleanup_on_fail = true
