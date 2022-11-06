@@ -29,8 +29,8 @@ resource "kubernetes_secret" "zerossl_eab_key_id" {
 }
 
 resource "kubernetes_secret" "argocd-tls" {
-  provider   = kubernetes.cinema
-  depends_on = [digitalocean_kubernetes_cluster.cinema, helm_release.external-dns, kubernetes_namespace.cinema]
+  provider   = kubernetes
+  depends_on = [module.gke, helm_release.external-dns]
   metadata {
     name = "argocd-tls"
     namespace = "istio-system"
@@ -51,7 +51,7 @@ resource "kubernetes_secret" "argocd-tls" {
 
 resource "kubernetes_secret" "wayofthesys-tls" {
   provider   = kubernetes
-  depends_on = [digitalocean_kubernetes_cluster.cinema, helm_release.external-dns, kubernetes_namespace.cinema]
+  depends_on = [module.gke, helm_release.external-dns] 
   metadata {
     name      = "${replace(var.domain_name[0], ".", "-")}-tls"
     namespace = "istio-system"
