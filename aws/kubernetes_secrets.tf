@@ -30,7 +30,7 @@ resource "kubernetes_secret" "zerossl_eab_key_id" {
 
 resource "kubernetes_secret" "argocd-tls" {
   provider   = kubernetes
-  depends_on = [module.eks, helm_release.external-dns]
+  depends_on = [module.eks, module.external_dns]
   metadata {
     name = "argocd-tls"
     namespace = "istio-system"
@@ -51,7 +51,7 @@ resource "kubernetes_secret" "argocd-tls" {
 
 resource "kubernetes_secret" "wayofthesys-tls" {
   provider   = kubernetes
-  depends_on = [module.eks, helm_release.external-dns] 
+  depends_on = [module.eks, module.external_dns] 
   metadata {
     name      = "${replace(var.domain_name[0], ".", "-")}-tls"
     namespace = "istio-system"

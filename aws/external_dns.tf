@@ -1,4 +1,4 @@
-module "external_dns_without_irsa_policy" {
+module "external_dns" {
   depends_on = [module.eks]
   source = "git::https://github.com/lablabs/terraform-aws-eks-external-dns"
 
