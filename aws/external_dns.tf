@@ -24,7 +24,9 @@ module "external_dns" {
       "app" : "aws-external-dns-helm"
     }
     "sources" : [ 
-       "ingress,service,istio-gateway"
+       "ingress"
+       "service"
+       "istio-gateway"
     ]
     "istio-ingress-gateway" : "istio-system/istio-ingressgateway"
   })
