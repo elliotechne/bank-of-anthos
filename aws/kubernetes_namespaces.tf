@@ -35,3 +35,14 @@ resource "kubernetes_namespace" "istio-ingress" {
     name = "istio-ingress"
   }
 }
+
+resource "kubernetes_namespace" "argocd" {
+  depends_on = [module.eks]
+  provider   = kubernetes
+  metadata {
+    labels = {
+      istio-injection = "enabled"
+    }
+    name = "argocd"
+  }
+}
