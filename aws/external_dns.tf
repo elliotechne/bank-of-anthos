@@ -23,7 +23,7 @@ module "external_dns" {
     "podLabels" : {
       "app" : "aws-external-dns-helm"
     }
-    "sources" : "{ingress,service,istio-gateway}"
+    "sources" : "ingress,service,istio-gateway"
     "istio-ingress-gateway" : "istio-system/istio-ingressgateway"
   })
 
