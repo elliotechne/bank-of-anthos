@@ -1,5 +1,5 @@
 resource "kubernetes_manifest" "argocd_virtualservice" {
-  provider   = kubernetes.cinema
+  provider   = kubernetes
   depends_on = [module.eks, helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
