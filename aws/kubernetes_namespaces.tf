@@ -32,7 +32,6 @@ resource "kubernetes_namespace" "istio-ingress" {
     labels = {
       istio-injection = "enabled"
     }
-  }
     name = "istio-ingress"
   }
 }
