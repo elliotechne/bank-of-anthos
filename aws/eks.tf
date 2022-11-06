@@ -55,7 +55,11 @@ module "eks" {
     }
   }
 
-  node_security_group_additional_rules = {
+  node_security_group_additional_rules = merge( # {
+    local.ingress_rules,
+    local.egress_rules
+  )
+    /*
     ingress_self_all = {
       description = "Node to node all ports/protocols"
       protocol    = "-1"
@@ -73,7 +77,7 @@ module "eks" {
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = ["::/0"]
     }
-  }
+  } */
 
   aws_auth_users = [
     {
