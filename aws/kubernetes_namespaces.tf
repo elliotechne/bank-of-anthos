@@ -19,6 +19,9 @@ resource "kubernetes_namespace" "istio-system" {
   provider   = kubernetes
   metadata {
     name = "istio-system"
+    labels = {
+      istio-injection = "enabled"
+    }
   }
 }
 
@@ -26,9 +29,10 @@ resource "kubernetes_namespace" "istio-ingress" {
   depends_on = [module.eks]
   provider   = kubernetes
   metadata {
-    annotations = {
+    labels = {
       istio-injection = "enabled"
     }
+  }
     name = "istio-ingress"
   }
 }
