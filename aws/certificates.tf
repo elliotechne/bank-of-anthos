@@ -1,6 +1,6 @@
 resource "kubernetes_manifest" "certificate_argo" {
   depends_on = [module.eks]
-  provider = kubernetes
+  provider   = kubernetes
   manifest = {
     "apiVersion" = "cert-manager.io/v1"
     "kind"       = "Certificate"
@@ -17,7 +17,21 @@ resource "kubernetes_manifest" "certificate_argo" {
         "kind" = "ClusterIssuer"
         "name" = "zerossl"
       }
+      "commonName" = var.domain_name[0]
+      "dnsNames" = [
+        var.domain_name[0]
+      ]
       "secretName" = "argocd-tls"
+      "acme" = {
+        "config" = {
+          "http01" = {
+            "ingressClass" = "istio"
+          },
+          "domains" = [
+            "argocd.${var.domain_name[0]}"
+          ]
+        }
+      }
     }
   }
 }
