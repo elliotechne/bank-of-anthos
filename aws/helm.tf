@@ -17,18 +17,18 @@ resource "helm_release" "argocd" {
     value = "{--insecure}"
   }
 
-  set { 
+  set {
     name  = "extensions.enabled"
     value = "true"
   }
 
   set {
-    name = "extensions.contents.name"
+    name  = "extensions.contents.name"
     value = "argo-rollouts"
   }
 
   set {
-    name = "extensions.contents.url"
+    name  = "extensions.contents.url"
     value = "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.1.0/extension.tar"
   }
 }
@@ -75,6 +75,9 @@ resource "helm_release" "cert-manager" {
     name  = "installCRDs"
     value = "true"
   }
+  set { 
+    name = extraArgs
+    value = '{--dns01-recursive-nameservers-only,--dns01-recursive-nameservers=8.8.8.8:53"}'
 }
 
 resource "helm_release" "metrics-server" {
@@ -84,7 +87,7 @@ resource "helm_release" "metrics-server" {
   chart           = "metrics-server"
   cleanup_on_fail = true
   force_update    = true
-  namespace       = "kube-system" 
+  namespace       = "kube-system"
 }
 
 resource "helm_release" "istio-base" {
@@ -147,6 +150,6 @@ resource "helm_release" "istio-cni" {
   chart           = "cni"
   cleanup_on_fail = true
   force_update    = true
-  namespace       = "kube-system" 
+  namespace       = "kube-system"
   depends_on      = [helm_release.istio-base, kubernetes_namespace.istio-ingress]
 }
