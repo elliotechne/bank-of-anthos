@@ -52,16 +52,6 @@ locals {
 
   istio_ports = [
     {
-      description = "80 inbound"
-      from_port   = 80
-      to_port     = 80
-    },
-    {
-      description = "443 inbound"
-      from_port   = 443
-      to_port     = 443
-    },
-    {
       description = "Envoy admin port / outbound"
       from_port   = 15000
       to_port     = 15001

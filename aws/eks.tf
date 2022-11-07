@@ -8,7 +8,7 @@ module "eks" {
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 
-  enable_irsa = true 
+  enable_irsa = true
 
   cluster_addons = {
     coredns = {
@@ -21,7 +21,7 @@ module "eks" {
   }
 
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = flatten([module.vpc.private_subnets, module.vpc.public_subnets]) 
+  subnet_ids = flatten([module.vpc.private_subnets, module.vpc.public_subnets])
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
@@ -59,7 +59,6 @@ module "eks" {
     local.ingress_rules,
     local.egress_rules
   )
-    /*
     ingress_self_all = {
       description = "Node to node all ports/protocols"
       protocol    = "-1"
@@ -77,7 +76,7 @@ module "eks" {
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = ["::/0"]
     }
-  } */
+  } 
 
   aws_auth_users = [
     {
