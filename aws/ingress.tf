@@ -1,4 +1,4 @@
-resource "kubernetes_ingress" "atlantis_events_cluster_ingress" {
+resource "kubernetes_ingress_v1" "argocd" {
   depends_on = [
     helm_release.argocd
   ]
