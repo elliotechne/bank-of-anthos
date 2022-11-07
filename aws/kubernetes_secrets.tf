@@ -75,7 +75,7 @@ resource "kubernetes_secret" "external-dns" {
   depends_on = [module.eks, module.external_dns]
   metadata {
     name      = "externaldns"
-    namespace = "kube-system"
+    namespace = "cert-manager"
   }
   type = "opaque"
   data = {
