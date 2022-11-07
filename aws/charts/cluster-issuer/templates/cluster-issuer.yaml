@@ -25,7 +25,7 @@ spec:
           secretAccessKeySecretRef:
             name: externaldns
             key: secret-key
-    # - http01:
-    #     ingress:
-    #       class: istio
+    - http01:
+        ingress:
+          class: istio
     
