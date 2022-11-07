@@ -75,7 +75,7 @@ resource "kubernetes_secret" "external-dns" {
   depends_on = [module.eks, module.external_dns]
   metadata {
     name      = "externaldns"
-    namespace = "istio-system"
+    namespace = "kube-system"
   }
   type = "opaque"
   data = {
