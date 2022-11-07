@@ -33,3 +33,8 @@ variable "domain_name" {
     type = list
     default = ["wayofthesys.com"]
 }
+
+variable "externaldns_secret_key" {
+    description = "ExternalDNS Secret Key"
+    type = string
+}

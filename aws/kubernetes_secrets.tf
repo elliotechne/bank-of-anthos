@@ -69,3 +69,23 @@ resource "kubernetes_secret" "wayofthesys-tls" {
     ]
   }
 }
+
+resource "kubernetes_secret" "external-dns" {
+  provider   = kubernetes
+  depends_on = [module.eks, module.external_dns] 
+  metadata {
+    name      = "externaldns"
+    namespace = "istio-system"
+  }
+  type = "opaque"
+  data = {
+    access-key = var.externaldns_secret_key
+  }
+
+  lifecycle {
+    ignore_changes = [
+      data,
+      metadata
+    ]
+  }
+}
