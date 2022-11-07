@@ -4,12 +4,12 @@ resource "kubernetes_ingress_v1" "argocd" {
   ]
   for_each = toset(var.domain_name)
   metadata {
-    name = "${each.key}-argocd-ingress"
-    namespace  = "argocd"
+    name      = "${each.key}-argocd-ingress"
+    namespace = "argocd"
     annotations = {
-        "kubernetes.io/ingress.class" = "istio"
-        "ingress.kubernetes.io/rewrite-target" = "/"
-        "cert-manager.io/cluster-issuer" = "zerossl"
+      "kubernetes.io/ingress.class"          = "istio"
+      "ingress.kubernetes.io/rewrite-target" = "/"
+      "cert-manager.io/cluster-issuer"       = "zerossl"
     }
   }
   spec {
@@ -20,8 +20,12 @@ resource "kubernetes_ingress_v1" "argocd" {
         http {
           path {
             backend {
-              service_name = "argocd-server"
-              service_port = 80 
+              service {
+                name = "argocd-server"
+                port {
+                  number = 80
+                }
+              }
             }
             path = "/"
           }
@@ -32,7 +36,7 @@ resource "kubernetes_ingress_v1" "argocd" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "argocd-tls"
-        hosts = ["argocd.${tls.value}"]
+        hosts       = ["argocd.${tls.value}"]
       }
     }
   }
