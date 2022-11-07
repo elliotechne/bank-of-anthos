@@ -13,6 +13,14 @@ resource "kubernetes_ingress_v1" "argocd" {
     }
   }
   spec {
+    default_backend {
+      service {
+        name = "argocd-server"
+        port {
+          number = 80
+        }
+      }
+    }
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
