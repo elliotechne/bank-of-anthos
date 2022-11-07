@@ -75,9 +75,10 @@ resource "helm_release" "cert-manager" {
     name  = "installCRDs"
     value = "true"
   }
-  set { 
-    name = extraArgs
-    value = '{--dns01-recursive-nameservers-only,--dns01-recursive-nameservers=8.8.8.8:53"}'
+  set {
+    name  = extraArgs
+    value = "{--dns01-recursive-nameservers-only,--dns01-recursive-nameservers=8.8.8.8:53}"
+  }
 }
 
 resource "helm_release" "metrics-server" {
