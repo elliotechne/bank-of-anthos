@@ -20,7 +20,7 @@ resource "kubernetes_manifest" "argocd_virtualservice" {
           "match" = [
             {
               "uri" = {
-                "exact" = "/"
+                "prefix" = "/"
               }
             },
           ]

@@ -22,7 +22,7 @@ resource "kubernetes_manifest" "argocd-gateway" {
             "protocol" = "HTTP"
           }
           "tls" = {
-            "httpsRedirect" = true 
+            "httpsRedirect" = false
           }
         },
         {
