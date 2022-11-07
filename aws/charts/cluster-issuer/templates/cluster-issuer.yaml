@@ -14,15 +14,17 @@ spec:
       keyAlgorithm: HS256
     privateKeySecretRef:
         name: prod 
-    dns01:
-      - name: aws 
-        route53: 
+    solvers:
+    - selector:
+        dnsZones: 
+          - "wayofthesys.com"
+      dns01:
+        route53:
           accessKeyID: AKIATMXSQTLMQGGS2MP7
           region: us-east-2
           secretAccessKeySecretRef:
             name: externaldns
             key: secret-key
-    solvers:
     - http01:
         ingress:
           class: istio
