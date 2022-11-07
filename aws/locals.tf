@@ -52,6 +52,13 @@ locals {
 
   istio_ports = [
     {
+      description = "Allow all"
+      protocol    = "-1"
+      from_port   = 0
+      to_port     = 0
+    }
+    /*
+    {
       description = "Envoy admin port / outbound"
       from_port   = 15000
       to_port     = 15001
@@ -106,6 +113,7 @@ locals {
       from_port   = 9443
       to_port     = 9443
     }
+    */
   ]
 
   ingress_rules = {

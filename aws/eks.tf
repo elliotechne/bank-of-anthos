@@ -59,6 +59,7 @@ module "eks" {
     local.ingress_rules,
     local.egress_rules
   )
+  /*
     ingress_self_all = {
       description = "Node to node all ports/protocols"
       protocol    = "-1"
@@ -77,6 +78,7 @@ module "eks" {
       ipv6_cidr_blocks = ["::/0"]
     }
   } 
+  */
 
   aws_auth_users = [
     {
