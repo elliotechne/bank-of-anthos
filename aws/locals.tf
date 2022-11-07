@@ -3,7 +3,7 @@ locals {
   jetstack-repo  = "https://charts.jetstack.io"
   bookinfo-repo  = "https://evry-ace.github.io/helm-charts"
   argocd-repo    = "https://argoproj.github.io/argo-helm"
-  metrics-server = "https://kubernetes-sigs.github.io/metrics-server" 
+  metrics-server = "https://kubernetes-sigs.github.io/metrics-server"
   argocd_dex_google = yamlencode(
     {
       server = {
@@ -51,6 +51,16 @@ locals {
   )
 
   istio_ports = [
+    {
+      description = "80 inbound"
+      from_port   = 80
+      to_port     = 80
+    },
+    {
+      description = "443 inbound"
+      from_port   = 443
+      to_port     = 443
+    },
     {
       description = "Envoy admin port / outbound"
       from_port   = 15000
