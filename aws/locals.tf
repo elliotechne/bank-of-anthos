@@ -106,7 +106,6 @@ locals {
       from_port   = 9443
       to_port     = 9443
     }
-    */
   ]
 
   ingress_rules = {
