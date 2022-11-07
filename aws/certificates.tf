@@ -9,10 +9,6 @@ resource "kubernetes_manifest" "certificate_argo" {
       "namespace" = "istio-system"
     }
     "spec" = {
-      "commonName" = "argocd.${var.domain_name[0]}"
-      "dnsNames" = [
-        "argocd.${var.domain_name[0]}",
-      ]
       "issuerRef" = {
         "kind" = "ClusterIssuer"
         "name" = "zerossl"
@@ -22,16 +18,6 @@ resource "kubernetes_manifest" "certificate_argo" {
         var.domain_name[0]
       ]
       "secretName" = "argocd-tls"
-      "acme" = {
-        "config" = {
-          "http01" = {
-            "ingressClass" = "istio"
-          },
-          "domains" = [
-            "argocd.${var.domain_name[0]}"
-          ]
-        }
-      }
     }
   }
 }
