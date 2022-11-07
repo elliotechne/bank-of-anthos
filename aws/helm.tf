@@ -76,7 +76,7 @@ resource "helm_release" "cert-manager" {
     value = "true"
   }
   set {
-    name  = extraArgs
+    name  = "extraArgs"
     value = "{--dns01-recursive-nameservers-only,--dns01-recursive-nameservers=8.8.8.8:53}"
   }
 }
