@@ -5,7 +5,7 @@ resource "kubernetes_ingress_v1" "argocd" {
   for_each = toset(var.domain_name)
   metadata {
     name      = "${each.key}-argocd-ingress"
-    namespace = "argocd"
+    namespace = "istio-ingress"
     annotations = {
       "kubernetes.io/ingress.class"          = "istio"
       "ingress.kubernetes.io/rewrite-target" = "/"
