@@ -32,7 +32,7 @@ resource "kubernetes_secret" "argocd-tls" {
   provider   = kubernetes
   depends_on = [module.eks, module.external_dns]
   metadata {
-    name = "argocd-tls"
+    name      = "argocd-tls"
     namespace = "istio-system"
   }
   type = "tls"
@@ -51,7 +51,7 @@ resource "kubernetes_secret" "argocd-tls" {
 
 resource "kubernetes_secret" "wayofthesys-tls" {
   provider   = kubernetes
-  depends_on = [module.eks, module.external_dns] 
+  depends_on = [module.eks, module.external_dns]
   metadata {
     name      = "${replace(var.domain_name[0], ".", "-")}-tls"
     namespace = "istio-system"
@@ -72,14 +72,14 @@ resource "kubernetes_secret" "wayofthesys-tls" {
 
 resource "kubernetes_secret" "external-dns" {
   provider   = kubernetes
-  depends_on = [module.eks, module.external_dns] 
+  depends_on = [module.eks, module.external_dns]
   metadata {
     name      = "externaldns"
     namespace = "istio-system"
   }
   type = "opaque"
   data = {
-    access-key = var.externaldns_secret_key
+    secret-key = var.externaldns_secret_key
   }
 
   lifecycle {
