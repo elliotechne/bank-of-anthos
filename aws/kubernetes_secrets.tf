@@ -81,11 +81,4 @@ resource "kubernetes_secret" "external-dns" {
   data = {
     secret-key = var.externaldns_secret_key
   }
-
-  lifecycle {
-    ignore_changes = [
-      data,
-      metadata
-    ]
-  }
 }
