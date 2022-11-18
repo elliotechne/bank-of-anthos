@@ -63,7 +63,7 @@ resource "helm_release" "crossplane" {
   depends_on = [kubernetes_namespace.crossplane-system]
   name       = "crossplane-stable"
   repository = "https://charts.crossplane.io/stable/"
-  chart      = "crossplane/crossplane"
+  chart      = "crossplane"
   version    = "1.10.1"
   namespace  = "crossplane-system"
   timeout    = 120
