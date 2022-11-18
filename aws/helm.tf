@@ -60,6 +60,17 @@ resource "helm_release" "cluster-issuer" {
 
 resource "helm_release" "cert-manager" {
   provider   = helm
+  depends_on = [kubernetes_namespace.crossplane-system]
+  name       = "crossplane-master"
+  repository = "https://charts.crossplane.io/stable/"
+  chart      = "crossplane-stable"
+  version    = "v1.11.0-rc.0.78.g224069e9"
+  namespace  = "crossplane-system"
+  timeout    = 120
+}
+
+resource "helm_release" "cert-manager" {
+  provider   = helm
   depends_on = [kubernetes_namespace.cert-manager]
   name       = "cert-manager"
   repository = "https://charts.jetstack.io"

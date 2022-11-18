@@ -1,3 +1,11 @@
+resource "kubernetes_namespace" "crossplane-system" {
+  depends_on = [module.eks]
+  provider   = kubernetes
+  metadata {
+    name = "crossplane-sysem"
+  }
+}
+
 resource "kubernetes_namespace" "cert-manager" {
   depends_on = [module.eks]
   provider   = kubernetes
