@@ -61,10 +61,10 @@ resource "helm_release" "cluster-issuer" {
 resource "helm_release" "crossplane" {
   provider   = helm
   depends_on = [kubernetes_namespace.crossplane-system]
-  name       = "crossplane-master"
+  name       = "crossplane-stable"
   repository = "https://charts.crossplane.io/stable/"
-  chart      = "crossplane-stable"
-  version    = "1.10.1"
+  chart      = "crossplane/crossplane"
+  version    = "v1.10.1"
   namespace  = "crossplane-system"
   timeout    = 120
 }
