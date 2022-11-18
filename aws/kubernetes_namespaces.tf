@@ -2,7 +2,7 @@ resource "kubernetes_namespace" "crossplane-system" {
   depends_on = [module.eks]
   provider   = kubernetes
   metadata {
-    name = "crossplane-sysem"
+    name = "crossplane-system"
   }
 }
 
