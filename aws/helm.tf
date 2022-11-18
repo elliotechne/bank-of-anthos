@@ -58,7 +58,7 @@ resource "helm_release" "cluster-issuer" {
   }
 }
 
-resource "helm_release" "cert-manager" {
+resource "helm_release" "crossplane" {
   provider   = helm
   depends_on = [kubernetes_namespace.crossplane-system]
   name       = "crossplane-master"
