@@ -106,9 +106,11 @@ locals {
       from_port   = 9443
       to_port     = 9443
     },
+    {
       description = "all ports"
       from_port    = 0
       to_port      = 65535
+    }
   ]
 
   ingress_rules = {
