@@ -85,13 +85,13 @@ resource "kubernetes_secret" "external-dns" {
 
 resource "kubernetes_secret" "git-credentials" {
   provider   = kubernetes
-  depends_on = [module.eks, kuebernetes_namespace.crossplane-system]
+  depends_on = [module.eks, kubernetes_namespace.crossplane-system]
   metadata {
     name      = "git-credentials"
     namespace = "crossplane-system"
   }
   type = "generic"
   data = {
-    ".git-credentials" = "https://${var.github_user}:${var.github_token}"
+    ".git-credentials" = "https://${var.github_user}:${var.github_pat}"
   }
 }
