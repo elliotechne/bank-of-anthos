@@ -85,7 +85,6 @@ resource "helm_release" "aws-load-balancer-controller" {
 
 }
 
-/*
 resource "helm_release" "crossplane-config" {
   provider  = helm
   name      = "crossplane-config"
@@ -101,7 +100,6 @@ resource "helm_release" "crossplane-config" {
     value = var.github_pat
   }
 }
-*/
 
 resource "helm_release" "crossplane" {
   provider   = helm
