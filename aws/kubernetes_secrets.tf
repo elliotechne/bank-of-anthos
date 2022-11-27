@@ -92,6 +92,6 @@ resource "kubernetes_secret" "git-credentials" {
   }
   type = "generic"
   data = {
-    .git-credentials = "https://${var.github_user}:${var.github_token}"
+    ".git-credentials" = "https://${var.github_user}:${var.github_token}"
   }
 }
