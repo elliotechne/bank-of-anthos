@@ -49,28 +49,6 @@ variable "github_user" {
   type        = string
 }
 
-variable "kubernetes_namespace" {
-  description = "Kubernetes Namespace name"
-  type        = string
-}
-
-variable "create_kubernetes_namespace" {
-  description = "Should the module create the namespace"
-  type        = bool
-  default     = true
-}
-
-variable "create_kubernetes_service_account" {
-  description = "Should the module create the Service Account"
-  type        = bool
-  default     = true
-}
-
-variable "kubernetes_service_account" {
-  description = "Kubernetes Service Account Name"
-  type        = string
-}
-
 variable "kubernetes_svc_image_pull_secrets" {
   description = "list(string) of kubernetes imagePullSecrets"
   type        = list(string)
