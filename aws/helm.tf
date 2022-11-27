@@ -93,12 +93,7 @@ resource "helm_release" "crossplane-config" {
   depends_on = [
     module.eks,
     kubernetes_namespace.crossplane-system,
-    kubernetes_secret.git-credentials 
   ]
-  set_sensitive {
-    name  = "github_pat"
-    value = var.github_pat
-  }
 }
 
 resource "helm_release" "crossplane" {
@@ -110,6 +105,11 @@ resource "helm_release" "crossplane" {
   version    = "1.10.1"
   namespace  = "crossplane-system"
   timeout    = 120
+
+  set_sensitive {
+    name = "provider.packages"
+    value = "[getting-started-with-aws:v1.10.1]"
+  }
 }
 
 resource "helm_release" "cert-manager" {
