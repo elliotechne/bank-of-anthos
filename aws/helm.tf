@@ -68,6 +68,16 @@ resource "helm_release" "aws-load-balancer-controller" {
     module.eks,
     kubernetes_namespace.crossplane-system,
   ]
+  set_sensitive {
+    name = "eks_cluster_id"
+    value = module.eks.cluster_id
+  }
+
+  set_sensitive {
+    name = "aws_region"
+    value = var.region
+  }
+
 }
 
 resource "helm_release" "crossplane-config" {
