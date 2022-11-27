@@ -39,7 +39,7 @@ steps:
   inputs:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-    commandOptions: '-var-file="prod.tfvars" -out="bank-prod.out" -var="zerossl_email"=$(ZEROSSL_EMAIL) -var="zerossl_eab_key_id"=$(ZEROSSL_EAB_KEY_ID) -var="zerossl_eab_hmac_key"=$(ZEROSSL_EAB_HMAC_KEY) -var="argocd_oidc_client_id"=$(ARGOCD_OIDC_CLIENT_ID) -var="argocd_oidc_client_secret"=$(ARGOCD_OIDC_CLIENT_SECRET) -var="externaldns_secret_key"=$(EXTERNALDNS_SECRET_KEY) -detailed-exitcode' 
+    commandOptions: '-var-file="prod.tfvars" -out="bank-prod.out" -var="github_user"=$(GITHUB_USER) -var="github_pat"=$(GITHUB_PAT) -var="zerossl_email"=$(ZEROSSL_EMAIL) -var="zerossl_eab_key_id"=$(ZEROSSL_EAB_KEY_ID) -var="zerossl_eab_hmac_key"=$(ZEROSSL_EAB_HMAC_KEY) -var="argocd_oidc_client_id"=$(ARGOCD_OIDC_CLIENT_ID) -var="argocd_oidc_client_secret"=$(ARGOCD_OIDC_CLIENT_SECRET) -var="externaldns_secret_key"=$(EXTERNALDNS_SECRET_KEY) -detailed-exitcode' 
     allowTelemetryCollection: false
     # publishPlanResults: 'bank-prod.out'
     providerAwsRegion: 'us-east-2'
