@@ -74,6 +74,11 @@ resource "helm_release" "aws-load-balancer-controller" {
   }
 
   set_sensitive {
+    name = "clusterName"
+    value = var.eks_cluster_name
+  }
+
+  set_sensitive {
     name = "aws_region"
     value = var.region
   }
