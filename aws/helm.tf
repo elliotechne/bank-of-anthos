@@ -93,6 +93,7 @@ resource "helm_release" "crossplane-config" {
   depends_on = [
     module.eks,
     kubernetes_namespace.crossplane-system,
+    helm_release.crossplane
   ]
 }
 
