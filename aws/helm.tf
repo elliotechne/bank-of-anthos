@@ -58,6 +58,34 @@ resource "helm_release" "cluster-issuer" {
   }
 }
 
+resource "helm_release" "aws-load-balancer-controller" {
+  provider  = helm
+  name      = "aws-load-balancer-controller"
+  chart     = "aws-load-balancer-controller"
+  repository = "https://aws.github.io/eks-charts"
+  namespace = "crossplane-system"
+  depends_on = [
+    module.eks,
+    kubernetes_namespace.crossplane-system,
+  ]
+}
+
+resource "helm_release" "crossplane-config" {
+  provider  = helm
+  name      = "crossplane-config"
+  chart     = "charts/crossplane-config"
+  namespace = "crossplane-system"
+  depends_on = [
+    module.eks,
+    kubernetes_namespace.crossplane-system,
+    kubernetes_secret.git-credentials 
+  ]
+  set_sensitive {
+    name  = "github_pat"
+    value = var.github_pat
+  }
+}
+
 resource "helm_release" "crossplane" {
   provider   = helm
   depends_on = [kubernetes_namespace.crossplane-system]

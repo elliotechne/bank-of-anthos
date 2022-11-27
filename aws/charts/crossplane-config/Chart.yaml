@@ -1,0 +1,4 @@
+name: crossplane-config
+description: CrossplaneConfig 
+version: 0.0.2
+kubeVersion: ">=1.10.0-0"
