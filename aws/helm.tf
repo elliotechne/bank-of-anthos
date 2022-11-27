@@ -85,20 +85,6 @@ resource "helm_release" "aws-load-balancer-controller" {
 
 }
 
-/*
-resource "helm_release" "crossplane-config" {
-  provider  = helm
-  name      = "crossplane-config"
-  chart     = "charts/crossplane-config"
-  namespace = "crossplane-system"
-  depends_on = [
-    module.eks,
-    kubernetes_namespace.crossplane-system,
-    helm_release.crossplane
-  ]
-}
-*/
-
 resource "helm_release" "crossplane" {
   provider   = helm
   depends_on = [kubernetes_namespace.crossplane-system]
@@ -113,6 +99,18 @@ resource "helm_release" "crossplane" {
     name = "provider.packages"
     value = "{getting-started-with-aws:v1.10.1}"
   }
+}
+
+resource "helm_release" "crossplane-config" {
+  provider  = helm
+  name      = "crossplane-config"
+  chart     = "charts/crossplane-config"
+  namespace = "crossplane-system"
+  depends_on = [
+    module.eks,
+    kubernetes_namespace.crossplane-system,
+    helm_release.crossplane
+  ]
 }
 
 resource "helm_release" "cert-manager" {
