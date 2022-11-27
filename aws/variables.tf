@@ -79,6 +79,12 @@ variable "irsa_iam_permissions_boundary" {
   default     = ""
 }
 
+variable "eks_cluster_name" {
+  description = "EKS Cluster Name"
+  type        = string
+  default     = "production"
+}
+
 variable "tags" {
   description = "Additional tags (e.g. `map('BusinessUnit`,`XYZ`)"
   type        = map(string)
