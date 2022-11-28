@@ -14,6 +14,6 @@ module "aws_provider_irsa" {
 
 resource "aws_iam_policy" "aws_provider" {
   description = "Crossplane AWS Provider IAM policy"
-  name        = "${var.addon_context.eks_cluster_id}-${local.aws_provider_sa}-irsa"
+  name        = "${module.eks.cluster_id}-${local.aws_provider_sa}-irsa"
   policy      = data.aws_iam_policy_document.s3_policy.json
 }
