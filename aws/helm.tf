@@ -97,7 +97,7 @@ resource "helm_release" "crossplane" {
 
   set_sensitive {
     name = "provider.packages"
-    value = "{getting-started-with-aws:v1.10.1}"
+    value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0"}"
   }
 }
 
