@@ -85,6 +85,12 @@ variable "eks_cluster_name" {
   default     = "production"
 }
 
+variable "aws_partition_id" {
+  description = "AWS Partition ID"
+  type        = string
+  default     = "bankofanthos"
+}
+
 variable "tags" {
   description = "Additional tags (e.g. `map('BusinessUnit`,`XYZ`)"
   type        = map(string)
