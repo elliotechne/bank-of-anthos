@@ -1,8 +1,10 @@
+data "aws_partition" "current" {}
+
 data "aws_iam_policy_document" "s3_policy" {
   statement {
     sid       = "VisualEditor0"
     effect    = "Allow"
-    resources = ["arn:${var.aws_partition_id}:s3:::*"]
+    resources = ["arn:${data.aws_partition.current.id}:s3:::*"]
 
     actions = [
       "s3:CreateBucket",
