@@ -113,6 +113,16 @@ resource "helm_release" "crossplane-config" {
   ]
 }
 
+resource "helm_release" "crossplane-workspaces" {
+  provider  = helm
+  name      = "crossplane-workspaces"
+  chart     = "charts/crossplane-workspaces"
+  namespace = "crossplane-system"
+  depends_on = [
+    helm_release.crossplane-config
+  ]
+}
+
 resource "helm_release" "cert-manager" {
   provider   = helm
   depends_on = [kubernetes_namespace.cert-manager]
