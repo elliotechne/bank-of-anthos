@@ -4,7 +4,7 @@ module "aws_provider_irsa" {
   create_kubernetes_service_account = true
   kubernetes_namespace              = "crossplane-system" 
   kubernetes_service_account        = "crossplane-config"
-  irsa_iam_policies                 = concat([aws_iam_policy.aws_provider.arn], var.additional_irsa_policies) 
+  irsa_iam_policies                 = [aws_iam_policy.aws_provider.arn]
   # [aws_iam_policy.aws_provider.arn]
   irsa_iam_role_path                = var.irsa_iam_role_path
   irsa_iam_permissions_boundary     = var.irsa_iam_permissions_boundary
