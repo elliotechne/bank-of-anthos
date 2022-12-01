@@ -59,27 +59,27 @@ resource "helm_release" "cluster-issuer" {
 }
 
 resource "helm_release" "aws-load-balancer-controller" {
-  provider  = helm
-  name      = "aws-load-balancer-controller"
-  chart     = "aws-load-balancer-controller"
+  provider   = helm
+  name       = "aws-load-balancer-controller"
+  chart      = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
-  namespace = "crossplane-system"
+  namespace  = "crossplane-system"
   depends_on = [
     module.eks,
     kubernetes_namespace.crossplane-system,
   ]
   set_sensitive {
-    name = "eks_cluster_id"
+    name  = "eks_cluster_id"
     value = module.eks.cluster_id
   }
 
   set_sensitive {
-    name = "clusterName"
+    name  = "clusterName"
     value = var.eks_cluster_name
   }
 
   set_sensitive {
-    name = "aws_region"
+    name  = "aws_region"
     value = var.region
   }
 
@@ -97,7 +97,10 @@ resource "helm_release" "crossplane" {
 
   set_sensitive {
     name = "provider.packages"
-    value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0, crossplane/provider-terraform:v0.2.0}"
+    value = {
+      "xpkg.upbound.io/crossplane-contrib/provider-aws" = "v0.33.0"
+      "crossplane/provider-terraform"                   = "v0.2.0"
+    }
   }
 }
 
