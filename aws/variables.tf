@@ -94,6 +94,7 @@ variable "aws_partition_id" {
 variable "additional_irsa_policies" {
   description = "AWS Partition ID"
   type        = list(string)
+  default     = [""]
 }
 
 variable "tags" {
