@@ -97,8 +97,9 @@ resource "helm_release" "crossplane" {
 
   set_sensitive {
     name  = "provider.packages"
-    value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0, crossplane/provider-terraform:v0.2.0}"
+    value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0,crossplane/provider-terraform:v0.2.0}"
   }
+    
 }
 
 resource "helm_release" "crossplane-config" {
