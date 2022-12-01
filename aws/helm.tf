@@ -96,8 +96,8 @@ resource "helm_release" "crossplane" {
   timeout    = 120
 
   set_sensitive {
-    name = "provider.packages"
-    value = var.crossplane_packages 
+    name  = "provider.packages"
+    value = var.crossplane_packages
   }
 }
 
