@@ -91,6 +91,11 @@ variable "aws_partition_id" {
   default     = "bankofanthos"
 }
 
+variable "additional_irsa_policies" {
+  description = "AWS Partition ID"
+  type        = list(string)
+}
+
 variable "tags" {
   description = "Additional tags (e.g. `map('BusinessUnit`,`XYZ`)"
   type        = map(string)
