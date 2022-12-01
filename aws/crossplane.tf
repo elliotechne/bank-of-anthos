@@ -9,7 +9,7 @@ module "aws_provider_irsa" {
   irsa_iam_role_path                = var.irsa_iam_role_path
   irsa_iam_permissions_boundary     = var.irsa_iam_permissions_boundary
   eks_cluster_id                    = module.eks.cluster_id 
-  eks_oidc_provider_arn             = "https://${ module.eks.oidc_provider }"
+  eks_oidc_provider_arn             = module.eks.oidc_provider
   depends_on                        = [helm_release.crossplane-config]
 }
 
