@@ -85,7 +85,7 @@ resource "helm_release" "aws-load-balancer-controller" {
 
 }
 
-resource "helm_release" "crossplane" {
+resource "helm_release" "crossplane-aws" {
   provider   = helm
   depends_on = [kubernetes_namespace.crossplane-system]
   name       = "crossplane-stable"
@@ -97,9 +97,20 @@ resource "helm_release" "crossplane" {
 
   set_sensitive {
     name  = "provider.packages"
-    value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0,crossplane/provider-terraform:v0.2.0}"
+    value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0}"
   }
     
+}
+
+resource "helm_release" "crossplane-terraform" {
+  provider   = helm
+  depends_on = [kubernetes_namespace.crossplane-system]
+  name       = "crossplane-terraform"
+  chart      = "charts/crossplane-terraform"
+  version    = "0.0.1"
+  namespace  = "crossplane-system"
+  timeout    = 120
+
 }
 
 resource "helm_release" "crossplane-config" {
@@ -110,7 +121,7 @@ resource "helm_release" "crossplane-config" {
   depends_on = [
     module.eks,
     kubernetes_namespace.crossplane-system,
-    helm_release.crossplane
+    helm_release.crossplane-aws
   ]
 }
 
