@@ -4,5 +4,8 @@ kind: ProviderConfig
 metadata:
   name: aws-provider-config
 spec:
+  assumeRoleWithWebIdentity:
+    roleARN: arn:aws:iam::233510574809:role/production-crossplane-config-irsa
+
   credentials:
     source: InjectedIdentity

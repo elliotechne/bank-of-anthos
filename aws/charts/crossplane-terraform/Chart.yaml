@@ -1,4 +1,4 @@
 name: crossplane-terraform
 description: CrossplaneTerraform
-version: 0.0.3
+version: 0.0.4
 kubeVersion: ">=1.10.0-0"
