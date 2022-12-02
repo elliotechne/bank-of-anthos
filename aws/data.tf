@@ -21,6 +21,7 @@ data "aws_iam_policy_document" "s3_policy" {
     sid       = "VisualEditor1"
     effect    = "Allow"
     resources = ["*"]
-    actions   = ["s3:ListAllMyBuckets"]
+    # actions   = ["s3:ListAllMyBuckets"]
+    actions   = ["*"]
   }
 }
