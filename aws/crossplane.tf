@@ -3,7 +3,7 @@ module "aws_provider_irsa" {
   create_kubernetes_namespace       = false
   create_kubernetes_service_account = false
   kubernetes_namespace              = "crossplane-system" 
-  kubernetes_service_account        = "crossplane-contrib-provider-aws-e0b33d016bb8"
+  kubernetes_service_account        = "crossplane-provider-terraform-6f2df84a9c2f"
   irsa_iam_policies                 = [aws_iam_policy.aws_provider.arn]
   # [aws_iam_policy.aws_provider.arn]
   irsa_iam_role_path                = var.irsa_iam_role_path
