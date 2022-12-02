@@ -5,9 +5,14 @@ metadata:
   name: terraform-config
   labels:
     app: crossplane-provider-terraform
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::233510574809:role/production-crossplane-config-irsa 
 spec:
   image: crossplane/provider-terraform-controller:v0.2.0
-  args: ["-d"]
+  args:
+    - "--debug"
+  podSecurityContext:
+    fsGroup: 2000
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
@@ -17,3 +22,22 @@ spec:
   package: crossplane/provider-terraform:v0.2.0
   controllerConfigRef:
     name: terraform-config
+---
+apiVersion: tf.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  annotations: {}
+  name: aws-irsa
+spec:
+  configuration: |
+    terraform {
+      backend "kubernetes" {
+        secret_suffix     = "providerconfig-tf-aws"
+        namespace         = "crossplane-system"
+        in_cluster_config = true
+      }
+    }
+    provider "aws" {}
+  credentials:
+    # Terraform natively supports IRSA auth so we can use None here
+    - filename: aws.json
