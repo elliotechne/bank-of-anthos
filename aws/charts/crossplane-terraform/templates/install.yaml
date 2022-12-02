@@ -39,6 +39,7 @@ spec:
     }
     provider "aws" {}
   credentials:
+    source: InjectedIdentity
     # Terraform natively supports IRSA auth so we can use None here
-    - filename: aws.json
-      source: None
+    # - filename: aws.json
+    #   source: None
