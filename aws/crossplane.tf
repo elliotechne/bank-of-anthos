@@ -1,7 +1,7 @@
 module "aws_provider_irsa" {
   source                            = "git::https://github.com/autotune/terraform-aws-fully-loaded-eks-cluster.git//modules/irsa"
   create_kubernetes_namespace       = false
-  create_kubernetes_service_account = false
+  create_kubernetes_service_account = true 
   kubernetes_namespace              = "crossplane-system" 
   kubernetes_service_account        = "crossplane-provider-terraform-6f2df84a9c2f"
   irsa_iam_policies                 = [aws_iam_policy.aws_provider.arn]
