@@ -103,10 +103,8 @@ variable "tags" {
   default     = {}
 }
 
-variable "terraform_vars_prod" {
-  description = "Terraform vars for prod  (e.g. `map('BusinessUnit`,`XYZ`)"
-  type        = map(string)
-  default = {
-    "region" = "us-east-2"
-  }
+variable "crossplane_region" {
+  description = "Region to host Crossplane Infra"
+  type        = string
+  default     = "us-east-2"
 }
