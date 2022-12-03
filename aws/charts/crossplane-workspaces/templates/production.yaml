@@ -1,11 +1,11 @@
 apiVersion: tf.crossplane.io/v1alpha1
 kind: Workspace
 metadata:
-  name: prod
+  name: production
   annotations:
     # The terraform workspace will be named 'myworkspace'. If you omit this
     # annotation it would be derived from metadata.name - e.g. 'example-remote'.
-    crossplane.io/external-name: prod
+    crossplane.io/external-name: production
 spec:
   providerConfigRef:
     name: aws-irsa
@@ -28,7 +28,7 @@ spec:
       secretKeyRef:
         namespace: crossplane-system
         name: terraform
-        key: prod.tfvars
+        key: production.tfvars
       # Variables are expected to be in HCL '.tfvars' format by default. Use
       # the JSON format if your variables are in the JSON '.tfvars.json' format.
       format: JSON
