@@ -107,6 +107,6 @@ variable "terraform_vars_prod" {
   description = "Terraform vars for prod  (e.g. `map('BusinessUnit`,`XYZ`)"
   type        = map(string)
   default = {
-    "foo" = "bar"
+    "region" = "us-east-2"
   }
 }
