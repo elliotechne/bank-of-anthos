@@ -79,7 +79,9 @@ resource "kubernetes_secret" "terraform-vars" {
   }
   type = "opaque"
   data = {
-    "prod.tfvars" = var.terraform_vars_prod 
+    "prod.tfvars" = {
+      "foo" = "bar"
+    }
   }
 }
 
