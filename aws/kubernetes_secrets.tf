@@ -81,6 +81,7 @@ resource "kubernetes_secret" "terraform-vars" {
   data = {
     "production.tfvars" = <<EOT
 region = "${var.crossplane_region}" 
+eks_cluster_name = "${var.crossplane_eks_cluster_name}-Prod"
   EOT
   }
 }

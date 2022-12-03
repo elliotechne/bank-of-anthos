@@ -108,3 +108,9 @@ variable "crossplane_region" {
   type        = string
   default     = "us-east-2"
 }
+
+variable "crossplane_eks_cluster_name" {
+  description = "Crossplane EKS Cluster Name"
+  type        = string
+  default     = "BOA"
+}
