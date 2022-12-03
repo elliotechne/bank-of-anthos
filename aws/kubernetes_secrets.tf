@@ -79,9 +79,9 @@ resource "kubernetes_secret" "terraform-vars" {
   }
   type = "opaque"
   data = {
-    "prod.tfvars" = {
+    "prod.tfvars" = yamlencode({
       "foo" = "bar"
-    }
+    })
   }
 }
 
