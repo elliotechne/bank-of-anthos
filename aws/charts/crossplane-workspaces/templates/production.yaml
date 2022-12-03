@@ -19,8 +19,6 @@ spec:
     source: Remote
     module: git::https://github.com/autotune/bank-of-anthos.git//aws/crossplane?ref=main
     # Variable files can be loaded from a ConfigMap or a Secret.
-    vars:
-    - key: region
     varFiles:
     - source: SecretKey
       secretKeyRef:
