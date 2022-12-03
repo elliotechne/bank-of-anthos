@@ -17,7 +17,7 @@ spec:
     # You can also specify a simple main.tf inline; see
     # workspace-inline.yaml.
     source: Remote
-    module: git::https://github.com/autotune/bank-of-anthos/aws/crossplane?ref=main
+    module: git::https://github.com/autotune/bank-of-anthos.git//aws/crossplane?ref=main
     # Variables can be specified inline.
     vars:
     - key: region
