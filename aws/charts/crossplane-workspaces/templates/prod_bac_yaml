@@ -1,0 +1,39 @@
+apiVersion: tf.crossplane.io/v1alpha1
+kind: Workspace
+metadata:
+  name: prod 
+  annotations:
+    # The terraform workspace will be named 'coolbucket'. If you omitted this
+    # annotation it would be derived from metadata.name - i.e. 'example-inline'.
+    crossplane.io/external-name: prod
+spec:
+  providerConfigRef:
+    name: aws-irsa
+  forProvider:
+    # For simple cases you can use an inline source to specify the content of
+    # main.tf as opaque, inline HCL.
+    source: Inline
+    module: |
+      // All outputs are written to the connection secret.  Non-sensitive outputs
+      // are stored as string values in the status.atProvider.outputs object.
+      output "arn" {
+        value       = aws_s3_bucket.wayofthesys.arn
+      }
+
+      resource "aws_s3_bucket" "wayofthesys" {
+        bucket = "wayofthesys-crossplane"
+
+        tags = {
+          Name        = "WayOfTheSys Crossplane"
+          Environment = "Prod"
+        }
+      }
+
+      resource "aws_s3_bucket_acl" "wayofthesys" {
+        bucket = aws_s3_bucket.wayofthesys.id
+        acl    = "private"
+      }
+
+  writeConnectionSecretToRef:
+    namespace: crossplane-system
+    name: prod

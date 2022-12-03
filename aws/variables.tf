@@ -97,17 +97,16 @@ variable "additional_irsa_policies" {
   default     = [""]
 }
 
-variable "crossplane_packages" {
-  description = "Crossplane Packages"
-  type        = map
-  default     = {
-      "xpkg.upbound.io/crossplane-contrib/provider-aws" = "v0.33.0"
-      "crossplane/provider-terraform"                   = "v0.2.0"
-  }
-}
-
 variable "tags" {
   description = "Additional tags (e.g. `map('BusinessUnit`,`XYZ`)"
   type        = map(string)
   default     = {}
+}
+
+variable "terraform_vars_prod" {
+  description = "Terraform vars for prod  (e.g. `map('BusinessUnit`,`XYZ`)"
+  type        = map(string)
+  default = {
+    "foo" = "bar"
+  }
 }

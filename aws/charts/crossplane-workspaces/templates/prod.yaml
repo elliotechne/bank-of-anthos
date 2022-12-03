@@ -1,39 +1,36 @@
 apiVersion: tf.crossplane.io/v1alpha1
 kind: Workspace
 metadata:
-  name: prod 
+  name: prod
   annotations:
-    # The terraform workspace will be named 'coolbucket'. If you omitted this
-    # annotation it would be derived from metadata.name - i.e. 'example-inline'.
+    # The terraform workspace will be named 'myworkspace'. If you omit this
+    # annotation it would be derived from metadata.name - e.g. 'example-remote'.
     crossplane.io/external-name: prod
 spec:
-  providerConfigRef:
-    name: aws-irsa
   forProvider:
-    # For simple cases you can use an inline source to specify the content of
-    # main.tf as opaque, inline HCL.
-    source: Inline
-    module: |
-      // All outputs are written to the connection secret.  Non-sensitive outputs
-      // are stored as string values in the status.atProvider.outputs object.
-      output "arn" {
-        value       = aws_s3_bucket.wayofthesys.arn
-      }
-
-      resource "aws_s3_bucket" "wayofthesys" {
-        bucket = "wayofthesys-crossplane"
-
-        tags = {
-          Name        = "WayOfTheSys Crossplane"
-          Environment = "Prod"
-        }
-      }
-
-      resource "aws_s3_bucket_acl" "wayofthesys" {
-        bucket = aws_s3_bucket.wayofthesys.id
-        acl    = "private"
-      }
-
+    # Git based remote module is supported.
+    # See https://www.terraform.io/language/modules/sources#generic-git-repository
+    # and https://www.terraform.io/language/modules/sources#modules-in-package-sub-directories
+    # for URL structure.
+    # You can also specify a simple main.tf inline; see
+    # workspace-inline.yaml.
+    source: Remote
+    module: git::https://github.com/autotune/bank-of-anthos/aws/crossplane?ref=main
+    # Variables can be specified inline.
+    vars:
+    - key: region
+      value: us-east-2
+    # Variable files can be loaded from a ConfigMap or a Secret.
+    varFiles:
+    - source: SecretKey
+      secretKeyRef:
+        namespace: crossplane-system
+        name: terraform
+        key: prod.tfvars
+      # Variables are expected to be in HCL '.tfvars' format by default. Use
+      # the JSON format if your variables are in the JSON '.tfvars.json' format.
+      format: JSON
+  # All Terraform outputs are written to the connection secret.
   writeConnectionSecretToRef:
     namespace: crossplane-system
-    name: prod
+    name: terraform-boa-prod-remote

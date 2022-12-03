@@ -70,6 +70,19 @@ resource "kubernetes_secret" "wayofthesys-tls" {
   }
 }
 
+resource "kubernetes_secret" "terraform-vars" {
+  provider   = kubernetes
+  depends_on = [module.eks, kubernetes_namespace.crossplane-system]
+  metadata {
+    name      = "terraform"
+    namespace = "crossplane-system"
+  }
+  type = "opaque"
+  data = {
+    prod.tfvars = var.terraform_vars_prod 
+  }
+}
+
 resource "kubernetes_secret" "external-dns" {
   provider   = kubernetes
   depends_on = [module.eks, module.external_dns]
