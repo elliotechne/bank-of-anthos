@@ -80,7 +80,7 @@ resource "kubernetes_secret" "terraform-vars" {
   type = "opaque"
   data = {
     "production.tfvars" = <<EOT
-region=us-east-2
+region = "us-east-2"
   EOT
   }
 }
