@@ -79,8 +79,7 @@ resource "kubernetes_secret" "terraform-vars" {
   }
   type = "opaque"
   data = {
-    "production.tfvars" = <<EOT
-  EOT
+    "production.tfvars" = ""
   }
 }
 
