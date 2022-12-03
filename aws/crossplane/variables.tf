@@ -1,5 +1,4 @@
-variable "foo" {
-  description = "Foo"
+variable "region" {
+  description = "Region"
   type        = string
-  default     = "foo"
 }

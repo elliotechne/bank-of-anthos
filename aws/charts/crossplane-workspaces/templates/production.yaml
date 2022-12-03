@@ -18,10 +18,6 @@ spec:
     # workspace-inline.yaml.
     source: Remote
     module: git::https://github.com/autotune/bank-of-anthos.git//aws/crossplane?ref=main
-    # Variables can be specified inline.
-    vars:
-    - key: region
-      value: us-east-2
     # Variable files can be loaded from a ConfigMap or a Secret.
     varFiles:
     - source: SecretKey
