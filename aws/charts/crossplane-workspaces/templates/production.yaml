@@ -29,9 +29,6 @@ spec:
         namespace: crossplane-system
         name: terraform
         key: production.tfvars
-      # Variables are expected to be in HCL '.tfvars' format by default. Use
-      # the JSON format if your variables are in the JSON '.tfvars.json' format.
-      format: JSON
   # All Terraform outputs are written to the connection secret.
   writeConnectionSecretToRef:
     namespace: crossplane-system
