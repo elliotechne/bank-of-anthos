@@ -80,6 +80,14 @@ module "eks" {
   } 
   */
 
+  aws_auth_roles = [
+    {
+      rolearn  = "arn:aws:iam::233510574809:role/production-crossplane-config-irsa"
+      username = "production-crossplane-config-irsa"
+      groups   = ["system:masters"]
+    },
+  ]
+
   aws_auth_users = [
     {
       userarn  = "arn:aws:iam::233510574809:user/badams"
