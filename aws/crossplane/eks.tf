@@ -42,7 +42,7 @@ module "eks" {
   }
 
   # aws-auth configmap
-  manage_aws_auth_configmap = true 
+  manage_aws_auth_configmap = false 
   # create_aws_auth_configmap = true
 
   cluster_security_group_additional_rules = {
@@ -95,5 +95,61 @@ module "eks" {
   tags = {
     Environment = "prod"
     Terraform   = "true"
+  }
+}
+
+module "aws-auth" {
+  source                 = "terraform.tier-services.io/tier/aws-auth/kubernetes"
+  version                = "~> 1.0"
+  clustername            = module.eks.cluster_id
+  depends_on             = [module.eks]
+  region                 = "us-east-2"
+  cluster_endpoint       = module.eks.cluster_endpoint
+  cluster_ca_certificate = module.eks.cluster_certificate_authority_data
+  team                   = "search-and-ride"
+  map_roles = [
+     {
+       rolearn  = "arn:aws:iam::233510574809:role/AdminAccess"
+       username = "team-search-and-ride-operator-viewer"
+       groups   = ["team-search-and-ride-viewers", "team-search-and-ride-editors"]
+     },
+     {
+       rolearn  = "arn:aws:iam::233510574809:role/AdminAccess"
+       username = "team-search-and-ride-operator-admin"
+       groups   = ["team-search-and-ride-viewers"]
+     },
+  ]
+}
+
+
+resource "kubernetes_cluster_role_binding" "viewers" {
+  metadata {
+       name = "team-search-and-ride-viewers"
+  }
+  role_ref {
+       api_group = "rbac.authorization.k8s.io"
+       kind      = "ClusterRole"
+       name      = "view"
+  }
+  subject {
+       kind  	= "Group"
+       name  	= "search-and-ride-viewers"
+       api_group = "rbac.authorization.k8s.io"
+  }
+}
+
+resource "kubernetes_cluster_role_binding" "editors" {
+  metadata {
+       name = "search-and-ride-editors"
+  }
+  role_ref {
+       api_group = "rbac.authorization.k8s.io"
+       kind      = "ClusterRole"
+       name      = "edit"
+  }
+  subject {
+       kind  	= "Group"
+       name  	= "search-and-ride-editors"
+       api_group = "rbac.authorization.k8s.io"
   }
 }
