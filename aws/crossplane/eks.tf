@@ -42,7 +42,7 @@ module "eks" {
   }
 
   # aws-auth configmap
-  manage_aws_auth_configmap = false
+  manage_aws_auth_configmap = true 
   # create_aws_auth_configmap = true
 
   cluster_security_group_additional_rules = {
@@ -80,20 +80,7 @@ module "eks" {
     }
   } 
   */
-  aws_auth_roles = [
-    {
-      rolearn  = "arn:aws:iam::233510574809:role/AdminAccess"
-      username = "AdminAccess"
-      groups   = ["system:masters"]
-    },
-  ]
-
   aws_auth_users = [
-    {
-      userarn  = "arn:aws:iam::233510574809:user/crossplane"
-      username = "crossplane"
-      groups   = ["system:masters"]
-    },
     {
       userarn  = "arn:aws:iam::233510574809:user/badams"
       username = "badams"
