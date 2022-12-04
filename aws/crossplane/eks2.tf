@@ -1,4 +1,4 @@
-module "eks" {
+module "eks-tmp" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 18.0"
 
