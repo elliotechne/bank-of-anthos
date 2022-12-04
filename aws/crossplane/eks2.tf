@@ -1,6 +1,6 @@
 module "eks-tmp" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 18.0"
+  version = "~> 18.20"
 
   cluster_name    = "TMP"
   cluster_version = "1.23"
@@ -43,7 +43,7 @@ module "eks-tmp" {
 
   # aws-auth configmap
   manage_aws_auth_configmap = true 
-  create_aws_auth_configmap = true
+  # create_aws_auth_configmap = true
 
   cluster_security_group_additional_rules = {
     egress_nodes_ephemeral_ports_tcp = {
