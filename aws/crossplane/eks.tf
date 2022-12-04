@@ -80,6 +80,13 @@ module "eks" {
     }
   } 
   */
+  aws_auth_roles = [
+    {
+      rolearn  = "arn:aws:iam::233510574809:role/AdminAccess"
+      username = "AdminAccess"
+      groups   = ["system:masters"]
+    },
+  ]
 
   aws_auth_users = [
     {
