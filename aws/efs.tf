@@ -30,6 +30,7 @@ module "efs" {
 }
 
 resource "aws_efs_file_system_policy" "policy" {
+  count          = 0
   file_system_id = module.efs[0].id
 
   policy = <<POLICY
