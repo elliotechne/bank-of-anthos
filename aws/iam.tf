@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "node_additional" {
-  name        = "eks-additional"
+  name        = "EKSAdditional"
   description = "Example usage of node additional policy"
 
   policy = jsonencode({
@@ -7,7 +7,9 @@ resource "aws_iam_policy" "node_additional" {
     Statement = [
       {
         Action = [
-          "ec2:Describe*",
+           "elasticfilesystem:ClientMount",
+           "elasticfilesystem:ClientWrite",
+           "elasticfilesystem:DescribeMountTargets"
         ]
         Effect   = "Allow"
         Resource = "*"
