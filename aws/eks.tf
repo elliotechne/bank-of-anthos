@@ -46,7 +46,7 @@ module "eks" {
 
   iam_role_additional_policies = {
     # AmazonEFSReadWriteMount = "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientReadWriteAccess"
-    AmazonEC2ContainerRegistryReadOnly = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+    "AmazonEC2ContainerRegistryReadOnly" = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   }
 
   cluster_security_group_additional_rules = {
