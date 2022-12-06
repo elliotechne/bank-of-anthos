@@ -1,4 +1,5 @@
 module "efs" {
+  count  = 0
   source = "cloudposse/efs/aws"
   # Cloud Posse recommends pinning every module to a specific version
   version     = "0.32.7"
