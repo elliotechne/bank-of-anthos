@@ -221,6 +221,16 @@ resource "helm_release" "istio-ingress" {
   depends_on      = [helm_release.istiod, helm_release.istio-base, kubernetes_namespace.argocd]
 }
 
+resource "helm_release" "efs" {
+  provider        = helm
+  repository      = local.efs-repo
+  name            = "efs-driver"
+  chart           = "aws-efs-csi-driver"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "default"
+}
+
 resource "helm_release" "istio-cni" {
   provider        = helm
   repository      = local.istio-repo

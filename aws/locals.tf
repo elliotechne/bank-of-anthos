@@ -4,6 +4,7 @@ locals {
   jetstack-repo   = "https://charts.jetstack.io"
   bookinfo-repo   = "https://evry-ace.github.io/helm-charts"
   argocd-repo     = "https://argoproj.github.io/argo-helm"
+  efs-repo        = "https://kubernetes-sigs.github.io/aws-efs-csi-driver"
   metrics-server  = "https://kubernetes-sigs.github.io/metrics-server"
   argocd_dex_google = yamlencode(
     {
