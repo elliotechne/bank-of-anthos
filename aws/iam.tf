@@ -9,7 +9,8 @@ resource "aws_iam_policy" "node_additional" {
         Action = [
            "elasticfilesystem:ClientMount",
            "elasticfilesystem:ClientWrite",
-           "elasticfilesystem:DescribeMountTargets"
+           "elasticfilesystem:DescribeMountTargets",
+           "ec2:DescribeAvailabilityZones"
         ]
         Effect   = "Allow"
         Resource = "*"
