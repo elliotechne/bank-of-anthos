@@ -9,7 +9,7 @@ module "efs" {
   name      = "bsee"
   region    = "us-east-2"
   vpc_id    = module.vpc.vpc_id
-  subnets   = flatten([module.vpc.private_subnets, module.vpc.public_subnets])
+  subnets   = module.vpc.private_subnets
   zone_id   = [aws_route53_zone.wayofthesys.zone_id]
 
   allowed_security_group_ids = [module.eks.cluster_security_group_id]
