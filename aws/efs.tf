@@ -1,6 +1,20 @@
+resource "kubernetes_csi_driver" "efs" {
+  metadata {
+    name = "efs.csi.aws.com"
+  }
+
+  spec {
+    attach_required        = false
+    volume_lifecycle_modes = [
+      "Persistent"
+    ]
+  }
+}
+
 module "efs" {
-  count  = 1
+  count  = 0
   source = "cloudposse/efs/aws"
+  depends_on = [kubernetes_csi_driver.efs]
   # Cloud Posse recommends pinning every module to a specific version
   version     = "0.32.7"
 
