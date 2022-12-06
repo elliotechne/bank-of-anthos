@@ -228,7 +228,7 @@ resource "helm_release" "efs" {
   chart           = "aws-efs-csi-driver"
   cleanup_on_fail = true
   force_update    = true
-  namespace       = "default"
+  namespace       = "kube-system"
 }
 
 resource "helm_release" "istio-cni" {
