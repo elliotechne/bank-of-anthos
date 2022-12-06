@@ -1,4 +1,5 @@
 resource "kubernetes_csi_driver" "efs" {
+  provider = kubernetes
   metadata {
     name = "efs.csi.aws.com"
   }
