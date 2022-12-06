@@ -30,7 +30,6 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    blue = {}
     green = {
       min_size     = 2
       max_size     = 10
