@@ -1,5 +1,21 @@
+resource "kubernetes_storage_class" "efs" {
+  depends_on = [helm_release.efs]
+  metadata {
+    name = "efs"
+  }
+  storage_provisioner = "efs.csi.aws.com"
+  reclaim_policy      = "Retain"
+  parameters = {
+    provisioningMode = "efs-ap"
+    fileSystemId = module.efs[0].id
+    directoryPerms = "700"
+    basePath = "/mnt/efs"
+  }
+  mount_options = ["tls"]
+}
+
 module "efs" {
-  count  = 0
+  count  = 1
   source = "cloudposse/efs/aws"
   depends_on = [helm_release.efs]
   # Cloud Posse recommends pinning every module to a specific version
@@ -17,7 +33,7 @@ module "efs" {
 }
 
 resource "aws_efs_file_system_policy" "policy" {
-  count          = 0
+  count          = 1
   file_system_id = module.efs[0].id
 
   policy = <<POLICY
