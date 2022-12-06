@@ -45,7 +45,7 @@ module "eks" {
   manage_aws_auth_configmap = true
 
   iam_role_additional_policies = {
-    AmazonEFSReadWriteMount = "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientReadWriteAccess"
+    AmazonEFSReadWriteMount = ["arn:aws:iam::aws:policy/AmazonElasticFileSystemClientReadWriteAccess"]
   }
 
   cluster_security_group_additional_rules = {
