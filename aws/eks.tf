@@ -44,12 +44,6 @@ module "eks" {
   # aws-auth configmap
   manage_aws_auth_configmap = true
 
-  iam_role_additional_policies = {
-    # AmazonEFSReadWriteMount = "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientReadWriteAccess"
-    foo = [aws_iam_policy.node_additional.arn]
-  }
-
-
   cluster_security_group_additional_rules = {
     egress_nodes_ephemeral_ports_tcp = {
       description                = "To node 1025-65535"
@@ -103,4 +97,11 @@ module "eks" {
     Environment = "prod"
     Terraform   = "true"
   }
+}
+
+resource "aws_iam_role_policy_attachment" "additional" {
+  for_each = module.eks.eks_managed_node_groups
+
+  policy_arn = aws_iam_policy.node_additional.arn
+  role       = each.value.iam_role_name
 }
