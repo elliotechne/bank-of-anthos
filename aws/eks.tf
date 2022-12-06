@@ -46,7 +46,7 @@ module "eks" {
 
   iam_role_additional_policies = {
     # AmazonEFSReadWriteMount = "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientReadWriteAccess"
-    [aws_iam_policy.node_additional.arn]
+    ["foo"] = [aws_iam_policy.node_additional.arn]
   }
 
 
