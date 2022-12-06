@@ -1,7 +1,15 @@
-module "efs_csi_driver" {
-  source = "git::https://github.com/DNXLabs/terraform-aws-eks-efs-csi-driver.git"
+module "efs" {
+  source = "cloudposse/efs/aws"
+  # Cloud Posse recommends pinning every module to a specific version
+  version     = "0.32.7"
 
-  cluster_name                     = module.eks.cluster_id
-  cluster_identity_oidc_issuer     = module.eks.cluster_oidc_issuer_url
-  cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
+  namespace = "default"
+  stage     = "prod"
+  name      = "bsee"
+  region    = "us-east-2"
+  vpc_id    = module.vpc.vpc_id
+  subnets   = module.vpc.private_subnets 
+  zone_id   = [aws_route53_zone.wayofthesys.zone_id]
+
+  allowed_security_group_ids = [module.eks.cluster_security_group_id]
 }
