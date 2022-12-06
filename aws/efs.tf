@@ -14,3 +14,33 @@ module "efs" {
 
   allowed_security_group_ids = [module.eks.cluster_security_group_id]
 }
+
+resource "aws_efs_file_system_policy" "policy" {
+  file_system_id = module.efs.id
+
+  policy = <<POLICY
+{
+    "Version": "2012-10-17",
+    "Id": "ExamplePolicy01",
+    "Statement": [
+        {
+            "Sid": "EFS01",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Resource": "${module.efs.arn}",
+            "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "true"
+                }
+            }
+        }
+    ]
+}
+POLICY
+}
