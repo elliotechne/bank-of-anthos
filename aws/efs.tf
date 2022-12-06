@@ -16,7 +16,7 @@ module "efs" {
 }
 
 resource "aws_efs_file_system_policy" "policy" {
-  file_system_id = module.efs.id
+  file_system_id = module.efs[0].id
 
   policy = <<POLICY
 {
@@ -29,7 +29,7 @@ resource "aws_efs_file_system_policy" "policy" {
             "Principal": {
                 "AWS": "*"
             },
-            "Resource": "${module.efs.arn}",
+            "Resource": "${module.efs[0].arn}",
             "Action": [
                 "elasticfilesystem:ClientMount",
                 "elasticfilesystem:ClientWrite"
