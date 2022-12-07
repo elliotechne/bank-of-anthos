@@ -18,6 +18,7 @@ module "db" {
   # user cannot be used as it is a reserved word used by the engine"
   db_name  = "bsee"
   username = "bsee"
+  password = var.rds_bsee_password
   port     = 5432
 
   multi_az               = true

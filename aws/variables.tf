@@ -114,3 +114,8 @@ variable "crossplane_eks_cluster_name" {
   type        = string
   default     = "BOA"
 }
+
+variable "rds_bsee_password" {
+  description = "RDS BSEE Password"
+  type        = string
+}
