@@ -231,9 +231,7 @@ resource "helm_release" "efs" {
   namespace       = "kube-system"
   set {
     name = "node.dnsConfig.nameservers"
-    value = [
-      "169.254.169.253"
-    ]
+    value = "[169.254.169.253"]"
   }
 }
 
