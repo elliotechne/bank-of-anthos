@@ -1,3 +1,4 @@
+
 resource "aws_iam_policy" "node_additional" {
   name        = "EKSAdditional"
   description = "Example usage of node additional policy"
@@ -7,14 +8,46 @@ resource "aws_iam_policy" "node_additional" {
     Statement = [
       {
         Action = [
-           "elasticfilesystem:ClientMount",
-           "elasticfilesystem:ClientWrite",
-           "elasticfilesystem:DescribeMountTargets",
-           "ec2:DescribeAvailabilityZones"
+          "elasticfilesystem:ClientMount",
+          "elasticfilesystem:ClientWrite",
+          "elasticfilesystem:DescribeMountTargets",
+          "ec2:DescribeAvailabilityZones"
         ]
         Effect   = "Allow"
         Resource = "*"
       },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "elasticfilesystem:DescribeAccessPoints",
+          "elasticfilesystem:DescribeFileSystems",
+          "elasticfilesystem:DescribeMountTargets",
+          "ec2:DescribeAvailabilityZones"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "elasticfilesystem:CreateAccessPoint"
+        ],
+        "Resource" : "*",
+        "Condition" : {
+          "StringLike" : {
+            "aws:RequestTag/efs.csi.aws.com/cluster" : "true"
+          }
+        }
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : "elasticfilesystem:DeleteAccessPoint",
+        "Resource" : "*",
+        "Condition" : {
+          "StringEquals" : {
+            "aws:ResourceTag/efs.csi.aws.com/cluster" : "true"
+          }
+        }
+      }
     ]
   })
 }
