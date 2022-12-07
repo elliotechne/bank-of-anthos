@@ -11,7 +11,7 @@ resource "kubernetes_persistent_volume" "tmp" {
     persistent_volume_source {
       csi {
         driver = "efs.csi.aws.com"
-        volumeHandle = module.efs[0].id
+        volume_handle = module.efs[0].id
       }
     }
   }
