@@ -52,7 +52,6 @@ module "db" {
     }
   ]
 
-  tags = local.tags
   db_option_group_tags = {
     "Sensitive" = "low"
   }
