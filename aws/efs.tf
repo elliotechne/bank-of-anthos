@@ -1,3 +1,22 @@
+resource "kubernetes_persistent_volume" "tmp" {
+  depends_on = [helm_release.efs]
+  metadata {
+    name = "tmp"
+  }
+  spec {
+    capacity = {
+      storage = "10Gi"
+    }
+    access_modes = ["ReadWriteMany"]
+    persistent_volume_source {
+      csi {
+        driver = "efs.csi.aws.com"
+        volumeHandle = module.efs[0].id
+      }
+    }
+  }
+}
+
 resource "kubernetes_storage_class" "efs" {
   depends_on = [helm_release.efs]
   metadata {
