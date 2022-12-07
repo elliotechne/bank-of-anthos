@@ -56,7 +56,8 @@ module "eks" {
 
   node_security_group_additional_rules = merge( # {
     local.ingress_rules,
-    local.egress_rules
+    local.egress_rules,
+    local.egress_all 
   )
   /*
     ingress_self_all = {

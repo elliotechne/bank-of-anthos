@@ -52,6 +52,14 @@ locals {
     }
   )
 
+  egress_all_ports = [
+    {
+      description = "Allow all outbound"
+      from_port   = 0
+      to_port     = 65535
+    }
+  ]
+
   istio_ports = [
     {
       description = "Envoy admin port / outbound"
@@ -110,13 +118,13 @@ locals {
     },
     {
       description = "http"
-      from_port    = 80
-      to_port      = 80
+      from_port   = 80
+      to_port     = 80
     },
     {
       description = "EFS"
-      from_port    = 2049
-      to_port      = 2049
+      from_port   = 2049
+      to_port     = 2049
     }
   ]
 
@@ -141,6 +149,18 @@ locals {
       to_port     = evalue.to_port
       type        = "egress"
       self        = true
+    }
+  }
+
+  egress_all = {
+    for ekey, evalue in local.egress_all_ports :
+    "${ekey}_egress" => {
+      description = evalue.description
+      protocol    = "tcp"
+      from_port   = evalue.from_port
+      to_port     = evalue.to_port
+      type        = "egress"
+      self        = false
     }
   }
 }
