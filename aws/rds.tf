@@ -36,6 +36,7 @@ module "cluster" {
 }
 
 module "db" {
+  count = 0
   source = "terraform-aws-modules/rds/aws"
 
   identifier = "bsee"
