@@ -1,5 +1,4 @@
 resource "aws_rds_global_cluster" "bsee" {
-  count = 0
   global_cluster_identifier = "bsee"
   engine                    = "aurora-postgresql"
   engine_version            = "11.12"
