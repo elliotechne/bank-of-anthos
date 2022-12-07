@@ -1,11 +1,11 @@
-resource "kubernetes_persistent_volume" "tmp" {
+resource "kubernetes_persistent_volume" "bsee" {
   depends_on = [helm_release.efs]
   metadata {
-    name = "tmp"
+    name = "bsee"
   }
   spec {
     capacity = {
-      storage = "10Gi"
+      storage = "50Gi"
     }
     access_modes = ["ReadWriteMany"]
     persistent_volume_source {
