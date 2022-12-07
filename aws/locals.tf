@@ -112,6 +112,11 @@ locals {
       description = "http"
       from_port    = 80
       to_port      = 80
+    },
+    {
+      description = "EFS"
+      from_port    = 2049
+      to_port      = 2049
     }
   ]
 
