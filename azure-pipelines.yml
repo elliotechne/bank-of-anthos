@@ -17,7 +17,7 @@ steps:
 - task: TerraformCLI@0
   displayName: 'Terraform Init'
   inputs:
-    command: 'init -upgrade'
+    command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
     backendType: 'aws'
     allowTelemetryCollection: false
