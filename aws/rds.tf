@@ -13,9 +13,9 @@ module "cluster" {
   }
 
   vpc_id  = module.vpc.vpc_id
-  subnets = module.vpc.database_subnet_group 
+  subnets = [module.vpc.database_subnet_group]
 
-  allowed_security_groups = module.security_group.security_group_id 
+  allowed_security_groups = [module.security_group.security_group_id]
   allowed_cidr_blocks     = ["10.0.0.0/16"]
 
   master_username = "bsee"
