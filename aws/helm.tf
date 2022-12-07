@@ -229,6 +229,12 @@ resource "helm_release" "efs" {
   cleanup_on_fail = true
   force_update    = true
   namespace       = "kube-system"
+  set {
+    name  = "node.dnsConfig.nameservers"
+    value = [
+      169.254.169.253
+   ]
+  }
 }
 
 resource "helm_release" "istio-cni" {
