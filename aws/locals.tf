@@ -160,7 +160,6 @@ locals {
       from_port   = evalue.from_port
       to_port     = evalue.to_port
       type        = "egress"
-      self        = true
     }
   }
 }
