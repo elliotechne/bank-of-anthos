@@ -50,7 +50,7 @@ module "eks" {
       from_port                  = 0
       to_port                    = 65535
       type                       = "egress"
-      source_node_security_group = false
+      source_node_security_group = true 
     }
   }
 
