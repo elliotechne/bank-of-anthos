@@ -152,6 +152,7 @@ locals {
     }
   }
 
+  /*
   egress_all = {
     for ekey, evalue in local.egress_all_ports :
     "${ekey}_egress" => {
@@ -162,4 +163,5 @@ locals {
       type        = "egress"
     }
   }
+  */
 }
