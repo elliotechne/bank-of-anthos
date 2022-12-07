@@ -70,7 +70,7 @@ resource "aws_efs_file_system_policy" "policy" {
             "Action": [
                 "elasticfilesystem:ClientMount",
                 "elasticfilesystem:ClientWrite"
-            ],
+            ]
         }
     ]
 }
