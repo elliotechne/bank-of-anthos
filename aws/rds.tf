@@ -27,7 +27,7 @@ module "cluster" {
   apply_immediately   = true
   monitoring_interval = 10
 
-  db_subnet_group_name   = module.primary_vpc.database_subnet_group_name
+  db_subnet_group_name   = module.vpc.database_subnet_group_name
   create_db_subnet_group = false
   create_security_group  = true
 
