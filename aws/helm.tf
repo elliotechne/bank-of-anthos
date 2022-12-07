@@ -99,7 +99,7 @@ resource "helm_release" "crossplane-aws" {
     name  = "provider.packages"
     value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0}"
   }
-    
+
 }
 
 resource "helm_release" "crossplane-terraform" {
@@ -230,10 +230,10 @@ resource "helm_release" "efs" {
   force_update    = true
   namespace       = "kube-system"
   set {
-    name  = "node.dnsConfig.nameservers"
+    name = "node.dnsConfig.nameservers"
     value = [
-      169.254.169.253
-   ]
+      "169.254.169.253"
+    ]
   }
 }
 
