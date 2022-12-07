@@ -1,3 +1,40 @@
+module "cluster" {
+  source  = "terraform-aws-modules/rds-aurora/aws"
+
+  name           = "aurora-db-postgres142"
+  engine         = "aurora-postgresql"
+  engine_version = "14.2"
+  instance_class = "db.r6g.large"
+  instances = {
+    one = {}
+    2 = {
+      instance_class = "db.r6g.2xlarge"
+    }
+  }
+
+  vpc_id  = module.vpc.vpc_id
+  subnets = module.vpc.database_subnet_group 
+
+  allowed_security_groups = module.security_group.security_group_id 
+  allowed_cidr_blocks     = ["10.0.0.0/16"]
+
+  master_username = "bsee"
+  master_password = var.rds_bsee_password 
+  storage_encrypted   = true
+  apply_immediately   = true
+  monitoring_interval = 10
+
+  db_parameter_group_name         = "aurouraPg"
+  db_cluster_parameter_group_name = "auroraPg"
+
+  enabled_cloudwatch_logs_exports = ["postgresql"]
+
+  tags = {
+    Environment = "dev"
+    Terraform   = "true"
+  }
+}
+
 module "db" {
   source = "terraform-aws-modules/rds/aws"
 
