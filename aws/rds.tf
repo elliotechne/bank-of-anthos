@@ -16,6 +16,8 @@ module "cluster" {
   instance_class = "db.r6g.large"
   instances = { for i in range(2) : i => {} }
 
+  database_name = "bsee"
+
   vpc_id  = module.vpc.vpc_id
 
   allowed_security_groups = [module.security_group.security_group_id]
