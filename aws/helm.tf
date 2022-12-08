@@ -136,6 +136,7 @@ resource "helm_release" "crossplane-workspaces" {
 }
 
 resource "helm_release" "bsee" {
+  count     = 0
   provider  = helm
   name      = "bsee"
   chart     = "charts/burp_enterprise_helm_chart_v2022_11"
