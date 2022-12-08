@@ -1,0 +1,13 @@
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets: []
+ #- name: aws-auth-img-pull
+
+image:
+  repository: ibhattacharya/aws-auth-controller
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: v1.0-master
+
+rbacproxy:
+  repository: gcr.io/kubebuilder/kube-rbac-proxy
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: v0.8.0

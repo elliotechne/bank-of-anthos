@@ -1,0 +1,16 @@
+domain: operators.com
+layout:
+- go.kubebuilder.io/v3
+projectName: aws-auth-operator
+repo: aws-auth-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: operators.com
+  group: eksauth
+  kind: EksAuthMap
+  path: aws-auth-operator/api/v1
+  version: v1
+version: "3"
