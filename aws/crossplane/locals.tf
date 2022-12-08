@@ -1,4 +1,5 @@
 locals {
+  environment = "Prod"
   istio_ports = [
     {
       description = "Envoy admin port / outbound"
