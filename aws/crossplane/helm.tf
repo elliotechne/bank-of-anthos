@@ -3,7 +3,7 @@ resource "helm_release" "bank-of-anthos" {
   provider  = helm
   name      = "bank-of-anthos"
   chart     = "charts/bank-of-anthos"
-  namespace = "kube-system"
+  namespace = "default"
   depends_on = [
     module.eks
   ]
