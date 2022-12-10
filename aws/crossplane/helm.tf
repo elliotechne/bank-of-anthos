@@ -1,8 +1,8 @@
-resource "helm_release" "aws-auth-operator" {
-  count     = 0
+resource "helm_release" "bank-of-anthos" {
+  count     = 1
   provider  = helm
-  name      = "aws-auth-operator"
-  chart     = "charts/aws-auth-operator/chart"
+  name      = "bank-of-anthos"
+  chart     = "charts/bank-of-anthos"
   namespace = "kube-system"
   depends_on = [
     module.eks

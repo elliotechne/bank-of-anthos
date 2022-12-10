@@ -1,4 +1,5 @@
 resource "kubernetes_secret" "jwt-key" {
+  count = 0
   provider   = kubernetes
   depends_on = [module.eks]
   metadata {
