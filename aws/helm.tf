@@ -100,6 +100,11 @@ resource "helm_release" "crossplane-aws" {
     value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0}"
   }
 
+  set_sensitive {
+    name  = "args"
+    value = "{-d}"
+  }
+
 }
 
 resource "helm_release" "crossplane-terraform" {
