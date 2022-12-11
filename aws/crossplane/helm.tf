@@ -1,5 +1,5 @@
 resource "helm_release" "bank-of-anthos" {
-  count     = 1
+  count     = 0
   provider  = helm
   name      = "bank-of-anthos"
   chart     = "charts/bank-of-anthos"
