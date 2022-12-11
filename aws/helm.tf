@@ -99,12 +99,6 @@ resource "helm_release" "crossplane-aws" {
     name  = "provider.packages"
     value = "{xpkg.upbound.io/crossplane-contrib/provider-aws:v0.33.0}"
   }
-
-  set_sensitive {
-    name  = "args"
-    value = "{-d}"
-  }
-
 }
 
 resource "helm_release" "crossplane-terraform" {
@@ -112,9 +106,14 @@ resource "helm_release" "crossplane-terraform" {
   depends_on = [kubernetes_namespace.crossplane-system]
   name       = "crossplane-terraform"
   chart      = "charts/crossplane-terraform"
-  version    = "0.0.1"
+  version    = "0.0.6"
   namespace  = "crossplane-system"
   timeout    = 120
+
+  set_sensitive {
+    name  = "crossplane_aws_role_arn"
+    value = module.aws_provider_irsa.irsa_iam_role_arn
+  }
 
 }
 

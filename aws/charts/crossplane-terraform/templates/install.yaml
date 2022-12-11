@@ -6,7 +6,7 @@ metadata:
   labels:
     app: crossplane-provider-terraform
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::233510574809:role/production-crossplane-config-irsa 
+    eks.amazonaws.com/role-arn: {{ .Values.crossplane_aws_role_arn }} 
 spec:
   image: crossplane/provider-terraform-controller:v0.2.0
   args:
