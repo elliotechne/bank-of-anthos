@@ -33,6 +33,6 @@ This uses Azure DevOps pipeline at ../azure-pipelines.yml, you can see the vars 
 -var="rds_bsee_password"=$(RDS_BSEE_PASSWORD) -var="github_user"=$(GITHUB_USER) -var="github_pat"=$(GITHUB_PAT) -var="zerossl_email"=$(ZEROSSL_EMAIL) -var="zerossl_eab_key_id"=$(ZEROSSL_EAB_KEY_ID) -var="zerossl_eab_hmac_key"=$(ZEROSSL_EAB_HMAC_KEY) -var="argocd_oidc_client_id"=$(ARGOCD_OIDC_CLIENT_ID) -var="argocd_oidc_client_secret"=$(ARGOCD_OIDC_CLIENT_SECRET) -var="externaldns_secret_key"=$(EXTERNALDNS_SECRET_KEY)
 ```
 
-The end result of this demonstration is infrastructure as code that reduces infra drift by ensuring resources are continuously reconciled and kept up to date. If someone goes in and changes something manually that is managed by crossplane, the change gets automatically reverted. Bank of Anthos demo gets installed and becomes available via svc load balancer, where you can then do some manual chaos testing yourself and see what happens. 
+The end result of this demonstration is infrastructure as code that reduces infra drift by ensuring resources are continuously reconciled and kept up to date. If someone goes in and changes something manually that is managed by Crossplane, the change gets automatically reverted. Bank of Anthos demo gets installed and becomes available via svc load balancer, where you can then do some manual chaos testing yourself and see what happens. 
 
  
