@@ -1,11 +1,11 @@
-resource "helm_release" "bank-of-anthos" {
+resource "helm_release" "boa" {
   count     = 1
   provider  = helm
-  name      = "bank-of-anthos"
+  name      = "boa"
   chart     = "charts/bank-of-anthos"
-  namespace = "bank-of-anthos"
+  namespace = "boa"
   depends_on = [
     module.eks,
-    kubernetes_namespace.bank-of-anthos
+    kubernetes_namespace.boa
   ]
 }

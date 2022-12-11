@@ -1,7 +1,7 @@
-resource "kubernetes_namespace" "bank-of-anthos" {
+resource "kubernetes_namespace" "boa" {
   depends_on = [module.eks]
   provider   = kubernetes
   metadata {
-    name = "bank-of-anthos"
+    name = "boa"
   }
 }
