@@ -1,10 +1,11 @@
 resource "helm_release" "bank-of-anthos" {
-  count     = 0
+  count     = 1
   provider  = helm
   name      = "bank-of-anthos"
   chart     = "charts/bank-of-anthos"
-  namespace = "default"
+  namespace = "bank-of-anthos"
   depends_on = [
-    module.eks
+    module.eks,
+    kubernetes_namespace.bank-of-anthos
   ]
 }
