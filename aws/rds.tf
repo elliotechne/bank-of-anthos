@@ -1,4 +1,5 @@
 resource "aws_rds_global_cluster" "bsee" {
+  count                     = 0
   global_cluster_identifier = "bsee"
   engine                    = "aurora-postgresql"
   engine_version            = "11.12"
@@ -39,6 +40,7 @@ module "cluster" {
 }
 
 module "security_group" {
+  count   = 0
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 

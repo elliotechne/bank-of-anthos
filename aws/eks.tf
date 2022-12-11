@@ -32,7 +32,7 @@ module "eks" {
   eks_managed_node_groups = {
     blue = {
       min_size     = 1
-      max_size     = 10
+      max_size     = 2
       desired_size = 1
 
       instance_types = ["t3.large"]
