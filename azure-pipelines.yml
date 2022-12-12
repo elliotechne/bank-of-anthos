@@ -4,10 +4,14 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
   paths:
     exclude:
       - 'aws/crossplane/*'
+    include:
+      - 'aws/*'
+    branches:
+      include:
+       - main
 
 pool: Ubuntu 
 
