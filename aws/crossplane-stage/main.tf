@@ -11,10 +11,6 @@ terraform {
   }
 }
 
-provider "aws" {
-  region = var.region
-}
-
 data "aws_eks_cluster_auth" "boa" {
   name = "BOA-${local.environment}"
 }
