@@ -50,5 +50,9 @@ steps:
       allowTelemetryCollection: false
       # publishPlanResults: 'bank-prod.out'
       providerAwsRegion: 'us-east-2'
+      backendServiceAws: 'WayOfTheSys'
+      backendAwsRegion: 'us-east-2'
+      backendAwsBucket: 'wayofthesys'
+      backendAwsKey: 'env:/production/crossplane-prod.tfstate'
 
 
