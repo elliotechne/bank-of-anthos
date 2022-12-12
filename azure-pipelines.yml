@@ -9,9 +9,9 @@ trigger:
       - 'aws/crossplane/*'
     include:
       - 'aws/*'
-    branches:
-      include:
-       - main
+  branches:
+    include:
+     - main
 
 pool: Ubuntu 
 
