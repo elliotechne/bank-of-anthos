@@ -1,0 +1,54 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+---
+trigger:
+  paths:
+    exclude:
+      - './*'
+    include:
+      - 'aws/crossplane-stage/*'
+  branches:
+    include:
+      - main
+
+pool: Ubuntu
+  
+steps:
+  - task: TerraformInstaller@0
+    inputs:
+      terraformVersion: '1.3.4'
+
+  - task: TerraformCLI@0
+    displayName: 'Terraform Init'
+    inputs:
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/aws/crossplane-stage'
+      backendType: 'aws'
+      allowTelemetryCollection: false
+      backendServiceAws: 'WayOfTheSys'
+      backendAwsRegion: 'us-east-2'
+      backendAwsBucket: 'wayofthesys'
+      backendAwsKey: 'env:/production/crossplane-prod.tfstate'
+
+
+  - task: TerraformCLI@0
+    displayName: 'Terraform Validate'
+    inputs:
+      command: 'validate'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/aws/crossplane-stage'
+      allowTelemetryCollection: false
+
+  - task: TerraformCLI@0
+    displayName: 'Terraform Plan'
+    inputs:
+      command: 'plan'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/aws/crossplane-stage'
+      commandOptions: '-var-file="prod.tfvars" -out="boa-prod.out" -detailed-exitcode' 
+      allowTelemetryCollection: false
+      # publishPlanResults: 'bank-prod.out'
+      providerAwsRegion: 'us-east-2'
+
+
