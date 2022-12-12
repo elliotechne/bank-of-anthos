@@ -11,20 +11,24 @@ terraform {
   }
 }
 
+data "aws_eks_cluster" "boa" {
+  name = "BOA-${local.environment}"
+}
+
 data "aws_eks_cluster_auth" "boa" {
   name = "BOA-${local.environment}"
 }
 
 provider "kubernetes" {
-  host                   = module.eks.cluster_endpoint
-  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+  host                   = data.aws_eks_cluster.boa.cluster_endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.boa.cluster_certificate_authority_data)
   token                  = data.aws_eks_cluster_auth.boa.token
 }
 
 provider "helm" {
   kubernetes {
-    host                   = module.eks.cluster_endpoint
-    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+    host                   = data.aws_eks_cluster.boa.cluster_endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.boa.cluster_certificate_authority_data)
     token                  = data.aws_eks_cluster_auth.boa.token
   }
 }
