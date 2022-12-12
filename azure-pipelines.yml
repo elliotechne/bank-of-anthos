@@ -3,15 +3,6 @@ resources:
   pipelines:
     - pipeline: AWSInit 
       source: azure-aws.yml
-      trigger:
-        paths:
-          exclude:
-            - './*'
-          include:
-            - 'aws/crossplane/*'
-        branches:
-          include:
-            - main
 
 #    - pipeline: Crossplane 
 #      source: azure-crossplane.yml

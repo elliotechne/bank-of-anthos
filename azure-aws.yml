@@ -4,6 +4,16 @@
 # https://aka.ms/yaml
 
 ---
+trigger:
+  paths:
+    exclude:
+      - './*'
+    include:
+      - 'aws/crossplane/*'
+  branches:
+    include:
+      - main
+
 pool: Ubuntu
 
 steps:
