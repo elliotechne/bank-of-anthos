@@ -112,6 +112,7 @@ variable "crossplane_region" {
 variable "crossplane_s3_bucket" {
   description = "S3 Bucket For Crossplane TF Backend"
   type        = string
+  default     = "wayofthesys"
 }
 
 variable "crossplane_eks_cluster_name" {
