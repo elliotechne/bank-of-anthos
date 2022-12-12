@@ -40,7 +40,7 @@ module "cluster" {
 }
 
 module "security_group" {
-  count   = 0
+  count   = 1
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 
