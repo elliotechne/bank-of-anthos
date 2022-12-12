@@ -32,9 +32,9 @@ spec:
   configuration: |
     terraform {
       backend "s3" {
-        bucket = ""{{ .Values.s3bucket }}""
-        key    = ""{{ .Values.tfstate_key }}""
-        region = ""{{ .Values.region }}""
+        bucket = {{ .Values.s3bucket|squote }}
+        key    = {{ .Values.tfstate_key|squote }}
+        region = {{ .Values.region|squote }}
       }
     }
     provider "aws" {}
