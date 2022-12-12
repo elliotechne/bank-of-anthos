@@ -106,7 +106,7 @@ resource "helm_release" "crossplane-terraform" {
   depends_on = [kubernetes_namespace.crossplane-system]
   name       = "crossplane-terraform"
   chart      = "charts/crossplane-terraform"
-  version    = "0.0.12"
+  version    = "0.0.13"
   namespace  = "crossplane-system"
   timeout    = 120
 
