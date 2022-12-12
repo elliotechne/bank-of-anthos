@@ -31,7 +31,7 @@ steps:
       backendServiceAws: 'WayOfTheSys'
       backendAwsRegion: 'us-east-2'
       backendAwsBucket: 'wayofthesys'
-      backendAwsKey: 'env:/production/crossplane-prod.tfstate'
+      backendAwsKey: 'crossplane-prod.tfstate'
 
 
   - task: TerraformCLI@0
