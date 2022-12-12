@@ -1,2 +1,2 @@
-region="us-east-2"
-bucket_name="wayofthesys-tmp2"
+region      = "us-east-2"
+crossplane_eks_cluster_name = "BOA"
