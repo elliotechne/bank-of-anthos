@@ -6,7 +6,7 @@ metadata:
   labels:
     app: crossplane-provider-terraform
   annotations:
-    eks.amazonaws.com/role-arn: {{ .Values.crossplane_aws_role_arn }} 
+    eks.amazonaws.com/role-arn: "{{ .Values.crossplane_aws_role_arn }}"
 spec:
   image: crossplane/provider-terraform-controller:v0.2.0
   args:
@@ -31,10 +31,10 @@ metadata:
 spec:
   configuration: |
     terraform {
-      backend "s3" {
-        bucket = "wayofthesys"
-        key    = "crossplane-prod.tfstate"
-        region = "us-east-2"
+      backend "kubernetes" {
+        secret_suffix     = "providerconfig-tf-aws"
+        namespace         = "crossplane-system"
+        in_cluster_config = true
       }
   }
     provider "aws" {}
