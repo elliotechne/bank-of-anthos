@@ -31,11 +31,19 @@ metadata:
 spec:
   configuration: |
     terraform {
+      /*
       backend "kubernetes" {
         secret_suffix     = "providerconfig-tf-aws"
         namespace         = "crossplane-system"
         in_cluster_config = true
       }
+     */
+      backend "s3" {
+        bucket = {{ .Values.s3bucket }}
+        key    = "crossplane-prod.tfstate"
+        region = "us-east-2"
+      }
+  }
     }
     provider "aws" {}
   credentials:

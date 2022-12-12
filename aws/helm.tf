@@ -106,13 +106,18 @@ resource "helm_release" "crossplane-terraform" {
   depends_on = [kubernetes_namespace.crossplane-system]
   name       = "crossplane-terraform"
   chart      = "charts/crossplane-terraform"
-  version    = "0.0.6"
+  version    = "0.0.7"
   namespace  = "crossplane-system"
   timeout    = 120
 
   set_sensitive {
     name  = "crossplane_aws_role_arn"
     value = module.aws_provider_irsa.irsa_iam_role_arn
+  }
+
+  set_sensitive {
+    name  = "s3bucket"
+    value = var.crossplane_s3_bucket
   }
 
 }

@@ -109,6 +109,11 @@ variable "crossplane_region" {
   default     = "us-east-2"
 }
 
+variable "crossplane_s3_bucket" {
+  description = "S3 Bucket For Crossplane TF Backend"
+  type        = string
+}
+
 variable "crossplane_eks_cluster_name" {
   description = "Crossplane EKS Cluster Name"
   type        = string
