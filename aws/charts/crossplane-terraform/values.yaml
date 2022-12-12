@@ -1,2 +1,4 @@
 crossplane_aws_role_arn: "" 
 s3bucket: ""
+tfstate_key: ""
+region: ""

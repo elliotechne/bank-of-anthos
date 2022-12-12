@@ -115,6 +115,12 @@ variable "crossplane_s3_bucket" {
   default     = "wayofthesys"
 }
 
+variable "crossplane_tfstate_key" {
+  description = "TFState Key For Crossplane TF Backend"
+  type        = string
+  default     = "crossplane-prod.tfstate"
+}
+
 variable "crossplane_eks_cluster_name" {
   description = "Crossplane EKS Cluster Name"
   type        = string
