@@ -60,6 +60,14 @@ module "eks" {
     local.egress_rules
   )
 
+  aws_auth_roles = [
+    {
+      rolearn  = "arn:aws:iam::233510574809:role/AdminAccess"
+      username = "AdminAccess"
+      groups   = ["system:masters"]
+    },
+  ]
+
   aws_auth_users = [
     {
       userarn  = "arn:aws:iam::233510574809:user/azuredevops"
