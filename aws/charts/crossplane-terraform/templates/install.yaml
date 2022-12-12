@@ -39,7 +39,7 @@ spec:
       }
      */
       backend "s3" {
-        bucket = {{ .Values.s3bucket }}
+        bucket = "wayofthesys"
         key    = "crossplane-prod.tfstate"
         region = "us-east-2"
       }
