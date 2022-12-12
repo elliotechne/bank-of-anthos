@@ -7,9 +7,9 @@
 trigger:
   paths:
     exclude:
-      - './*'
+      - './aws/crossplane/*'
     include:
-      - 'aws/crossplane/*'
+      - 'aws/*'
   branches:
     include:
       - main
