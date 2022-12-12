@@ -1,66 +1,27 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 ---
 resources:
   pipelines:
-    - pipeline: AWSInit
-
+    - pipeline: AWSInit 
+      source: azure-aws.yml
       trigger:
         paths:
           exclude:
-            - 'aws/crossplane/*'
+            - './*'
           include:
-            - 'aws/*'
+            - 'aws/crossplane/*'
         branches:
           include:
             - main
 
-      pool: Ubuntu
+#    - pipeline: Crossplane 
+#      source: azure-crossplane.yml
+#      trigger:
+#        paths:
+#          exclude:
+#            - './*'
+#          include:
+#            - 'aws/crossplane/*'
+#        branches:
+#          include:
+#            - main
 
-      steps:
-        - task: TerraformInstaller@0
-          inputs:
-            terraformVersion: '1.3.4'
-
-        - task: TerraformCLI@0
-          displayName: 'Terraform Init'
-          inputs:
-            command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-            backendType: 'aws'
-            allowTelemetryCollection: false
-            backendServiceAws: 'WayOfTheSys'
-            backendAwsRegion: 'us-east-2'
-            backendAwsBucket: 'wayofthesys'
-            backendAwsKey: 'bank-prod.tfstate'
-
-
-        - task: TerraformCLI@0
-          displayName: 'Terraform Validate'
-          inputs:
-            command: 'validate'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-            allowTelemetryCollection: false
-
-        - task: TerraformCLI@0
-          displayName: 'Terraform Plan'
-          inputs:
-            command: 'plan'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-            commandOptions: '-var-file="prod.tfvars" -out="bank-prod.out" -var="crossplane_s3_bucket"=$(CROSSPLANE_S3_BUCKET) -var="rds_bsee_password"=$(RDS_BSEE_PASSWORD) -var="github_user"=$(GITHUB_USER) -var="github_pat"=$(GITHUB_PAT) -var="zerossl_email"=$(ZEROSSL_EMAIL) -var="zerossl_eab_key_id"=$(ZEROSSL_EAB_KEY_ID) -var="zerossl_eab_hmac_key"=$(ZEROSSL_EAB_HMAC_KEY) -var="argocd_oidc_client_id"=$(ARGOCD_OIDC_CLIENT_ID) -var="argocd_oidc_client_secret"=$(ARGOCD_OIDC_CLIENT_SECRET) -var="externaldns_secret_key"=$(EXTERNALDNS_SECRET_KEY) -detailed-exitcode' 
-            allowTelemetryCollection: false
-            # publishPlanResults: 'bank-prod.out'
-            providerAwsRegion: 'us-east-2'
-
-        - task: TerraformCLI@0
-          displayName: 'Terraform Apply'
-          inputs:
-            command: 'apply'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
-            commandOptions: '"bank-prod.out"'
-            allowTelemetryCollection: false
-            providerServiceAws: 'WayOfTheSys'
-            providerAwsRegion: 'us-east-2'
