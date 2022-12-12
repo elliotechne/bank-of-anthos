@@ -1,0 +1,47 @@
+apiVersion: eksauth.operators.com/v1
+kind: EksAuthMap
+metadata:
+  name: my-rbac
+spec:
+  config:
+    - arn: "arn:aws:iam::[YOUR_AWS_ACCOUNT]:role/sre-role"
+      username: "sre-cluster-admin"
+      type: "role"
+      groups:
+      - "ADMIN"
+    - arn: "arn:aws:iam::[YOUR_AWS_ACCOUNT]:role/hsre-role"
+      username: "hsre-cluster-role"
+      type: "role"
+      groups:
+      - "READONLY"
+    - arn: "arn:aws:iam::[YOUR_AWS_ACCOUNT]:role/cd-jenkins-role"
+      username: "cd-jenkins"
+      type: "role"
+      groups:
+      - "ADMIN"
+    - arn: "arn:aws:iam::[YOUR_AWS_ACCOUNT]:role/app-dev"
+      username: "app-dev"
+      type: "role"
+      groups:
+      - "NSADMIN"
+      - "READONLY"
+      namespaces:
+      - web
+      - app     
+    - arn: "arn:aws:iam::[YOUR_AWS_ACCOUNT]:role/app-architects"
+      username: "architects"
+      type: "role"
+      groups:
+      - "WRITE"  
+      - "group2"          
+    - arn: "arn:aws:iam::[YOUR_AWS_ACCOUNT]:user/ops-user"
+      username: "ops-user"
+      type: "user"
+      groups:
+      - "ADMIN" 
+    - arn: "arn:aws:iam::[YOUR_AWS_ACCOUNT]:user/ops-user"
+      username: "ops-user"
+      type: "user"
+      groups:
+      - "my-custom-group"  
+      - "group2"
