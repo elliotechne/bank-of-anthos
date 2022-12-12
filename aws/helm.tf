@@ -106,7 +106,7 @@ resource "helm_release" "crossplane-terraform" {
   depends_on = [kubernetes_namespace.crossplane-system]
   name       = "crossplane-terraform"
   chart      = "charts/crossplane-terraform"
-  version    = "0.0.7"
+  version    = "0.0.8"
   namespace  = "crossplane-system"
   timeout    = 120
 
@@ -120,6 +120,15 @@ resource "helm_release" "crossplane-terraform" {
     value = var.crossplane_s3_bucket
   }
 
+  set_sensitive {
+    name  = "tfstate_key"
+    value = var.crossplane_tfstate_key
+  }
+
+  set_sensitive {
+    name  = "region"
+    value = var.region
+  }
 }
 
 resource "helm_release" "crossplane-config" {
