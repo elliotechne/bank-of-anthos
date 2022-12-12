@@ -9,7 +9,7 @@ metadata:
     eks.amazonaws.com/role-arn: "arn:aws:iam::233510574809:role/production-crossplane-config-irsa"
 spec:
   image: crossplane/provider-terraform-controller:v0.2.0
-  args: ["--debug"]
+  args: ["-d"]
   podSecurityContext:
     fsGroup: 2000
 ---
