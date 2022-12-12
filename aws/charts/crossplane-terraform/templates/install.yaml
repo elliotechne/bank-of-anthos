@@ -31,20 +31,12 @@ metadata:
 spec:
   configuration: |
     terraform {
-      /*
-      backend "kubernetes" {
-        secret_suffix     = "providerconfig-tf-aws"
-        namespace         = "crossplane-system"
-        in_cluster_config = true
-      }
-     */
       backend "s3" {
         bucket = "wayofthesys"
         key    = "crossplane-prod.tfstate"
         region = "us-east-2"
       }
   }
-    }
     provider "aws" {}
   credentials:
     # Terraform natively supports IRSA auth so we can use None here
