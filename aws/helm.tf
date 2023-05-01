@@ -1,3 +1,4 @@
+/*
 resource "helm_release" "argocd" {
   depends_on      = [kubernetes_namespace.argocd]
   provider        = helm
@@ -32,6 +33,7 @@ resource "helm_release" "argocd" {
     value = "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.1.0/extension.tar"
   }
 }
+*/
 
 resource "helm_release" "cluster-issuer" {
   provider  = helm
@@ -150,17 +152,6 @@ resource "helm_release" "crossplane-workspaces" {
   namespace = "crossplane-system"
   depends_on = [
     helm_release.crossplane-config
-  ]
-}
-
-resource "helm_release" "bsee" {
-  count     = 0
-  provider  = helm
-  name      = "bsee"
-  chart     = "charts/burp_enterprise_helm_chart_v2022_11"
-  namespace = "default"
-  depends_on = [
-    helm_release.efs
   ]
 }
 
