@@ -43,6 +43,7 @@ module "eks" {
   # aws-auth configmap
   manage_aws_auth_configmap = true
 
+  /*
   cluster_security_group_additional_rules = {
     egress_nodes_ephemeral_ports_tcp = {
       description                = "To node 1025-65535"
@@ -52,7 +53,7 @@ module "eks" {
       type                       = "egress"
     }
   }
-
+  */
   node_security_group_additional_rules = merge( # {
     local.ingress_rules,
     local.egress_rules,
