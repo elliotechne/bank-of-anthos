@@ -51,7 +51,6 @@ steps:
       # publishPlanResults: 'bank-prod.out'
       providerAwsRegion: 'us-east-2'
       backendType: 'aws'
-      allowTelemetryCollection: false
       backendServiceAws: 'WayOfTheSys'
       backendAwsRegion: 'us-east-2'
       backendAwsBucket: 'wayofthesys2'
