@@ -50,6 +50,12 @@ steps:
       allowTelemetryCollection: false
       # publishPlanResults: 'bank-prod.out'
       providerAwsRegion: 'us-east-2'
+      backendType: 'aws'
+      allowTelemetryCollection: false
+      backendServiceAws: 'WayOfTheSys'
+      backendAwsRegion: 'us-east-2'
+      backendAwsBucket: 'wayofthesys2'
+      backendAwsKey: 'bank-prod.tfstate'
 
   - task: TerraformCLI@0
     displayName: 'Terraform Apply'
