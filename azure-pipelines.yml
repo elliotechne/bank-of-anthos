@@ -18,7 +18,9 @@ pool: Ubuntu
   
 stages:
 - stage: cluster 
-  steps:
+  jobs:
+  - job: cluster
+    steps:
     - task: TerraformInstaller@0
       inputs:
         terraformVersion: '1.3.4'
