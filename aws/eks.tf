@@ -42,7 +42,7 @@ module "eks" {
 
   # aws-auth configmap
   manage_aws_auth_configmap = true
-  create_aws_auth_configmap = true
+  create_aws_auth_configmap = false 
 
   /*
   cluster_security_group_additional_rules = {
