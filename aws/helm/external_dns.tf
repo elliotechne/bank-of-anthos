@@ -1,5 +1,4 @@
 module "external_dns" {
-  depends_on = [module.eks]
   source     = "git::https://github.com/lablabs/terraform-aws-eks-external-dns"
 
   enabled = true
