@@ -1,5 +1,10 @@
 locals {
   aws_provider_sa = "aws-provider"
+  eks_oidc_provider_arn = join("/", ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider"],
+                                    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[2]],
+                                    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[3]],
+                                    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[4]])
+ 
   istio-repo      = "https://istio-release.storage.googleapis.com/charts"
   jetstack-repo   = "https://charts.jetstack.io"
   bookinfo-repo   = "https://evry-ace.github.io/helm-charts"
