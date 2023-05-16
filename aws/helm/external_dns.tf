@@ -33,6 +33,6 @@ module "external_dns" {
   helm_timeout = 240
   helm_wait    = true
 
-  cluster_identity_oidc_issuer     = module.eks.cluster_oidc_issuer_url
-  cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
+  cluster_identity_oidc_issuer     = local.eks_oidc_provider_url
+  cluster_identity_oidc_issuer_arn = local.eks_oidc_provider_arn
 }
