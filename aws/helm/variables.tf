@@ -67,7 +67,7 @@ variable "irsa_iam_permissions_boundary" {
 variable "eks_cluster_name" {
   description = "EKS Cluster Name"
   type        = string
-  default     = "production"
+  default     = "prod"
 }
 
 variable "aws_partition_id" {
