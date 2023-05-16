@@ -1,6 +1,5 @@
 resource "kubernetes_secret" "zerossl_eab_hmac_key" {
   provider   = kubernetes
-  depends_on = [module.eks]
   metadata {
     name      = "zerossl-eab-hmac-key"
     namespace = "cert-manager"
@@ -15,7 +14,6 @@ resource "kubernetes_secret" "zerossl_eab_hmac_key" {
 
 resource "kubernetes_secret" "zerossl_eab_key_id" {
   provider   = kubernetes
-  depends_on = [module.eks]
   metadata {
     name      = "zerossl-eab-hmac-key-id"
     namespace = "cert-manager"
@@ -30,7 +28,7 @@ resource "kubernetes_secret" "zerossl_eab_key_id" {
 
 resource "kubernetes_secret" "argocd-tls" {
   provider   = kubernetes
-  depends_on = [module.eks, module.external_dns]
+  depends_on = [module.external_dns]
   metadata {
     name      = "argocd-tls"
     namespace = "istio-system"
@@ -51,7 +49,7 @@ resource "kubernetes_secret" "argocd-tls" {
 
 resource "kubernetes_secret" "wayofthesys-tls" {
   provider   = kubernetes
-  depends_on = [module.eks, module.external_dns]
+  depends_on = [module.external_dns]
   metadata {
     name      = "${replace(var.domain_name[0], ".", "-")}-tls"
     namespace = "istio-system"
@@ -72,7 +70,7 @@ resource "kubernetes_secret" "wayofthesys-tls" {
 
 resource "kubernetes_secret" "terraform-vars" {
   provider   = kubernetes
-  depends_on = [module.eks, kubernetes_namespace.crossplane-system]
+  depends_on = [kubernetes_namespace.crossplane-system]
   metadata {
     name      = "terraform"
     namespace = "crossplane-system"
@@ -88,7 +86,7 @@ eks_cluster_name = "${var.crossplane_eks_cluster_name}-Prod"
 
 resource "kubernetes_secret" "external-dns" {
   provider   = kubernetes
-  depends_on = [module.eks, module.external_dns]
+  depends_on = [module.external_dns]
   metadata {
     name      = "externaldns"
     namespace = "cert-manager"
@@ -101,7 +99,7 @@ resource "kubernetes_secret" "external-dns" {
 
 resource "kubernetes_secret" "git-credentials" {
   provider   = kubernetes
-  depends_on = [module.eks, kubernetes_namespace.crossplane-system]
+  depends_on = [kubernetes_namespace.crossplane-system]
   metadata {
     name      = "git-credentials"
     namespace = "crossplane-system"
