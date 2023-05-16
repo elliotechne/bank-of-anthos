@@ -69,6 +69,8 @@ stages:
         allowTelemetryCollection: false
         providerServiceAws: 'WayOfTheSys'
         providerAwsRegion: 'us-east-2'
+- stage: helm 
+  jobs:
   - job: helm 
     steps:
     - task: TerraformInstaller@0
