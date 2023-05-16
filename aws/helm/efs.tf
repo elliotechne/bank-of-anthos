@@ -44,11 +44,11 @@ module "efs" {
   stage     = "prod"
   name      = "bsee"
   region    = "us-east-2"
-  vpc_id    = module.vpc.vpc_id
-  subnets   = module.vpc.public_subnets
+  vpc_id    = data.aws_vpcs.prod.ids[0]
+  subnets   = data.aws_subnets.prod-public.ids
   zone_id   = [aws_route53_zone.wayofthesys.zone_id]
 
-  allowed_security_group_ids = [module.eks.cluster_security_group_id, module.eks.node_security_group_id]
+  allowed_security_group_ids = data.aws_eks_cluster.default.vpc_config[0].security_group_ids
 }
 
 resource "aws_efs_file_system_policy" "policy" {

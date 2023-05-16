@@ -1,31 +1,25 @@
 variable "region" {
   description = "The region where to provision resources"
   type        = string
+  default     = "us-east-2"
 }
 
 variable "zerossl_eab_key_id" {
   description = "ZeroSSL eab key id"
   type        = string
+  default     = "foo"
 }
 
 variable "zerossl_eab_hmac_key" {
   description = "ZeroSSL eab hmac key"
   type        = string
+  default     = "bar"
 }
 
 variable "zerossl_email" {
   description = "ZeroSSL email"
   type        = string
-}
-
-variable "argocd_oidc_client_id" {
-  description = "ArgoCD OIDC Client ID"
-  type        = string
-}
-
-variable "argocd_oidc_client_secret" {
-  description = "ArgoCD OIDC Client Secret"
-  type        = string
+  default     = "foo@example.com"
 }
 
 variable "domain_name" {
@@ -37,16 +31,7 @@ variable "domain_name" {
 variable "externaldns_secret_key" {
   description = "ExternalDNS Secret Key"
   type        = string
-}
-
-variable "github_pat" {
-  description = "GitHub Personal Access Token"
-  type        = string
-}
-
-variable "github_user" {
-  description = "GitHub User"
-  type        = string
+  default     = "foobarfoo"
 }
 
 variable "kubernetes_svc_image_pull_secrets" {
@@ -112,7 +97,7 @@ variable "crossplane_region" {
 variable "crossplane_s3_bucket" {
   description = "S3 Bucket For Crossplane TF Backend"
   type        = string
-  default     = "wayofthesys"
+  default     = "wayofthesys2"
 }
 
 variable "crossplane_tfstate_key" {
@@ -127,7 +112,3 @@ variable "crossplane_eks_cluster_name" {
   default     = "BOA"
 }
 
-variable "rds_bsee_password" {
-  description = "RDS BSEE Password"
-  type        = string
-}

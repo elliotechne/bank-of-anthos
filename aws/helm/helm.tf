@@ -1,6 +1,5 @@
 /*
 resource "helm_release" "argocd" {
-  depends_on      = [kubernetes_namespace.argocd]
   provider        = helm
   repository      = local.argocd-repo
   version         = "5.1.0"
@@ -41,10 +40,7 @@ resource "helm_release" "cluster-issuer" {
   chart     = "charts/cluster-issuer"
   namespace = "kube-system"
   depends_on = [
-    module.eks,
     helm_release.cert-manager,
-    kubernetes_secret.zerossl_eab_hmac_key,
-    kubernetes_secret.zerossl_eab_key_id
   ]
   set_sensitive {
     name  = "zerossl_email"
@@ -66,13 +62,9 @@ resource "helm_release" "aws-load-balancer-controller" {
   chart      = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   namespace  = "crossplane-system"
-  depends_on = [
-    module.eks,
-    kubernetes_namespace.crossplane-system,
-  ]
   set_sensitive {
     name  = "eks_cluster_id"
-    value = module.eks.cluster_id
+    value = data.aws_eks_cluster.default.cluster_id
   }
 
   set_sensitive {
@@ -89,7 +81,6 @@ resource "helm_release" "aws-load-balancer-controller" {
 
 resource "helm_release" "cert-manager" {
   provider   = helm
-  depends_on = [kubernetes_namespace.cert-manager]
   name       = "cert-manager"
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
@@ -127,8 +118,8 @@ resource "helm_release" "istio-base" {
   chart           = "base"
   cleanup_on_fail = true
   force_update    = true
-  namespace       = kubernetes_namespace.istio-system.metadata.0.name
-  depends_on      = [kubernetes_namespace.istio-system, helm_release.metrics-server]
+  namespace       = "istio-system"
+  depends_on      = [helm_release.metrics-server]
 }
 
 resource "helm_release" "istiod" {
@@ -138,7 +129,7 @@ resource "helm_release" "istiod" {
   chart           = "istiod"
   cleanup_on_fail = true
   force_update    = true
-  namespace       = kubernetes_namespace.istio-system.metadata.0.name
+  namespace       = "istio-system"
   set {
     name  = "meshConfig.accessLogFile"
     value = "/dev/stdout"
@@ -169,8 +160,8 @@ resource "helm_release" "istio-ingress" {
   chart           = "gateway"
   cleanup_on_fail = true
   force_update    = true
-  namespace       = kubernetes_namespace.istio-ingress.metadata.0.name
-  depends_on      = [helm_release.istiod, helm_release.istio-base, kubernetes_namespace.argocd]
+  namespace       = "istio-ingress"
+  depends_on      = [helm_release.istiod, helm_release.istio-base]
 }
 
 resource "helm_release" "efs" {
@@ -195,5 +186,5 @@ resource "helm_release" "istio-cni" {
   cleanup_on_fail = true
   force_update    = true
   namespace       = "kube-system"
-  depends_on      = [helm_release.istio-base, kubernetes_namespace.istio-ingress]
+  depends_on      = [helm_release.istio-base]
 }
