@@ -112,3 +112,14 @@ variable "crossplane_eks_cluster_name" {
   default     = "BOA"
 }
 
+variable "github_pat" {
+  description = "GitHub PAT"
+  type        = string
+  default     = "foo"
+}
+
+variable "github_user" {
+  description = "GitHub User"
+  type        = string
+  default     = "foo"
+}

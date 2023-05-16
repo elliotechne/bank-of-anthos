@@ -26,27 +26,6 @@ resource "kubernetes_secret" "zerossl_eab_key_id" {
   type = "kubernetes.io/opaque"
 }
 
-resource "kubernetes_secret" "argocd-tls" {
-  provider   = kubernetes
-  depends_on = [module.external_dns]
-  metadata {
-    name      = "argocd-tls"
-    namespace = "istio-system"
-  }
-  type = "tls"
-  data = {
-    "tls.crt" = tls_locally_signed_cert.cert.cert_pem
-    "tls.key" = tls_private_key.key.private_key_pem
-  }
-
-  lifecycle {
-    ignore_changes = [
-      data,
-      metadata
-    ]
-  }
-}
-
 resource "kubernetes_secret" "wayofthesys-tls" {
   provider   = kubernetes
   depends_on = [module.external_dns]
