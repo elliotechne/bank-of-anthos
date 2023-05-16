@@ -1,6 +1,6 @@
 module "external_dns" {
   depends_on = [module.eks]
-  source = "git::https://github.com/lablabs/terraform-aws-eks-external-dns"
+  source     = "git::https://github.com/lablabs/terraform-aws-eks-external-dns"
 
   enabled = true
 
@@ -23,10 +23,10 @@ module "external_dns" {
     "podLabels" : {
       "app" : "aws-external-dns-helm"
     }
-    "sources" : [ 
-       "ingress",
-       "service",
-       "istio-gateway"
+    "sources" : [
+      "ingress",
+      "service",
+      "istio-gateway"
     ]
     "istio-ingress-gateway" : "istio-system/istio-ingressgateway"
   })
