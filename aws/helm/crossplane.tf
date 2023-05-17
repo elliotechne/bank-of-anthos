@@ -13,6 +13,7 @@ resource "helm_release" "crossplane-aws" {
   }
 }
 
+/*
 resource "helm_release" "crossplane-terraform" {
   provider   = helm
   depends_on = [helm_release.crossplane-aws]
@@ -22,17 +23,17 @@ resource "helm_release" "crossplane-terraform" {
   namespace  = "crossplane-system"
   timeout    = 120
 
-  set_sensitive {
+  set {
     name  = "crossplane_aws_role_arn"
     value = module.aws_provider_irsa.irsa_iam_role_arn
   }
 
-  set_sensitive {
+  set {
     name  = "s3bucket"
     value = var.crossplane_s3_bucket
   }
 
-  set_sensitive {
+  set {
     name  = "tfstate_key"
     value = var.crossplane_tfstate_key
   }
@@ -49,7 +50,7 @@ resource "helm_release" "crossplane-config" {
   chart     = "charts/crossplane-config"
   namespace = "crossplane-system"
   depends_on = [
-    helm_release.crossplane-aws,
+    helm_release.crossplane-aws
   ]
 }
 
@@ -62,7 +63,7 @@ resource "helm_release" "crossplane-workspaces" {
     helm_release.crossplane-config
   ]
 }
-
+*/
 
 module "aws_provider_irsa" {
   source                            = "git::https://github.com/autotune/terraform-aws-fully-loaded-eks-cluster.git//modules/irsa"
@@ -76,11 +77,11 @@ module "aws_provider_irsa" {
   irsa_iam_permissions_boundary     = var.irsa_iam_permissions_boundary
   eks_cluster_id                    = data.aws_eks_cluster.default.cluster_id 
   eks_oidc_provider_arn             = local.eks_oidc_provider_arn
-  depends_on                        = [helm_release.crossplane-config]
+  # depends_on                        = [helm_release.crossplane-config]
 }
 
 resource "aws_iam_policy" "aws_provider" {
   description = "Crossplane AWS Provider IAM policy"
-  name        = data.aws_eks_cluster.default.cluster_id # -irsa"
+  # name        = "${var.eks_cluster_name}-irsa"
   policy      = data.aws_iam_policy_document.s3_policy.json
 }
