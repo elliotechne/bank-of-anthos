@@ -1,39 +1,3 @@
-/*
-resource "helm_release" "argocd" {
-  provider        = helm
-  repository      = local.argocd-repo
-  version         = "5.1.0"
-  namespace       = "argocd"
-  name            = "argocd"
-  chart           = "argo-cd"
-  cleanup_on_fail = true
-  force_update    = true
-  values = [
-    local.argocd_dex_google,
-    local.argocd_dex_rbac
-  ]
-  set {
-    name  = "server.extraArgs"
-    value = "{--insecure}"
-  }
-
-  set {
-    name  = "extensions.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "extensions.contents.name"
-    value = "argo-rollouts"
-  }
-
-  set {
-    name  = "extensions.contents.url"
-    value = "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.1.0/extension.tar"
-  }
-}
-*/
-
 resource "helm_release" "cluster-issuer" {
   provider  = helm
   name      = "cluster-issuer"
@@ -61,8 +25,7 @@ resource "helm_release" "aws-load-balancer-controller" {
   name       = "aws-load-balancer-controller"
   chart      = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
-  namespace  = "crossplane-system"
-
+  namespace  = "kube-system"
   set_sensitive {
     name  = "clusterName"
     value = var.eks_cluster_name
@@ -73,6 +36,16 @@ resource "helm_release" "aws-load-balancer-controller" {
     value = var.region
   }
 
+  set_sensitive {
+    name  = "serviceAccount.name"
+    value = "aws-load-balancer-controller"
+  }
+
+  set_sensitive {
+    name  = "enableServiceMutatorWebhook"
+    value = false 
+  }
+
 }
 
 resource "helm_release" "cert-manager" {
@@ -80,7 +53,7 @@ resource "helm_release" "cert-manager" {
   name       = "cert-manager"
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
-  version    = "v1.9.1"
+  version    = "v1.11.1"
   namespace  = "cert-manager"
   timeout    = 120
   set {
@@ -91,10 +64,10 @@ resource "helm_release" "cert-manager" {
     name  = "installCRDs"
     value = "true"
   }
-  set {
-    name  = "extraArgs"
-    value = "{--dns01-recursive-nameservers-only,--dns01-recursive-nameservers=169.254.169.253:53}"
-  }
+  # set {
+  #   name  = "extraArgs"
+  #   value = "{--dns01-recursive-nameservers-only,--dns01-recursive-nameservers=169.254.169.253:53}"
+  # }
 }
 
 resource "helm_release" "metrics-server" {
