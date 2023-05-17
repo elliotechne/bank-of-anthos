@@ -1,5 +1,4 @@
-apiVersion: tf.crossplane.io/v1alpha1
-# tf.upbound.io/v1beta1
+apiVersion: tf.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
   annotations: {}
