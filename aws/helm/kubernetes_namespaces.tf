@@ -2,6 +2,9 @@ resource "kubernetes_namespace" "crossplane-system" {
   provider   = kubernetes
   metadata {
     name = "crossplane-system"
+    labels = {
+      istio-injection = "disabled"
+    }
   }
 }
 
