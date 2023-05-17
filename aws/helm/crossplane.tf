@@ -49,7 +49,7 @@ resource "helm_release" "crossplane-config" {
   chart     = "charts/crossplane-config"
   namespace = "crossplane-system"
   depends_on = [
-    helm_release.crossplane-aws
+    helm_release.crossplane-aws,
   ]
 }
 
