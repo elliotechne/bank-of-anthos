@@ -17,7 +17,7 @@ resource "helm_release" "crossplane-terraform-install" {
   provider   = helm
   depends_on = [helm_release.crossplane-aws]
   name       = "crossplane-terraform"
-  chart      = "charts/crossplane-terraform"
+  chart      = "charts/crossplane-terraform-install"
   version    = "0.0.13"
   namespace  = "crossplane-system"
   timeout    = 120
@@ -32,7 +32,7 @@ resource "helm_release" "crossplane-terraform-config" {
   provider   = helm
   depends_on = [helm_release.crossplane-terraform-install]
   name       = "crossplane-terraform"
-  chart      = "charts/crossplane-terraform"
+  chart      = "charts/crossplane-terraform-config"
   version    = "0.0.13"
   namespace  = "crossplane-system"
   timeout    = 120
