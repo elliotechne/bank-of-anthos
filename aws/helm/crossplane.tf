@@ -15,6 +15,7 @@ resource "helm_release" "crossplane-aws" {
 
 resource "helm_release" "crossplane-terraform" {
   provider   = helm
+  depends_on = [helm_release.crossplane-aws]
   name       = "crossplane-terraform"
   chart      = "charts/crossplane-terraform"
   version    = "0.0.13"
