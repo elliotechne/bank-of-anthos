@@ -62,10 +62,6 @@ resource "helm_release" "aws-load-balancer-controller" {
   chart      = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   namespace  = "crossplane-system"
-  set_sensitive {
-    name  = "eks_cluster_id"
-    value = data.aws_eks_cluster.default.cluster_id
-  }
 
   set_sensitive {
     name  = "clusterName"
