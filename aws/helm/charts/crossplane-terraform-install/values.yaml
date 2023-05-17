@@ -1,0 +1,4 @@
+crossplane_aws_role_arn: "arn:aws:iam::504376484015:role/terraform-20230517012039849700000001" 
+s3bucket: "wayofthesys2"
+tfstate_key: "crossplane-prod.tfstate"
+region: "us-east-2"
