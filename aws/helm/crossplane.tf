@@ -13,8 +13,7 @@ resource "helm_release" "crossplane-aws" {
   }
 }
 
-/*
-resource "helm_release" "crossplane-terraform" {
+resource "helm_release" "crossplane-terraform-install" {
   provider   = helm
   depends_on = [helm_release.crossplane-aws]
   name       = "crossplane-terraform"
@@ -27,6 +26,16 @@ resource "helm_release" "crossplane-terraform" {
     name  = "crossplane_aws_role_arn"
     value = module.aws_provider_irsa.irsa_iam_role_arn
   }
+}
+
+resource "helm_release" "crossplane-terraform-config" {
+  provider   = helm
+  depends_on = [helm_release.crossplane-terraform-install]
+  name       = "crossplane-terraform"
+  chart      = "charts/crossplane-terraform"
+  version    = "0.0.13"
+  namespace  = "crossplane-system"
+  timeout    = 120
 
   set {
     name  = "s3bucket"
@@ -43,7 +52,6 @@ resource "helm_release" "crossplane-terraform" {
     value = var.region
   }
 }
-*/ 
 
 resource "helm_release" "crossplane-config" {
   provider  = helm
@@ -55,7 +63,6 @@ resource "helm_release" "crossplane-config" {
   ]
 }
 
-/*
 resource "helm_release" "crossplane-workspaces" {
   provider  = helm
   name      = "crossplane-workspaces"
@@ -65,7 +72,6 @@ resource "helm_release" "crossplane-workspaces" {
     helm_release.crossplane-config
   ]
 }
-*/
 
 module "aws_provider_irsa" {
   source                            = "git::https://github.com/autotune/terraform-aws-fully-loaded-eks-cluster.git//modules/irsa"
