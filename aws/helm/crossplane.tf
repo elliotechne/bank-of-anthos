@@ -31,7 +31,7 @@ resource "helm_release" "crossplane-terraform-install" {
 resource "helm_release" "crossplane-terraform-config" {
   provider   = helm
   depends_on = [helm_release.crossplane-terraform-install]
-  name       = "crossplane-terraform"
+  name       = "crossplane-terraform-config"
   chart      = "charts/crossplane-terraform-config"
   version    = "0.0.13"
   namespace  = "crossplane-system"
