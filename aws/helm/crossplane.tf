@@ -43,6 +43,7 @@ resource "helm_release" "crossplane-terraform" {
     value = var.region
   }
 }
+*/ 
 
 resource "helm_release" "crossplane-config" {
   provider  = helm
@@ -54,6 +55,7 @@ resource "helm_release" "crossplane-config" {
   ]
 }
 
+/*
 resource "helm_release" "crossplane-workspaces" {
   provider  = helm
   name      = "crossplane-workspaces"
