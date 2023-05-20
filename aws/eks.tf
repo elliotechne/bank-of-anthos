@@ -21,7 +21,7 @@ module "eks" {
   }
 
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = flatten([module.vpc.public_subnets])
+  subnet_ids = flatten([module.vpc.public_subnets, module.vpc.private_subnets])
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
