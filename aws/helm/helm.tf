@@ -157,3 +157,13 @@ resource "helm_release" "istio-cni" {
   namespace       = "kube-system"
   depends_on      = [helm_release.istio-base]
 }
+
+resource "helm_release" "boa" {
+  provider  = helm
+  depends_on = [
+    kubernetes_namespace.boa
+  ]
+  name      = "boa"
+  chart     = "charts/bank-of-anthos"
+  namespace = "boa"
+}

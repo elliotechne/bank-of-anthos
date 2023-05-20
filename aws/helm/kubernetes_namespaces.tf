@@ -51,3 +51,10 @@ resource "kubernetes_namespace" "argocd" {
     name = "argocd"
   }
 }
+
+resource "kubernetes_namespace" "boa" {
+  provider   = kubernetes
+  metadata {
+    name = "boa"
+  }
+}
