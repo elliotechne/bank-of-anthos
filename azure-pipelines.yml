@@ -85,7 +85,7 @@ stages:
         backendType: 'aws'
         allowTelemetryCollection: false
         backendServiceAws: 'WayOfTheSys'
-        backendAwsRegion: 'us-east-1'
+        backendAwsRegion: 'us-east-2'
         backendAwsBucket: 'wayofthesys2'
         backendAwsKey: 'bank-prod-helm.tfstate'
 
@@ -105,10 +105,10 @@ stages:
         commandOptions: '-var-file="prod.tfvars" -out="bank-prod-helm.out" -var="crossplane_s3_bucket"=$(CROSSPLANE_S3_BUCKET) -var="github_user"=$(GITHUB_USER) -var="github_pat"=$(GITHUB_PAT) -var="zerossl_email"=$(ZEROSSL_EMAIL) -var="zerossl_eab_key_id"=$(ZEROSSL_EAB_KEY_ID) -var="zerossl_eab_hmac_key"=$(ZEROSSL_EAB_HMAC_KEY) -var="externaldns_secret_key"=$(EXTERNALDNS_SECRET_KEY) -detailed-exitcode' 
         allowTelemetryCollection: false
         # publishPlanResults: 'bank-prod.out'
-        providerAwsRegion: 'us-east-1'
+        providerAwsRegion: 'us-east-2'
         backendType: 'aws'
         backendServiceAws: 'WayOfTheSys'
-        backendAwsRegion: 'us-east-1'
+        backendAwsRegion: 'us-east-2'
         backendAwsBucket: 'wayofthesys2'
         backendAwsKey: 'bank-prod-helm.tfstate'
 
@@ -120,5 +120,5 @@ stages:
         commandOptions: '"bank-prod-helm.out"'
         allowTelemetryCollection: false
         providerServiceAws: 'WayOfTheSys'
-        providerAwsRegion: 'us-east-1'
+        providerAwsRegion: 'us-east-2'
 
