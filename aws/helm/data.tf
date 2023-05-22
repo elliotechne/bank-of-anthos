@@ -14,14 +14,14 @@ data "aws_eks_cluster_auth" "default" {
 
 data "aws_vpcs" "prod" {
   tags = {
-    Name = "prod"
+    Name = "prod-use-2"
   }
 }
 
 data "aws_subnets" "prod-public" {
   filter {
     name   = "tag:Name"
-    values = ["prod-public-${var.region}*"] 
+    values = ["prod-use-2-public-${var.region}*"] 
   }
 }
 
