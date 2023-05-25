@@ -55,6 +55,9 @@ resource "kubernetes_namespace" "argocd" {
 resource "kubernetes_namespace" "boa" {
   provider   = kubernetes
   metadata {
+    labels = {
+      istio-injection = "enabled"
+    }
     name = "boa"
   }
 }
