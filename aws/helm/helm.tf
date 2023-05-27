@@ -22,8 +22,6 @@ resource "helm_release" "cluster-issuer" {
 
 resource "helm_release" "aws-load-balancer-controller" {
   provider   = helm
-  depends_on = [module.eks]
-  count      = 0
   name       = "aws-load-balancer-controller"
   chart      = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
