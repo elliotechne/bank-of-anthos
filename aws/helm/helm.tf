@@ -159,6 +159,7 @@ resource "helm_release" "istio-cni" {
 }
 
 resource "helm_release" "boa" {
+  count = 0 
   provider  = helm
   depends_on = [
     kubernetes_namespace.boa
