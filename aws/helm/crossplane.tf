@@ -18,7 +18,7 @@ resource "helm_release" "crossplane-terraform-install" {
   depends_on = [helm_release.crossplane-aws]
   name       = "crossplane-terraform"
   chart      = "charts/crossplane-terraform-install"
-  version    = "0.0.13"
+  version    = "0.0.15"
   namespace  = "crossplane-system"
   timeout    = 120
 
