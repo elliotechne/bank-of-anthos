@@ -20,6 +20,7 @@ metadata:
   name: crossplane-provider-terraform
   namespace: crossplane-system
 spec:
-  package: xpkg.upbound.io/upbound/provider-terraform:v0.2.0
+  package: crossplanecontrib/provider-terraform:v0.6.0
+  # xpkg.upbound.io/upbound/provider-terraform:v0.2.0
   controllerConfigRef:
     name: terraform

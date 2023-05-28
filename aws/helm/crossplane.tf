@@ -18,7 +18,7 @@ resource "helm_release" "crossplane-terraform-install" {
   depends_on = [helm_release.crossplane-aws]
   name       = "crossplane-terraform"
   chart      = "charts/crossplane-terraform-install"
-  version    = "0.0.15"
+  version    = "0.0.16"
   namespace  = "crossplane-system"
   timeout    = 120
 
@@ -47,7 +47,7 @@ resource "helm_release" "crossplane-terraform-config" {
     value = var.crossplane_tfstate_key
   }
 
-  set_sensitive {
+  set {
     name  = "region"
     value = var.region
   }
