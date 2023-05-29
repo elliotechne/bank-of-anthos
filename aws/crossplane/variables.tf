@@ -8,8 +8,3 @@ variable "eks_cluster_name" {
   type        = string
 }
 
-variable "foo" {
-  description = "foo"
-  type        = string
-  default     = "bar"
-}
