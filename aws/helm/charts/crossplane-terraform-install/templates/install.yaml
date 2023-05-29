@@ -8,7 +8,7 @@ metadata:
   annotations:
     eks.amazonaws.com/role-arn: {{ .Values.crossplane_aws_role_arn }}
 spec:
-  image: crossplane/provider-terraform-controller:v0.2.0
+  # image: crossplane/provider-terraform-controller:v0.2.0
   args:
     - "--debug"
   podSecurityContext:
@@ -20,7 +20,6 @@ metadata:
   name: crossplane-provider-terraform
   namespace: crossplane-system
 spec:
-  package: crossplanecontrib/provider-terraform:v0.6.0
-  # xpkg.upbound.io/upbound/provider-terraform:v0.2.0
+  package: xpkg.upbound.io/upbound/provider-terraform:v0.2.0
   controllerConfigRef:
     name: terraform
