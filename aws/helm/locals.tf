@@ -39,6 +39,20 @@ locals {
       }
     }
   )
+  argocd_dex_rbac = yamlencode(
+    {
+      server = {
+        rbacConfig = {
+          "policy.default" = "readOnly",
+          "scopes"         = "[email]"
+          "policy.csv" = replace(yamlencode(
+            "g, autotune@contrasting.org, role:admin",
+            ),
+          "\"", "")
+        }
+      }
+    }
+  )
   istio-repo      = "https://istio-release.storage.googleapis.com/charts"
   jetstack-repo   = "https://charts.jetstack.io"
   bookinfo-repo   = "https://evry-ace.github.io/helm-charts"
