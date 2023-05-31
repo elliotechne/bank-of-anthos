@@ -22,6 +22,16 @@ variable "zerossl_email" {
   default     = "foo@example.com"
 }
 
+variable "argocd_oidc_client_id" {
+  description = "ArgoCD OIDC Client ID"
+  type        = string
+}
+
+variable "argocd_oidc_client_secret" {
+  description = "ArgoCD OIDC Client Secret"
+  type        = string
+}
+
 variable "domain_name" {
   description = "Primary domain name"
   type        = list(any)
