@@ -8,6 +8,37 @@ locals {
                                     [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[3]],
                                     [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[4]])
  
+  argocd_dex_google = yamlencode(
+    {
+      server = {
+        config = {
+          "admin.enabled" = "true"
+          "url"           = "https://argocd.${var.domain_name[0]}"
+          "dex.config" = yamlencode(
+            {
+              connectors = [
+                {
+                  id   = "google"
+                  type = "oidc"
+                  name = "Google"
+                  config = {
+                    issuer       = "https://accounts.google.com"
+                    clientID     = var.argocd_oidc_client_id
+                    clientSecret = var.argocd_oidc_client_secret
+                  }
+                  requestedScopes = [
+                    "-openid",
+                    "-profile",
+                    "-email"
+                  ]
+                }
+              ]
+            }
+          )
+        }
+      }
+    }
+  )
   istio-repo      = "https://istio-release.storage.googleapis.com/charts"
   jetstack-repo   = "https://charts.jetstack.io"
   bookinfo-repo   = "https://evry-ace.github.io/helm-charts"
