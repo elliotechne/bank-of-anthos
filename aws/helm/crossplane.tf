@@ -14,7 +14,6 @@ resource "helm_release" "crossplane-aws" {
 }
 
 resource "helm_release" "crossplane-terraform-install" {
-  count      = 0
   provider   = helm
   depends_on = [helm_release.crossplane-aws]
   name       = "crossplane-terraform"
@@ -30,7 +29,6 @@ resource "helm_release" "crossplane-terraform-install" {
 }
 
 resource "helm_release" "crossplane-terraform-config" {
-  count      = 0
   provider   = helm
   depends_on = [helm_release.crossplane-terraform-install]
   name       = "crossplane-terraform-config"
