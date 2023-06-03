@@ -1,7 +1,7 @@
-resource "kubernetes_namespace" "crossplane-system" {
+resource "kubernetes_namespace" "upbound-system" {
   provider   = kubernetes
   metadata {
-    name = "crossplane-system"
+    name = "upbound-system"
     labels = {
       istio-injection = "disabled"
     }

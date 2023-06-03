@@ -4,7 +4,7 @@ resource "helm_release" "crossplane-aws" {
   repository = "https://charts.crossplane.io/stable/"
   chart      = "crossplane"
   version    = "1.10.1"
-  namespace  = "crossplane-system"
+  namespace  = "upbound-system"
   timeout    = 120
 
   set_sensitive {
@@ -19,7 +19,7 @@ resource "helm_release" "crossplane-terraform-install" {
   name       = "crossplane-terraform"
   chart      = "charts/crossplane-terraform-install"
   version    = "0.0.16"
-  namespace  = "crossplane-system"
+  namespace  = "upbound-system"
   timeout    = 120
 
   set {
@@ -34,7 +34,7 @@ resource "helm_release" "crossplane-terraform-config" {
   name       = "crossplane-terraform-config"
   chart      = "charts/crossplane-terraform-config"
   version    = "0.0.13"
-  namespace  = "crossplane-system"
+  namespace  = "upbound-system"
   timeout    = 120
 
   set {
@@ -57,7 +57,7 @@ resource "helm_release" "crossplane-config" {
   provider  = helm
   name      = "crossplane-config"
   chart     = "charts/crossplane-config"
-  namespace = "crossplane-system"
+  namespace = "upbound-system"
   depends_on = [
     helm_release.crossplane-aws
   ]
@@ -67,7 +67,7 @@ resource "helm_release" "crossplane-workspaces" {
   provider  = helm
   name      = "crossplane-workspaces"
   chart     = "charts/crossplane-workspaces"
-  namespace = "crossplane-system"
+  namespace = "upbound-system"
   depends_on = [
     helm_release.crossplane-terraform-config
   ]
@@ -77,7 +77,7 @@ module "aws_provider_irsa" {
   source                            = "git::https://github.com/autotune/terraform-aws-fully-loaded-eks-cluster.git//modules/irsa"
   create_kubernetes_namespace       = false
   create_kubernetes_service_account = false
-  kubernetes_namespace              = "crossplane-system" 
+  kubernetes_namespace              = "upbound-system" 
   kubernetes_service_account        = "crossplane-config"
   irsa_iam_policies                 = [aws_iam_policy.aws_provider.arn]
   # [aws_iam_policy.aws_provider.arn]
