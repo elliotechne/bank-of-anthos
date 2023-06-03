@@ -3,7 +3,6 @@ kind: ProviderConfig
 metadata:
   annotations: {}
   name: aws-irsa 
-  namespace: crossplane-system
 spec:
   configuration: |
     terraform {
