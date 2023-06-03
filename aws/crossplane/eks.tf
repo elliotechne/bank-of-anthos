@@ -21,7 +21,7 @@ module "eks" {
   }
 
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = flatten([module.vpc.private_subnets, module.vpc.public_subnets])
+  subnet_ids = flatten([module.vpc.public_subnets])
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
@@ -62,26 +62,27 @@ module "eks" {
 
   aws_auth_roles = [
     {
-      rolearn  = "arn:aws:iam::233510574809:role/AdminAccess"
-      username = "AdminAccess"
+      rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
+      username = "admin_role"
       groups   = ["system:masters"]
     },
   ]
 
   aws_auth_users = [
     {
-      userarn  = "arn:aws:iam::233510574809:user/azuredevops"
+      userarn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/azuredevops"
       username = "azuredevops"
       groups   = ["system:masters"]
     },
   ]
 
   aws_auth_accounts = [
-    "233510574809",
+    "${data.aws_caller_identity.current.account_id}",
   ]
 
   tags = {
     Environment = "prod"
     Terraform   = "true"
+    Crossplane  = "true"
   }
 }
