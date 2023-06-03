@@ -18,7 +18,6 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: crossplane-provider-terraform
-  namespace: crossplane-system
 spec:
   package: xpkg.upbound.io/upbound/provider-terraform:v0.2.0
   controllerConfigRef:
