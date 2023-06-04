@@ -3,12 +3,13 @@ apiVersion: pkg.crossplane.io/v1alpha1
 kind: ControllerConfig
 metadata:
   name: terraform
+  namespace: upbound-system
   labels:
     app: crossplane-provider-terraform
   annotations:
     eks.amazonaws.com/role-arn: {{ .Values.crossplane_aws_role_arn }}
 spec:
-  # image: crossplane/provider-terraform-controller:v0.2.0
+  image: crossplane/provider-terraform-controller:v0.5.0
   args:
     - "--debug"
   podSecurityContext:
@@ -17,8 +18,9 @@ spec:
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
+  namespace: upbound-system
   name: crossplane-provider-terraform
 spec:
-  package: xpkg.upbound.io/upbound/provider-terraform:v0.2.0
+  package: xpkg.upbound.io/upbound/provider-terraform:v0.5.0
   controllerConfigRef:
     name: terraform

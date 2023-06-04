@@ -1,4 +1,4 @@
-apiVersion: tf.upbound.io/v1beta1 
+apiVersion: tf.crossplane.io/v1alpha1 
 kind: Workspace
 metadata:
   name: production
@@ -22,7 +22,7 @@ spec:
     varFiles:
     - source: SecretKey
       secretKeyRef:
-        namespace: crossplane-system
+        namespace: upbound-system
         name: terraform
         key: production.tfvars
   # All Terraform outputs are written to the connection secret.
