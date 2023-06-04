@@ -1,5 +1,6 @@
 resource "kubernetes_manifest" "argocd-gateway" {
   provider = kubernetes
+  depends_on = [helm_release.istiod]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "Gateway"
