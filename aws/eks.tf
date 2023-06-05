@@ -5,6 +5,8 @@ module "eks" {
   cluster_name    = var.eks_cluster_name
   cluster_version = "1.23"
 
+  create_iam_role = false
+  iam_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 
