@@ -106,9 +106,9 @@ module "eks" {
   }
 }
 
-resource "aws_iam_role_policy_attachment" "additional" {
+resource "aws_iam_role_policy_attachment" "crossplane" {
   for_each = module.eks.eks_managed_node_groups
 
-  policy_arn = aws_iam_policy.node_additional.arn
+  policy_arn = aws_iam_policy.node_crossplane.arn
   role       = each.value.iam_role_name
 }

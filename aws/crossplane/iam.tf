@@ -1,6 +1,6 @@
 
-resource "aws_iam_policy" "node_additional" {
-  name        = "EKSAdditional"
+resource "aws_iam_policy" "node_crossplane" {
+  name        = "EKSCrossplane"
   description = "Example usage of node additional policy"
 
   policy = jsonencode({
