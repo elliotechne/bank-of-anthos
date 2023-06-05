@@ -1,11 +1,17 @@
-
-resource "aws_iam_policy" "node_crossplane" {
-  name        = "EKSCrossplane"
-  description = "Example usage of node additional policy"
+resource "aws_iam_policy" "node_additional" {
+  name        = "Crossplane"
+  description = "Crossplane global admin permissions"
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
+      {
+        Action = [
+          "*"
+        ]
+        Effect = "Allow"
+        Resource = "*" 
+      },
       {
         Action = [
           "elasticfilesystem:ClientMount",
