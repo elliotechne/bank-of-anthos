@@ -1,6 +1,6 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 18.0"
+  version = "~> 18.27"
 
   cluster_name    = var.eks_cluster_name
   cluster_version = "1.23"
@@ -21,44 +21,64 @@ module "eks" {
   }
 
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = flatten([module.vpc.public_subnets])
+  subnet_ids = module.vpc.public_subnets
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
     disk_size      = 50
-    instance_types = ["t2.medium"]
+    instance_types = ["t3.large"]
   }
 
   eks_managed_node_groups = {
     green = {
-      min_size     = 1 
-      max_size     = 2
+      min_size     = 2
+      max_size     = 4
       desired_size = 2
 
-      instance_types = ["t2.medium"]
+      instance_types = ["t3.xlarge"]
       capacity_type  = "ON_DEMAND"
     }
   }
 
   # aws-auth configmap
   manage_aws_auth_configmap = true 
-  # create_aws_auth_configmap = true
+  create_aws_auth_configmap = false 
 
+  /*
   cluster_security_group_additional_rules = {
     egress_nodes_ephemeral_ports_tcp = {
       description                = "To node 1025-65535"
       protocol                   = "tcp"
-      from_port                  = 1025
+      from_port                  = 0
       to_port                    = 65535
       type                       = "egress"
-      source_node_security_group = true
     }
   }
-
+  */
   node_security_group_additional_rules = merge( # {
     local.ingress_rules,
-    local.egress_rules
+    local.egress_rules,
   )
+  /*
+    ingress_self_all = {
+      description = "Node to node all ports/protocols"
+      protocol    = "-1"
+      from_port   = 0
+      to_port     = 0
+      type        = "ingress"
+      self        = true
+    }
+    egress_all = {
+      description      = "Node all egress"
+      protocol         = "-1"
+      from_port        = 0
+      to_port          = 0
+      type             = "egress"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+  } 
+  */
 
   aws_auth_roles = [
     {
@@ -83,6 +103,12 @@ module "eks" {
   tags = {
     Environment = "prod"
     Terraform   = "true"
-    Crossplane  = "true"
   }
+}
+
+resource "aws_iam_role_policy_attachment" "additional" {
+  for_each = module.eks.eks_managed_node_groups
+
+  policy_arn = aws_iam_policy.node_additional.arn
+  role       = each.value.iam_role_name
 }
