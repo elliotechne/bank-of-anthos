@@ -1,4 +1,3 @@
-
 resource "aws_iam_policy" "node_additional" {
   name        = "Crossplane"
   description = "Crossplane global admin permissions"
