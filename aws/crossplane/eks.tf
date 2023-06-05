@@ -4,6 +4,7 @@ module "eks" {
 
   cluster_name    = var.eks_cluster_name
   cluster_version = "1.23"
+  create_cloudwatch_log_group = false 
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
