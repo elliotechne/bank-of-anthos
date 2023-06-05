@@ -39,6 +39,8 @@ module "eks" {
 
       instance_types = ["t3.xlarge"]
       capacity_type  = "ON_DEMAND"
+      iam_role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
+      create_iam_role = false 
     }
   }
 
@@ -86,6 +88,11 @@ module "eks" {
     {
       rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
       username = "admin_role"
+      groups   = ["system:masters"]
+    },
+    {
+      rolearn  = "arn:aws:iam::504376484015:role/green-eks-node-group-20230604190046714400000001"
+      username = "crossplane_role"
       groups   = ["system:masters"]
     },
   ]
