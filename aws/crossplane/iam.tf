@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "node_additional" {
-  name        = "Crossplane"
+  name        = "BOA"
   description = "Crossplane global admin permissions"
 
   policy = jsonencode({
