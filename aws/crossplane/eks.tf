@@ -6,7 +6,6 @@ module "eks" {
   cluster_version = "1.23"
 
   create_iam_role = false
-  create_cloudwatch_log_group = false 
   iam_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
@@ -40,12 +39,14 @@ module "eks" {
 
       instance_types = ["t3.xlarge"]
       capacity_type  = "ON_DEMAND"
+      iam_role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
+      create_iam_role = false 
     }
   }
 
   # aws-auth configmap
   manage_aws_auth_configmap = true 
-  create_aws_auth_configmap = true 
+  create_aws_auth_configmap = false 
 
   /*
   cluster_security_group_additional_rules = {
@@ -89,6 +90,11 @@ module "eks" {
       username = "admin_role"
       groups   = ["system:masters"]
     },
+    {
+      rolearn  = "arn:aws:iam::504376484015:role/green-eks-node-group-20230604190046714400000001"
+      username = "crossplane_role"
+      groups   = ["system:masters"]
+    },
   ]
 
   aws_auth_users = [
@@ -109,9 +115,11 @@ module "eks" {
   }
 }
 
+/* 
 resource "aws_iam_role_policy_attachment" "additional" {
   for_each = module.eks.eks_managed_node_groups
 
   policy_arn = aws_iam_policy.node_additional.arn
   role       = each.value.iam_role_name
 }
+*/
