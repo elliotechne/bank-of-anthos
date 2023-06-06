@@ -117,8 +117,8 @@ module "eks" {
 
 resource "aws_iam_role_policy_attachment" "additional" {
   count = 0
-  for_each = module.eks.eks_managed_node_groups
+  # for_each = module.eks.eks_managed_node_groups
 
-  policy_arn = aws_iam_policy.node_additional.arn
-  role       = each.value.iam_role_name
+  # policy_arn = aws_iam_policy.node_additional.arn
+  # role       = each.value.iam_role_name
 }
