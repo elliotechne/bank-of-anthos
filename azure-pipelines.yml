@@ -85,7 +85,7 @@ stages:
         backendAwsRegion: 'us-east-2'
         backendAwsBucket: 'wayofthesys2'
         backendAwsKey: 'bank-prod-2-eksauth.tfstate'
-'
+
     - task: TerraformCLI@0
       displayName: 'Terraform Validate'
       inputs:
