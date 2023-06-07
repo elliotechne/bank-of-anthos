@@ -70,7 +70,9 @@ stages:
         providerServiceAws: 'WayOfTheSys'
         providerAwsRegion: 'us-east-2'
 
-- stage: eksauth
+- stage: auth
+  jobs:
+  - job: eks
     - task: TerraformCLI@0
       displayName: 'Terraform Validate'
       inputs:
