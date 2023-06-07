@@ -73,6 +73,7 @@ stages:
 - stage: auth
   jobs:
   - job: eks
+    steps:
     - task: TerraformCLI@0
       displayName: 'Terraform Validate'
       inputs:
