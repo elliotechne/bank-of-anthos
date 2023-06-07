@@ -78,7 +78,7 @@ stages:
       displayName: 'Terraform Validate'
       inputs:
         command: 'validate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/aws'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/aws/eksauth'
         allowTelemetryCollection: false
 
     - task: TerraformCLI@0
