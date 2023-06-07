@@ -45,7 +45,7 @@ module "eks" {
   }
 
   # aws-auth configmap
-  manage_aws_auth_configmap = false 
+  manage_aws_auth_configmap = true 
   create_aws_auth_configmap = true 
 
   /*
