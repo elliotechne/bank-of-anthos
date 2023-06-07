@@ -7,8 +7,8 @@ module "kube_auth" {
     nodes_role = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
     master_users = [
       {
-        username  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/azuredevops"
-        arn       = "admin_user"
+        username  = "azuredevops"
+        arn       = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/azuredevops"
       }
     ]
 }
