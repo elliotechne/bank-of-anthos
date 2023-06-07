@@ -75,6 +75,18 @@ stages:
   - job: eks
     steps:
     - task: TerraformCLI@0
+      displayName: 'Terraform Init'
+      inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/aws/eksauth'
+        backendType: 'aws'
+        allowTelemetryCollection: false
+        backendServiceAws: 'WayOfTheSys'
+        backendAwsRegion: 'us-east-2'
+        backendAwsBucket: 'wayofthesys2'
+        backendAwsKey: 'bank-prod-2-eksauth.tfstate'
+'
+    - task: TerraformCLI@0
       displayName: 'Terraform Validate'
       inputs:
         command: 'validate'
