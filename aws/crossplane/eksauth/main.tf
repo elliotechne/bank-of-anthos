@@ -11,4 +11,18 @@ module "kube_auth" {
         groups   = ["system:masters"]
       }
     ]
+    nodes_role = [
+      {
+        rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
+        username = "admin_role"
+        groups   = ["system:masters"]
+      }
+    ]
+    master_user = [
+      {
+        rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/azuredevops"
+        username = "admin_user"
+        groups   = ["system:masters"]
+      }
+    ]
 }
