@@ -24,7 +24,7 @@ spec:
       secretKeyRef:
         namespace: upbound-system
         name: terraform
-        key: production.tfvars
+        key: eksauth.tfvars
   # All Terraform outputs are written to the connection secret.
   writeConnectionSecretToRef:
     namespace: upbound-system
