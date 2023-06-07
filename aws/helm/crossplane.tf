@@ -33,7 +33,7 @@ resource "helm_release" "crossplane-terraform-config" {
   depends_on = [helm_release.crossplane-terraform-install, helm_release.crossplane-config]
   name       = "crossplane-terraform-config"
   chart      = "charts/crossplane-terraform-config"
-  version    = "0.0.13"
+  version    = "0.0.16"
   namespace  = "upbound-system"
   timeout    = 120
 
