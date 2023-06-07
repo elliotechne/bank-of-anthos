@@ -1,28 +1,14 @@
 module "kube_auth" {
-    source = "koslib/eks-auth/aws"
-    version = "0.1.0"
+    source = "git::https://github.com/autotune/terraform-aws-eks-auth.git?ref=master"
 
-    aws_region   = var.region 
-    cluster_name = var.eks_cluster_name 
-    master_roles = [
-      {
-        rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
-        username = "admin_role"
-        groups   = ["system:masters"]
-      }
-    ]
-    nodes_role = [
-      {
-        rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
-        username = "admin_role"
-        groups   = ["system:masters"]
-      }
-    ]
+    aws_region   = var.region
+    cluster_name = var.eks_cluster_name
+    master_roles = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"]
+    nodes_role = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
     master_users = [
       {
-        rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/azuredevops"
-        username = "admin_user"
-        groups   = ["system:masters"]
+        username  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/azuredevops"
+        arn       = "admin_user"
       }
     ]
 }
