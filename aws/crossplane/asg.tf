@@ -117,7 +117,7 @@ resource "aws_launch_configuration" "primary" {
   instance_type        = var.asg_size
   key_name             = var.key_name
   security_groups      = [aws_security_group.ec2.id]
-  user_data            = file("templates/user_data.sh")
+  user_data            = file("${path.module}/templates/user_data.sh")
 
   lifecycle {
     create_before_destroy = true
