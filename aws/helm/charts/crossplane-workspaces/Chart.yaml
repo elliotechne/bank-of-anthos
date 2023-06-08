@@ -1,4 +1,4 @@
 name: crossplane-workspaces
 description: CrossplaneWorkspaces
-version: 0.0.18
+version: 0.0.19
 kubeVersion: ">=1.10.0-0"
