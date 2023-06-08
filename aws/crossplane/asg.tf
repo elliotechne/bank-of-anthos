@@ -33,28 +33,27 @@ resource "aws_autoscaling_group" "primary" {
 
   metrics_granularity = "1Minute"
 
-  tags = [
-    {
+  tag {
       key                 = "CostCenter"
       value               = var.costcenter
       propagate_at_launch = true
-    },
-    {
+    }
+
+  tag {
       key                 = "Environment"
       value               = terraform.workspace
       propagate_at_launch = true
-    },
-    {
+    }
+  tag {
       key                 = "Bucket"
       value               = var.bucket
       propagate_at_launch = true
-    },
-    {
+    }
+  tag {
       key                 = "Key"
       value               = var.key
       propagate_at_launch = true
-    },
-  ]
+    }
 }
 
 resource "aws_autoscaling_policy" "web_policy_up" {
@@ -118,7 +117,7 @@ resource "aws_launch_configuration" "primary" {
   instance_type        = var.asg_size
   key_name             = var.key_name
   security_groups      = [aws_security_group.ec2.id]
-  user_data            = data.template_file.user_data.rendered
+  user_data            = file("templates/user_data.sh")
 
   lifecycle {
     create_before_destroy = true
