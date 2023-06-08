@@ -28,4 +28,4 @@ spec:
   # All Terraform outputs are written to the connection secret.
   writeConnectionSecretToRef:
     namespace: upbound-system
-    name: terraform-boa-prod-remote
+    name: terraform-boa-prod-auth
