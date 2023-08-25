@@ -8,7 +8,18 @@ jobs:
     name: Update
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 
+      - name: Checkout 
+        uses: actions/checkout@v3 
+
+      - name: Setup Node LTS ✨
+        uses: actions/setup-nodejs@v3
+        with:
+          node-version: lts/*
+          cache: yarn
+
+      - name: Installing dependencies 📦️
+        run: yarn install
+
       - uses: pulumi/actions@v4
         with:
           command: up
