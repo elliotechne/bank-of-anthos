@@ -11,4 +11,16 @@ const cluster = new digitalocean.KubernetesCluster("boa", {
     },
 });
 
+const config = new pulumi.Config();
+const k8sNamespace = config.get("k8sNamespace") || "default";
+const appLabels = {
+  app: "nginx-ingress",
+}
+
+// Create NS
+const ingressNs = new kubernetes.core.v1.Namespace("ingressns", {metadata: {
+    labels: appLabels,
+    name: k8sNamespace
+}});
+
 export const kubeconfig = cluster.kubeConfigs[0].rawConfig;
