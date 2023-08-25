@@ -12,7 +12,7 @@ jobs:
       - uses: pulumi/actions@v4
         with:
           command: up
-          stack-name: wayofthesys/do/boa 
+          stack-name: wayofthesys/dev/boa 
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
