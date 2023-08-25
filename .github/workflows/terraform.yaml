@@ -18,7 +18,8 @@ jobs:
           cache: yarn
 
       - name: Installing dependencies 📦️
-        run: npm install -i package.json
+        run: yarn install -i package.json
+        working-directory: do/pulumi
 
       - uses: pulumi/actions@v4
         with:
@@ -27,3 +28,4 @@ jobs:
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
           DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
+        working-directory: do/pulumi
