@@ -21,7 +21,8 @@ jobs:
         run: yarn install -i package.json
         working-directory: do/pulumi
 
-      - uses: pulumi/actions@v4
+      - name: Run pulumi up
+        uses: pulumi/actions@v4
         with:
           command: up
           stack-name: wayofthesys/dev/boa 
