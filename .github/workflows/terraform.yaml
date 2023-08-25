@@ -18,7 +18,7 @@ jobs:
           cache: yarn
 
       - name: Installing dependencies 📦️
-        run: yarn install
+        run: npm install -i package.json
 
       - uses: pulumi/actions@v4
         with:
