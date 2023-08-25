@@ -22,7 +22,7 @@ jobs:
         working-directory: do/pulumi
 
       - name: Install Pulumi SDK
-        uses: yarn add @pulumi/pulumi 
+        uses: yarn add '@pulumi/pulumi' 
 
       - name: Run pulumi up
         uses: pulumi/actions@v4
