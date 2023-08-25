@@ -18,8 +18,11 @@ jobs:
           cache: yarn
 
       - name: Installing dependencies 📦️
-        run: yarn install -i package.json
+        run: npm install -i package.json
         working-directory: do/pulumi
+
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@v1.0.1
 
       - name: Run pulumi up
         uses: pulumi/actions@v4
