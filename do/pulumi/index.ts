@@ -4,7 +4,7 @@ import * as kubernetes from "@pulumi/kubernetes";
 
 const cluster = new digitalocean.KubernetesCluster("boa", {
     region: digitalocean.Region.SFO2,
-    version: "latest",
+    version: "1.27",
     nodePool: {
         name: "worker01",
         size: digitalocean.DropletSlug.DropletS2VCPU2GB,
