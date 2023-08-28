@@ -16,15 +16,15 @@ export const kubeconfig = cluster.kubeConfigs[0].rawConfig;
 const provider = new kubernetes.Provider("do-k8s", { kubeconfig })
 
 const config = new pulumi.Config();
-const k8sNamespace = config.get("k8sNamespace") || "default";
+const k8sNamespace = config.get("k8sNamespace"||"default");
 const appLabels = {
   app: "nginx-ingress",
 }
 
 // Create NS
 const ingressNs = new kubernetes.core.v1.Namespace("ingressns", {metadata: {
-    labels: appLabels,
-    name: k8sNamespace
+     labels: appLabels,
+     name: k8sNamespace
 }}, { provider });
 
 // Use Helm to install the Nginx ingress controller
