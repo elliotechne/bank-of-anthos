@@ -37,7 +37,7 @@ module "eks" {
       max_size     = 4
       desired_size = 2
 
-      instance_types = ["t3.xlarge"]
+      instance_types = ["t3.large"]
       capacity_type  = "ON_DEMAND"
       iam_role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
       create_iam_role = false 
