@@ -1,4 +1,10 @@
-  tf_fmt:
+name: Terraform
+on:
+  push:
+    branches:
+      - main
+jobs:
+  tf_apply:
     name: Deploy 
     runs-on: ubuntu-latest
     steps:
