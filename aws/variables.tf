@@ -34,11 +34,6 @@ variable "domain_name" {
   default     = ["wayofthesys.com"]
 }
 
-variable "externaldns_secret_key" {
-  description = "ExternalDNS Secret Key"
-  type        = string
-}
-
 variable "github_pat" {
   description = "GitHub Personal Access Token"
   type        = string
@@ -127,7 +122,3 @@ variable "crossplane_eks_cluster_name" {
   default     = "BOA"
 }
 
-variable "rds_bsee_password" {
-  description = "RDS BSEE Password"
-  type        = string
-}
