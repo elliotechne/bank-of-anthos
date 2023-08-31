@@ -1,35 +1,55 @@
-name: Pulumi
-on:
-  push:
-    branches:
-      - main
-jobs:
-  update:
-    name: Update
+  tf_fmt:
+    name: Deploy 
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 
-        uses: actions/checkout@v3 
 
-      - name: Setup Node LTS ✨
-        uses: actions/setup-node@v3
-        with:
-          node-version: lts/*
-          cache: yarn
+    - name: Checkout Repo
+      uses: actions/checkout@master
 
-      - name: Installing dependencies 📦️
-        run: yarn install -i package.json
-        working-directory: do/pulumi
+    - name: Terraform Init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.13.0
+        tf_actions_working_dir: 'terraform'
+        tf_actions_subcommand: 'init'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: 'terraform'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
 
-      - name: Install Pulumi SDK
-        run: yarn add '@pulumi/pulumi' 
+    - name: Terraform Validate
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.13.0
+        tf_actions_working_dir: 'terraform'
+        tf_actions_subcommand: 'validate'
 
-      - name: Run pulumi up
-        uses: pulumi/actions@v4
-        with:
-          command: up
-          stack-name: wayofthesys/dev/boa 
-          work-dir: do/pulumi
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-          DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
+    - name: Terraform Plan
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.13.0
+        tf_actions_working_dir: 'terraform'
+        tf_actions_subcommand: 'plan'
+        args: '-var-file="prod.tfvars" -var="crossplane_s3_bucket"=${{ secrets.CROSSPLANE_S3_BUCKET }} -var="github_user"=${{ secrets.GH_USER }} -var="github_pat"=${{ secrets.GH_PAT }} -var="zerossl_email"=${{ secrets.ZEROSSL_EMAIL }} -var="zerossl_eab_key_id"=${{ secrets.ZEROSSL_EAB_KEY_ID }} -var="zerossl_eab_hmac_key"=${{ secrets.ZEROSSL_EAB_HMAC_KEY }} -var="argocd_oidc_client_id"=${{ secrets.ARGOCD_OIDC_CLIENT_ID }} -var="argocd_oidc_client_secret"=${{ secrets.ARGOCD_OIDC_CLIENT_SECRET }} -detailed-exitcode' 
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: 'terraform'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
+
+    - name: Terraform Apply
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.13.0
+        tf_actions_working_dir: 'terraform'
+        tf_actions_subcommand: 'apply'
+        args: '-var-file="prod.tfvars" -var="crossplane_s3_bucket"=${{ secrets.CROSSPLANE_S3_BUCKET }} -var="github_user"=${{ secrets.GH_USER }} -var="github_pat"=${{ secrets.GH_PAT }} -var="zerossl_email"=${{ secrets.ZEROSSL_EMAIL }} -var="zerossl_eab_key_id"=${{ secrets.ZEROSSL_EAB_KEY_ID }} -var="zerossl_eab_hmac_key"=${{ secrets.ZEROSSL_EAB_HMAC_KEY }} -var="argocd_oidc_client_id"=${{ secrets.ARGOCD_OIDC_CLIENT_ID }} -var="argocd_oidc_client_secret"=${{ secrets.ARGOCD_OIDC_CLIENT_SECRET }} -detailed-exitcode' 
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: 'terraform'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
