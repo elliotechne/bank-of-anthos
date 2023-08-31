@@ -36,12 +36,12 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.13.0
-        tf_actions_working_dir: 'terraform'
+        tf_actions_working_dir: 'aws'
         tf_actions_subcommand: 'plan'
         args: '-var-file="prod.tfvars" -var="crossplane_s3_bucket"=${{ secrets.CROSSPLANE_S3_BUCKET }} -var="github_user"=${{ secrets.GH_USER }} -var="github_pat"=${{ secrets.GH_PAT }} -var="zerossl_email"=${{ secrets.ZEROSSL_EMAIL }} -var="zerossl_eab_key_id"=${{ secrets.ZEROSSL_EAB_KEY_ID }} -var="zerossl_eab_hmac_key"=${{ secrets.ZEROSSL_EAB_HMAC_KEY }} -var="argocd_oidc_client_id"=${{ secrets.ARGOCD_OIDC_CLIENT_ID }} -var="argocd_oidc_client_secret"=${{ secrets.ARGOCD_OIDC_CLIENT_SECRET }} -detailed-exitcode' 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        TF_ACTION_WORKING_DIR: 'terraform'
+        TF_ACTION_WORKING_DIR: 'aws'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
@@ -50,12 +50,12 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.13.0
-        tf_actions_working_dir: 'terraform'
+        tf_actions_working_dir: 'aws'
         tf_actions_subcommand: 'apply'
         args: '-var-file="prod.tfvars" -var="crossplane_s3_bucket"=${{ secrets.CROSSPLANE_S3_BUCKET }} -var="github_user"=${{ secrets.GH_USER }} -var="github_pat"=${{ secrets.GH_PAT }} -var="zerossl_email"=${{ secrets.ZEROSSL_EMAIL }} -var="zerossl_eab_key_id"=${{ secrets.ZEROSSL_EAB_KEY_ID }} -var="zerossl_eab_hmac_key"=${{ secrets.ZEROSSL_EAB_HMAC_KEY }} -var="argocd_oidc_client_id"=${{ secrets.ARGOCD_OIDC_CLIENT_ID }} -var="argocd_oidc_client_secret"=${{ secrets.ARGOCD_OIDC_CLIENT_SECRET }} -detailed-exitcode' 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        TF_ACTION_WORKING_DIR: 'terraform'
+        TF_ACTION_WORKING_DIR: 'aws'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
