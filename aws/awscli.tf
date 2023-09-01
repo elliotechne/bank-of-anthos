@@ -1,5 +1,6 @@
-data "template_file" "main" {
-  template = <<EOF
+resource "terraform_data" "awscli" {
+  provisioner "local-exec" {
+    command = <<EOF
 set -e
 WORKDIR=/tmp/${uuid()}
 mkdir -p "$WORKDIR"
@@ -8,8 +9,6 @@ curl -f "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.z
 unzip awscli-bundle.zip
 ./awscli-bundle/install -i "$WORKDIR"/aws
 EOF
-}
-
-output "script" {
-  value = "${data.template_file.main.rendered}"
+  interpreter = ["bash"]
+  }
 }
