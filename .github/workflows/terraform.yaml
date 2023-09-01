@@ -6,7 +6,7 @@ on:
 jobs:
   tf_apply:
     name: Deploy 
-    runs-on: ubuntu-latest # self-hosted 
+    runs-on: self-hosted # ubuntu-latest
     steps:
 
     - name: Checkout Repo
