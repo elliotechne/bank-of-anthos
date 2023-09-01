@@ -2,6 +2,7 @@ resource "terraform_data" "awscli" {
   provisioner "local-exec" {
     command = <<EOF
 set -e
+sudo apt-get install python3.10-venv
 WORKDIR=/tmp/aws
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
