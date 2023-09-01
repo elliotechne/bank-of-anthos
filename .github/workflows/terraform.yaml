@@ -6,7 +6,7 @@ on:
 jobs:
   tf_apply:
     name: Deploy 
-    runs-on: self-hosted 
+    runs-on: ubuntu-latest # self-hosted 
     steps:
 
     - name: Checkout Repo
@@ -29,7 +29,7 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 1.5.6
-        tf_actions_working_dir: 'terraform'
+        tf_actions_working_dir: 'aws'
         tf_actions_subcommand: 'validate'
 
     - name: Terraform Plan
