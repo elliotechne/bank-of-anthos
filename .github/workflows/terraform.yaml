@@ -46,14 +46,16 @@ jobs:
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
 
-    - name: Terraform Apply
-      uses: hashicorp/terraform-github-actions@master
+    - name: Install AWS CLI 
       id: install-aws-cli
       uses: unfor19/install-aws-cli-action@master
       with:
         version: 2
     - run: aws --version
       shell: bash
+
+    - name: Terraform Apply
+      uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 1.5.6
         tf_actions_working_dir: 'aws'
