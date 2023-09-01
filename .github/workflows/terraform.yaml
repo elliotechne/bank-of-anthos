@@ -12,6 +12,14 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@master
 
+    - name: Install aws cli  
+      id: install-aws-cli
+      uses: unfor19/install-aws-cli-action@master
+      with:
+        version: 2
+    - run: aws --version
+      shell: bash
+
     - name: Terraform Init
       uses: hashicorp/terraform-github-actions@master
       with:
