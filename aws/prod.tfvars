@@ -1,2 +1,2 @@
-region      = "us-east-1"
-eks_cluster_name = "prod"
+region      = "us-east-2"
+eks_cluster_name = "production"
