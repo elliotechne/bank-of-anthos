@@ -25,25 +25,6 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.public_subnets
 
-  # EKS Managed Node Group(s)
-  eks_managed_node_group_defaults = {
-    disk_size      = 50
-    instance_types = ["t3.large"]
-  }
-
-  eks_managed_node_groups = {
-    green = {
-      min_size     = 2
-      max_size     = 4
-      desired_size = 2
-
-      instance_types = ["t3.large"]
-      capacity_type  = "ON_DEMAND"
-      iam_role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
-      create_iam_role = false 
-    }
-  }
-
   # aws-auth configmap
   manage_aws_auth_configmap = true 
   create_aws_auth_configmap = true 
@@ -111,6 +92,47 @@ module "eks" {
 
   tags = {
     Environment = "prod"
+    Terraform   = "true"
+  }
+}
+
+module "eks_managed_node_group" {
+  source = "terraform-aws-modules/eks/aws//modules/eks-managed-node-group"
+
+  name            = var.eks_cluster_name
+  cluster_name    = var.eks_cluster_name 
+  cluster_version = "1.27"
+
+  subnet_ids = module.vpc.public_subnets 
+
+  // The following variables are necessary if you decide to use the module outside of the parent EKS module context.
+  // Without it, the security groups of the nodes are empty and thus won't join the cluster.
+  cluster_primary_security_group_id = module.eks.cluster_primary_security_group_id
+  vpc_security_group_ids            = [module.eks.node_security_group_id]
+
+  min_size     = 2
+  max_size     = 4
+  desired_size = 2
+
+  instance_types = ["t3.large"]
+  capacity_type  = "SPOT"
+
+  labels = {
+    Environment = "test"
+    GithubRepo  = "terraform-aws-eks"
+    GithubOrg   = "terraform-aws-modules"
+  }
+
+  taints = {
+    dedicated = {
+      key    = "dedicated"
+      value  = "gpuGroup"
+      effect = "NO_SCHEDULE"
+    }
+  }
+
+  tags = {
+    Environment = "dev"
     Terraform   = "true"
   }
 }
