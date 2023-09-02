@@ -36,7 +36,7 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 1.5.6
-        tf_actions_working_dir: '/tmp/github-runner-your-repo/bank-of-anthos/bank-of-anthos'
+        tf_actions_working_dir: '/tmp/github-runner-your-repo/bank-of-anthos/bank-of-anthos/aws'
         tf_actions_subcommand: 'plan'
         args: '-var="region"=us-east-2 -var="eks_cluster_name"=prod -var="crossplane_s3_bucket"=${{ secrets.CROSSPLANE_S3_BUCKET }} -var="github_user"=${{ secrets.GH_USER }} -var="github_pat"=${{ secrets.GH_PAT }} -var="zerossl_email"=${{ secrets.ZEROSSL_EMAIL }} -var="zerossl_eab_key_id"=${{ secrets.ZEROSSL_EAB_KEY_ID }} -var="zerossl_eab_hmac_key"=${{ secrets.ZEROSSL_EAB_HMAC_KEY }} -var="argocd_oidc_client_id"=${{ secrets.ARGOCD_OIDC_CLIENT_ID }} -var="argocd_oidc_client_secret"=${{ secrets.ARGOCD_OIDC_CLIENT_SECRET }}' 
       env:
