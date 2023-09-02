@@ -13,9 +13,6 @@ module "eks" {
   enable_irsa = true
 
   cluster_addons = {
-    coredns = {
-      resolve_conflicts = "OVERWRITE"
-    }
     kube-proxy = {}
     vpc-cni = {
       resolve_conflicts = "OVERWRITE"
@@ -135,6 +132,13 @@ module "eks_managed_node_group" {
     Environment = "dev"
     Terraform   = "true"
   }
+}
+
+resource "aws_eks_addon" "coredns" {
+  depends_on = [module.eks_managed_node_group]
+  cluster_name = var.eks_cluster_name
+  addon_name   = "coredns"
+  resolve_conflicts_on_update = "OVERWRITE"
 }
 
 /* 
