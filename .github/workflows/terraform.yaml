@@ -26,7 +26,7 @@ jobs:
 
     - run: cd aws && terraform init  
     - run: cd aws && terraform validate
-    - run: cd aws && terraform plan -var="region"=us-east-2 -var="eks_cluster_name"=prod -var="crossplane_s3_bucket"=${{ secrets.CROSSPLANE_S3_BUCKET }} -var="github_user"=${{ secrets.GH_USER }} -var="github_pat"=${{ secrets.GH_PAT }} -var="zerossl_email"=${{ secrets.ZEROSSL_EMAIL }} -var="zerossl_eab_key_id"=${{ secrets.ZEROSSL_EAB_KEY_ID }} -var="zerossl_eab_hmac_key"=${{ secrets.ZEROSSL_EAB_HMAC_KEY }} -var="argocd_oidc_client_id"=${{ secrets.ARGOCD_OIDC_CLIENT_ID }} -var="argocd_oidc_client_secret"=${{ secrets.ARGOCD_OIDC_CLIENT_SECRET }} -out plan.out aws 
+    - run: cd aws && terraform plan -var="region"=us-east-2 -var="eks_cluster_name"=prod -var="crossplane_s3_bucket"=${{ secrets.CROSSPLANE_S3_BUCKET }} -var="github_user"=${{ secrets.GH_USER }} -var="github_pat"=${{ secrets.GH_PAT }} -var="zerossl_email"=${{ secrets.ZEROSSL_EMAIL }} -var="zerossl_eab_key_id"=${{ secrets.ZEROSSL_EAB_KEY_ID }} -var="zerossl_eab_hmac_key"=${{ secrets.ZEROSSL_EAB_HMAC_KEY }} -var="argocd_oidc_client_id"=${{ secrets.ARGOCD_OIDC_CLIENT_ID }} -var="argocd_oidc_client_secret"=${{ secrets.ARGOCD_OIDC_CLIENT_SECRET }} -out plan.out  
 
    # - name: Terraform Plan
    #    uses: hashicorp/terraform-github-actions@master
