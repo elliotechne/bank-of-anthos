@@ -98,7 +98,7 @@ module "eks_managed_node_group" {
 
   name            = var.eks_cluster_name
   cluster_name    = var.eks_cluster_name 
-  cluster_version = "1.27"
+  cluster_version = "1.23"
 
   subnet_ids = module.vpc.public_subnets 
 
