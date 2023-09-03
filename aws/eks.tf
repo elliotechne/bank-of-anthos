@@ -111,7 +111,7 @@ module "eks_managed_node_group" {
   max_size     = 4
   desired_size = 2
 
-  instance_types = ["t3.large"]
+  instance_types = ["t3.xlarge"]
   capacity_type  = "SPOT"
 
   labels = {
