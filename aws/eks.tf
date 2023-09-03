@@ -119,11 +119,6 @@ module "eks_managed_node_group" {
     GithubRepo  = "terraform-aws-eks"
     GithubOrg   = "terraform-aws-modules"
   }
-
-  tags = {
-    Environment = "dev"
-    Terraform   = "true"
-  }
 }
 
 resource "aws_eks_addon" "coredns" {
