@@ -26,17 +26,10 @@ module "eks" {
   manage_aws_auth_configmap = true 
   create_aws_auth_configmap = true 
 
-  /*
-  cluster_security_group_additional_rules = {
-    egress_nodes_ephemeral_ports_tcp = {
-      description                = "To node 1025-65535"
-      protocol                   = "tcp"
-      from_port                  = 0
-      to_port                    = 65535
-      type                       = "egress"
-    }
+  node_security_group_tags = {
+    "kubernetes.io/cluster/${var.eks_cluster_name}" = null
   }
-  */
+
   node_security_group_additional_rules = merge( # {
     local.ingress_rules,
     local.egress_rules,
@@ -107,9 +100,9 @@ module "eks_managed_node_group" {
   cluster_primary_security_group_id = module.eks.cluster_primary_security_group_id
   vpc_security_group_ids            = [module.eks.node_security_group_id]
 
-  min_size     = 2
-  max_size     = 4
-  desired_size = 2
+  min_size     = 4
+  max_size     = 6
+  desired_size = 4
 
   instance_types = ["t3.xlarge"]
   capacity_type  = "SPOT"
