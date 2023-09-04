@@ -59,7 +59,7 @@ module "eks" {
     {
       rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
       username = "admin_role"
-      groups   = ["system:masters"]
+      groups   = ["system:masters", "system:nodes"]
     },
     {
       rolearn  = "arn:aws:iam::504376484015:role/green-eks-node-group-20230604190046714400000001"
