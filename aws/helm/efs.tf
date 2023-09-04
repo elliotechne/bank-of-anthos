@@ -20,6 +20,7 @@ resource "kubernetes_persistent_volume" "bsee" {
 
 resource "kubernetes_storage_class" "efs" {
   depends_on = [helm_release.efs]
+  count = 0 
   metadata {
     name = "efs"
   }
