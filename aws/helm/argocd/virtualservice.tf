@@ -1,7 +1,5 @@
 resource "kubernetes_manifest" "argocd_virtualservice" {
   provider   = kubernetes
-  count      = 0
-  depends_on = [helm_release.argocd, helm_release.istiod]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "VirtualService"
