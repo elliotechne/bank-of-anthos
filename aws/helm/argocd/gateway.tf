@@ -1,7 +1,7 @@
 resource "kubernetes_manifest" "argocd-gateway" {
   provider = kubernetes
   manifest = {
-    "apiVersion" = "networking.istio.io/v1beta1"
+    "apiVersion" = "networking.istio.io/v1alpha3"
     "kind"       = "Gateway"
     "metadata" = {
       "name"      = "argocd"
