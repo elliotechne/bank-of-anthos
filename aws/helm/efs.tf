@@ -1,5 +1,6 @@
 resource "kubernetes_persistent_volume" "bsee" {
   depends_on = [helm_release.efs]
+  count = 0
   metadata {
     name = "bsee"
   }
@@ -34,7 +35,7 @@ resource "kubernetes_storage_class" "efs" {
 }
 
 module "efs" {
-  count      = 1
+  count      = 0
   source     = "cloudposse/efs/aws"
   depends_on = [helm_release.efs]
   # Cloud Posse recommends pinning every module to a specific version
@@ -52,7 +53,7 @@ module "efs" {
 }
 
 resource "aws_efs_file_system_policy" "policy" {
-  count          = 1
+  count          = 0
   file_system_id = module.efs[0].id
 
   policy = <<POLICY
