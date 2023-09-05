@@ -210,9 +210,9 @@ resource "helm_release" "boa" {
 resource "helm_release" "nginx-ingress" {
   provider        = helm
   repository      = local.nginx-repo
-  name            = "nginx-ingress"
-  chart           = "nginx-ingress"
-  cleanup_on_fail = true
-  force_update    = true
-  namespace       = "kube-system"
+  name = "ingress-nginx"
+  chart = "ingress-nginx"
+  namespace = "ingress"
+  version = "4.0.13"
+  create_namespace = true 
 }
