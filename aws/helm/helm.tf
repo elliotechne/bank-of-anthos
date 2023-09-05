@@ -159,6 +159,7 @@ resource "helm_release" "istiod" {
 
 resource "helm_release" "istio-ingress" {
   provider        = helm
+  count           = 0
   repository      = local.istio-repo
   name            = "istio-ingressgateway"
   chart           = "gateway"
@@ -193,6 +194,8 @@ resource "helm_release" "istio-cni" {
   depends_on      = [helm_release.istio-base]
 }
 
+
+
 resource "helm_release" "boa" {
   count = 0 
   provider  = helm
@@ -202,4 +205,14 @@ resource "helm_release" "boa" {
   name      = "boa"
   chart     = "charts/bank-of-anthos"
   namespace = "boa"
+}
+
+resource "helm_release" "nginx-ingress" {
+  provider        = helm
+  repository      = local.nginx-repo
+  name            = "nginx-ingress"
+  chart           = "nginx-ingress"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "kube-system"
 }
