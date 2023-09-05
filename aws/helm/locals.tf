@@ -54,7 +54,7 @@ locals {
     }
   )
   istio-repo      = "https://istio-release.storage.googleapis.com/charts"
-  nginx-repo      = "oci://ghcr.io/nginxinc/charts/nginx-ingress"
+  nginx-repo      = "https://kubernetes.github.io/ingress-nginx"
   jetstack-repo   = "https://charts.jetstack.io"
   bookinfo-repo   = "https://evry-ace.github.io/helm-charts"
   argocd-repo     = "https://argoproj.github.io/argo-helm"
