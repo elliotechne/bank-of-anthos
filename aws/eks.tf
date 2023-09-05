@@ -107,6 +107,7 @@ module "eks_managed_node_group" {
   instance_types = ["t3.xlarge"]
   capacity_type  = "SPOT"
 
+  create_iam_role = false 
   iam_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
 
   labels = {
