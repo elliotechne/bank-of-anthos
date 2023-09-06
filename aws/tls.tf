@@ -38,7 +38,7 @@ resource "tls_self_signed_cert" "ca" {
   ]
 
   provisioner "local-exec" {
-    command = "echo '${self.cert_pem}' > ../tls/ca.pem && chmod 0600 ../tls/ca.pem"
+    command = "echo '${self.cert_pem}' > tls/ca.pem && chmod 0600 tls/ca.pem"
   }
 }
 
@@ -47,7 +47,7 @@ resource "tls_private_key" "key" {
   rsa_bits  = "2048"
 
   provisioner "local-exec" {
-    command = "echo '${self.private_key_pem}' > ../tls/tls.key && chmod 0600 ../tls/tls.key"
+    command = "echo '${self.private_key_pem}' > tls/tls.key && chmod 0600 tls/tls.key"
   }
 }
 
@@ -91,6 +91,6 @@ resource "tls_locally_signed_cert" "cert" {
   ]
 
   provisioner "local-exec" {
-    command = "echo '${self.cert_pem}' > ../tls/tls.cert && echo '${tls_self_signed_cert.ca.cert_pem}' >> ../tls/tls.cert && chmod 0600 ../tls/tls.cert"
+    command = "echo '${self.cert_pem}' > tls/tls.cert && echo '${tls_self_signed_cert.ca.cert_pem}' >> tls/tls.cert && chmod 0600 tls/tls.cert"
   }
 }
