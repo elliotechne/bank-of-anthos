@@ -31,7 +31,7 @@ variable "argocd_oidc_client_secret" {
 variable "domain_name" {
   description = "Primary domain name"
   type        = list(any)
-  default     = ["wayofthesys.com"]
+  default     = ["wayofthesys.org"]
 }
 
 variable "github_pat" {
