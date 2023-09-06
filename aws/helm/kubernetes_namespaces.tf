@@ -8,16 +8,6 @@ resource "kubernetes_namespace" "upbound-system" {
   }
 }
 
-resource "kubernetes_namespace" "boa" {
-  provider   = kubernetes
-  metadata {
-    name = "boa"
-    labels = {
-      istio-injection = "disabled"
-    }
-  }
-}
-
 resource "kubernetes_namespace" "cert-manager" {
   provider   = kubernetes
   metadata {
