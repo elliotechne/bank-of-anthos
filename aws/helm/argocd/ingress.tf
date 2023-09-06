@@ -1,25 +1,49 @@
-resource "kubernetes_ingress" "argocd" {
+resource "kubernetes_ingress_v1" "argocd" {
+  for_each = toset(var.domain_name)
   metadata {
-    name      = "argocd"
-    namespace = "argocd" 
+    name      = "${each.key}-argocd-ingress"
+    namespace = "argocd"
     annotations = {
-      "kubernetes.io/ingress.class"               = "alb"
-      "alb.ingress.kubernetes.io/scheme"          = "internet-facing"
-      "alb.ingress.kubernetes.io/target-type"     = "ip"
-      "external-dns.alpha.kubernetes.io/hostname" = "argocd.${var.domain_name[0]}"
+      "kubernetes.io/ingress.class"          = "nginx"
+      "ingress.kubernetes.io/rewrite-target" = "/"
+      "cert-manager.io/cluster-issuer"       = "zerossl"
     }
   }
   spec {
-    rule {
-      http {
-        path {
-          path = "/*"
-          backend {
-            service_name = "argocd-server"
-            service_port = 443 
+    default_backend {
+      service {
+        name = "argocd-server"
+        port {
+          number = 80
+        }
+      }
+    }
+    dynamic "rule" {
+      for_each = toset(var.domain_name)
+      content {
+        host = "argocd.${rule.value}"
+        http {
+          path {
+            backend {
+              service {
+                name = "argocd-server"
+                port {
+                  number = 80
+                }
+              }
+            }
+            path = "/"
           }
         }
       }
     }
+    dynamic "tls" {
+      for_each = toset(var.domain_name)
+      content {
+        secret_name = "argocd-tls"
+        hosts       = ["argocd.${tls.value}"]
+      }
+    }
   }
 }
+
