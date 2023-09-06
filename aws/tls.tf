@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "tls" {
   metadata {
-    name      = "${replace(var.domain_name[0], ".", "-")}-atlantis-tls"
-    namespace = "atlantis"
+    name      = "${replace(var.domain_name[0], ".", "-")}-argocd-tls"
+    namespace = "argocd"
   }
 
   data = {
@@ -20,12 +20,12 @@ resource "tls_private_key" "ca" {
 }
 
 resource "tls_self_signed_cert" "ca" {
-  key_algorithm   = tls_private_key.ca.algorithm
+  // key_algorithm   = tls_private_key.ca.algorithm
   private_key_pem = tls_private_key.ca.private_key_pem
 
   subject {
     common_name  = "ca.local"
-    organization = "Atlantis"
+    organization = "WayOfTheSys"
   }
 
   validity_period_hours = 8760
@@ -65,12 +65,11 @@ resource "tls_cert_request" "request" {
 
   ip_addresses = [
     "127.0.0.1",
-    digitalocean_loadbalancer.ingress_load_balancer.ip,
   ]
 
   subject {
     common_name  = var.domain_name[0]
-    organization = "Atlantis"
+    organization = "WayOfTheSys"
   }
 }
 
