@@ -17,15 +17,15 @@ spec:
     solvers:
     - selector:
         dnsZones: 
-          - "wayofthesys.com"
+          - {{ .Values.dns_zone }}
       dns01:
         route53:
-          accessKeyID: AKIATMXSQTLMQGGS2MP7
+          accessKeyID: {{ .Values.access_key_id }} 
           region: us-east-2
           secretAccessKeySecretRef:
-            name: externaldns
+            name: zerosslclusterissuer 
             key: secret-key
     - http01:
         ingress:
-          class: istio
+          class: nginx` 
     
