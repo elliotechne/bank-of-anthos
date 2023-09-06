@@ -40,7 +40,7 @@ resource "kubernetes_ingress_v1" "argocd" {
     dynamic "tls" {
       for_each = toset(var.domain_name)
       content {
-        secret_name = "argocd-tls"
+        secret_name = "${tls.value}-argocd-tls"
         hosts       = ["argocd.${tls.value}"]
       }
     }
