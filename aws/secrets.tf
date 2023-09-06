@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "eab_hmac" {
   metadata {
     name      = "zerossl-eab-hmac-key"
-    namespace = "kube-system"
+    namespace = "cert-manager"
   }
 
   data = {
