@@ -23,7 +23,8 @@ module "eks" {
   subnet_ids = module.vpc.public_subnets
 
   # aws-auth configmap
-  manage_aws_auth_configmap = true 
+  # we use external module to manage 
+  manage_aws_auth_configmap = false 
   create_aws_auth_configmap = true 
 
   node_security_group_tags = {
