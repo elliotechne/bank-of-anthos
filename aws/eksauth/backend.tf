@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "wayofthesys2"
-    key    = "bank-prod-2.tfstate"
+    key    = "bank-dev-auth.tfstate"
     region = "us-east-2"
   }
 }
