@@ -101,9 +101,9 @@ module "eks_managed_node_group" {
   cluster_primary_security_group_id = module.eks.cluster_primary_security_group_id
   vpc_security_group_ids            = [module.eks.node_security_group_id]
 
-  min_size     = 1
-  max_size     = 2
-  desired_size = 1
+  min_size     = 4
+  max_size     = 6
+  desired_size = 4
 
   instance_types = ["t3.xlarge"]
   capacity_type  = "SPOT"
