@@ -36,6 +36,9 @@ jobs:
     - name: Apply Terraform 
       run: cd aws && terraform apply -var-file=prod.tfvars -var="crossplane_s3_bucket"=${{ secrets.CROSSPLANE_S3_BUCKET }} -var="github_user"=${{ secrets.GH_USER }} -var="github_pat"=${{ secrets.GH_PAT }} -var="zerossl_email"=${{ secrets.ZEROSSL_EMAIL }} -var="zerossl_eab_key_id"=${{ secrets.ZEROSSL_EAB_KEY_ID }} -var="zerossl_eab_hmac_key"=${{ secrets.ZEROSSL_EAB_HMAC_KEY }} -var="argocd_oidc_client_id"=${{ secrets.ARGOCD_OIDC_CLIENT_ID }} -var="argocd_oidc_client_secret"=${{ secrets.ARGOCD_OIDC_CLIENT_SECRET }} -auto-approve
 
+    - name: Init eksauth 
+      run: cd aws/eksauth && terraform init -reconfigure 
+
     - name: Apply eksauth 
       run: cd aws/eksauth && terraform apply -var-file=prod.tfvars
 
