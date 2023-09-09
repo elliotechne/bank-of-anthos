@@ -39,6 +39,9 @@ jobs:
     - name: Init eksauth 
       run: cd aws/eksauth && terraform init -reconfigure 
 
+    - name: Plan eksauth 
+      run: cd aws/eksauth && terraform plan -var-file=prod.tfvars
+
     - name: Apply eksauth 
       run: cd aws/eksauth && terraform apply -var-file=prod.tfvars
 
