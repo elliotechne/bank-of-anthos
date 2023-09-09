@@ -43,7 +43,7 @@ jobs:
       run: cd aws/eksauth && terraform plan -var-file=prod.tfvars
 
     - name: Apply eksauth 
-      run: cd aws/eksauth && terraform apply -var-file=prod.tfvars
+      run: cd aws/eksauth && terraform apply -var-file=prod.tfvars -auto-approve
 
     - name: Initialize Helm
       run: cd aws/helm && terraform init  
