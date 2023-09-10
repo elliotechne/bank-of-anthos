@@ -8,6 +8,29 @@ terraform {
       source  = "hashicorp/helm"
       version = "2.6.0"
     }
+    flux = {
+      source = "fluxcd/flux"
+    }
+  }
+}
+
+provider "github" {
+  owner = var.github_user
+  token = var.github_pat
+}
+
+provider "flux" {
+ kubernetes = {
+    host                   = data.aws_eks_cluster.default.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.default.token
+  }
+  git = {
+    url = "ssh://git@github.com/${var.github_user}/${var.github_repo}.git"
+    ssh = {
+      username    = "git"
+      private_key = tls_private_key.flux.private_key_pem
+    }
   }
 }
 

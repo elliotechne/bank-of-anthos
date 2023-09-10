@@ -133,3 +133,9 @@ variable "github_user" {
   type        = string
   default     = "foo"
 }
+
+variable "github_repo" {
+  description = "GitHub Repo"
+  type        = string
+  default     = "bank-of-anthos"
+}
