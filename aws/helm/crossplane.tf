@@ -30,6 +30,7 @@ resource "helm_release" "crossplane-terraform-install" {
 
 resource "helm_release" "crossplane-terraform-config" {
   provider   = helm
+  count      = 0
   depends_on = [helm_release.crossplane-terraform-install, helm_release.crossplane-config]
   name       = "crossplane-terraform-config"
   chart      = "charts/crossplane-terraform-config"
