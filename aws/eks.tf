@@ -3,7 +3,7 @@ module "eks" {
   version = "~> 18.27"
 
   cluster_name    = var.eks_cluster_name
-  cluster_version = "1.23"
+  cluster_version = "1.27"
 
   create_iam_role = false
   iam_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
@@ -92,7 +92,7 @@ module "eks_managed_node_group" {
 
   name            = var.eks_cluster_name
   cluster_name    = var.eks_cluster_name 
-  cluster_version = "1.23"
+  cluster_version = "1.27"
 
   subnet_ids = module.vpc.public_subnets 
 
