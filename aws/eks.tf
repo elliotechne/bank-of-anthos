@@ -130,3 +130,28 @@ resource "aws_iam_instance_profile" "karpenter" {
   role = module.eks_managed_node_group.iam_role_name
 }
 
+
+module "karpenter_irsa" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  depends_on = [module.kube_auth]
+
+  role_name                          = "karpenter_controller"
+  attach_karpenter_controller_policy = true
+
+  karpenter_controller_cluster_id         = module.eks.cluster_id
+  karpenter_controller_node_iam_role_arns = [
+    module.eks_managed_node_group.iam_role_arn
+  ]
+
+  oidc_providers = {
+    main = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["karpenter:karpenter"]
+    }
+  }
+
+  tags = {
+    Environment = "dev"
+    Terraform   = "true"
+  }
+}
