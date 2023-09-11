@@ -1,5 +1,7 @@
 locals {
   aws_provider_sa = "aws-provider"
+  name            = var.eks_cluster_name 
+  partition       = data.aws_partition.current.partition
   istio-repo      = "https://istio-release.storage.googleapis.com/charts"
   jetstack-repo   = "https://charts.jetstack.io"
   bookinfo-repo   = "https://evry-ace.github.io/helm-charts"
