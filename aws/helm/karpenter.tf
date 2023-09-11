@@ -19,17 +19,17 @@ module "karpenter_irsa" {
   role_name                          = "karpenter-controller-${local.name}"
   attach_karpenter_controller_policy = true
 
-  karpenter_controller_cluster_id = module.eks.cluster_id
+  karpenter_controller_cluster_id = data.aws_eks_cluster.default.cluster_id 
   karpenter_controller_ssm_parameter_arns = [
     "arn:${local.partition}:ssm:*:*:parameter/aws/service/*"
   ]
   karpenter_controller_node_iam_role_arns = [
-    module.eks_managed_node_group.iam_role_arn
-  ]
+   data.aws_eks_cluster.default.role_arn
+  ]/
 
   oidc_providers = {
     ex = {
-      provider_arn               = module.eks.oidc_provider_arn
+      provider_arn               = data.aws_eks_cluster.default.identity[0].oidc[0].issuer
       namespace_service_accounts = ["karpenter:karpenter"]
     }
   }
