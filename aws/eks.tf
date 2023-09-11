@@ -142,6 +142,7 @@ provider "kubectl" {
 module "karpenter_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "~> 4.21.1"
+  depends_on = [module.eks]
 
   role_name                          = "karpenter-controller-${local.name}"
   attach_karpenter_controller_policy = true
@@ -169,6 +170,7 @@ resource "aws_iam_instance_profile" "karpenter" {
 
 resource "helm_release" "karpenter" {
   namespace        = "karpenter"
+  depends_on       = [module.eks]
   create_namespace = true
 
   name       = "karpenter"
