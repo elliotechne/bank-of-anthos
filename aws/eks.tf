@@ -24,7 +24,7 @@ module "eks" {
 
   # aws-auth configmap
   # we use external module to manage 
-  manage_aws_auth_configmap = false 
+  manage_aws_auth_configmap = true 
   create_aws_auth_configmap = true 
 
   node_security_group_tags = {
@@ -60,7 +60,7 @@ module "eks" {
     {
       rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/admin_role"
       username = "admin_role"
-      groups   = ["system:masters", "system:nodes"]
+      groups   = ["system:masters", "system:nodes", "system:serviceaccount:runners:default"]
     },
     {
       rolearn  = "arn:aws:iam::504376484015:role/green-eks-node-group-20230604190046714400000001"
