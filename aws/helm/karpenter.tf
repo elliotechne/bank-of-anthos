@@ -25,7 +25,7 @@ module "karpenter_irsa" {
   ]
   karpenter_controller_node_iam_role_arns = [
    data.aws_eks_cluster.default.role_arn
-  ]/
+  ]
 
   oidc_providers = {
     ex = {
