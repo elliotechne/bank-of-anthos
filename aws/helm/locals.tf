@@ -1,5 +1,7 @@
 locals {
   aws_provider_sa = "aws-provider"
+  name            = var.eks_cluster_name
+  partition       = data.aws_partition.current.partition
   eks_oidc_provider_url = join("/", [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[2]],
                                     [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[3]],
                                     [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[4]])
