@@ -51,16 +51,16 @@ resource "helm_release" "karpenter" {
 
   set {
     name  = "clusterName"
-    value = module.eks.cluster_id
+    value = data.aws_eks_cluster.default.cluster_id 
   }
 
   set {
     name  = "clusterEndpoint"
-    value = module.eks.cluster_endpoint
+    value = data.aws_eks_cluster.default.endpoint
   }
 
   set {
     name  = "aws.defaultInstanceProfile"
-    value = aws_iam_instance_profile.karpenter.name
+    value = "KarpenterNodeInstanceProfile-${local.name}"
   }
 }
