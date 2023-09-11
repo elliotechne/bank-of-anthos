@@ -11,6 +11,10 @@ terraform {
     flux = {
       source = "fluxcd/flux"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = ">= 1.14"
+    }
   }
 }
 
