@@ -151,7 +151,7 @@ module "karpenter_irsa" {
     "arn:${local.partition}:ssm:*:*:parameter/aws/service/*"
   ]
   karpenter_controller_node_iam_role_arns = [
-    module.eks.eks_managed_node_groups["karpenter"].iam_role_arn
+    module.eks_managed_node_group.iam_role_arn
   ]
 
   oidc_providers = {
@@ -164,7 +164,7 @@ module "karpenter_irsa" {
 
 resource "aws_iam_instance_profile" "karpenter" {
   name = "KarpenterNodeInstanceProfile-${local.name}"
-  role = module.eks.eks_managed_node_groups["karpenter"].iam_role_name
+  role = module.eks_managed_node_group.iam_role_name
 }
 
 resource "helm_release" "karpenter" {
