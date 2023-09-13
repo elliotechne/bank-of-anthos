@@ -192,21 +192,42 @@ resource "helm_release" "karpenter" {
   }
 }
 
-data "http" "karpenter_crd" {
-  url = "https://raw.githubusercontent.com/aws/karpenter/v0.30.0/charts/karpenter/crds/karpenter.sh_provisioners.yaml"
+data "http" "karpenter_crds" {
+  url = "https://raw.githubusercontent.com/aws/karpenter/v0.30.0/pkg/apis/crds/karpenter.sh_provisioners.yaml"
 }
 
-resource "null_resource" "karpenter_crd" {
+data "kubectl_file_documents" "karpenter_crds" {
+  content = data.http.karpenter_crds.response_body
+}
 
-  triggers = {
-    manifest_sha1 = "${sha1("${data.http.karpenter_crd.body}")}"
-  }
+resource "kubectl_manifest" "karpenter_crds" {
+  for_each  = data.kubectl_file_documents.karpenter_crds.manifests
+  yaml_body = each.value
+}
 
-  provisioner "local-exec" {
-    command = "kubectl replace -f https://raw.githubusercontent.com/aws/karpenter/v0.30.0/pkg/apis/crds/karpenter.sh_provisioners.yaml"
-  }
+resource "kubectl_manifest" "karpenter_provisioner" {
+  yaml_body = <<-YAML
+  apiVersion: karpenter.sh/v1alpha5
+  kind: Provisioner
+  metadata:
+    name: default
+  spec:
+    requirements:
+      - key: karpenter.sh/capacity-type
+        operator: In
+        values: ["spot"]
+    limits:
+      resources:
+        cpu: 1000
+    provider:
+      subnetSelector:
+        karpenter.sh/discovery: ${local.name}
+      securityGroupSelector:
+        karpenter.sh/discovery: ${local.name}
+      tags:
+        karpenter.sh/discovery: ${local.name}
+    ttlSecondsAfterEmpty: 30
+  YAML
 
-  depends_on = [
-    helm_release.karpenter
-  ]
+  depends_on = [helm_release.karpenter, kubectl_manifest.karpenter_crds]
 }
