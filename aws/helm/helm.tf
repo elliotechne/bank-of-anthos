@@ -117,6 +117,7 @@ resource "helm_release" "metrics-server" {
 
 resource "helm_release" "istio-base" {
   provider        = helm
+  count           = 0
   repository      = local.istio-repo
   name            = "istio-base"
   chart           = "base"
@@ -128,6 +129,7 @@ resource "helm_release" "istio-base" {
 
 resource "helm_release" "istiod" {
   provider        = helm
+  count           = 0
   repository      = local.istio-repo
   name            = "istiod"
   chart           = "istiod"
