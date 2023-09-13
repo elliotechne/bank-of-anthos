@@ -1,3 +1,6 @@
+[![Terraform](https://github.com/autotune/bank-of-anthos/actions/workflows/terraform.yaml/badge.svg)](https://github.com/autotune/bank-of-anthos/actions/workflows/terraform.yaml)
+
+
 For anyone curious about Crossplane and terraform in AWS, I have a barebones public repo set up that sets up the following and infra to support the following:
 
 
