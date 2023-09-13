@@ -156,15 +156,30 @@ module "karpenter_irsa" {
   }
 }
 
+data "aws_ecrpublic_authorization_token" "token" {
+  provider=aws.virginia
+}
+
 resource "helm_release" "karpenter" {
   namespace        = "karpenter"
   create_namespace = true
 
-  name       = "karpenter"
-  repository = "https://charts.karpenter.sh"
-  chart      = "karpenter"
+  name                = "karpenter"
+  repository          = "oci://public.ecr.aws/karpenter"
+  repository_username = data.aws_ecrpublic_authorization_token.token.user_name
+  repository_password = data.aws_ecrpublic_authorization_token.token.password
+  chart               = "karpenter"
+  version             = "v0.30.0"
 
-  version    = "0.16.3"
+  set {
+    name  = "settings.aws.clusterName"
+    value = module.eks.cluster_name 
+  }
+
+  set {
+    name  = "settings.aws.clusterEndpoint"
+    value = module.eks.cluster_endpoint
+  }
 
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
@@ -172,17 +187,26 @@ resource "helm_release" "karpenter" {
   }
 
   set {
-    name  = "clusterName"
-    value = module.eks.cluster_id
+    name  = "settings.aws.defaultInstanceProfile"
+    value = "KarpenterNodeInstanceProfile-${local.name}" 
+  }
+}
+
+data "http" "karpenter_crd" {
+  url = "https://raw.githubusercontent.com/aws/karpenter/v0.30.0/charts/karpenter/crds/karpenter.sh_provisioners.yaml"
+}
+
+resource "null_resource" "karpenter_crd" {
+
+  triggers = {
+    manifest_sha1 = "${sha1("${data.http.karpenter_crd.body}")}"
   }
 
-  set {
-    name  = "clusterEndpoint"
-    value = module.eks.cluster_endpoint
+  provisioner "local-exec" {
+    command = "kubectl replace -f https://raw.githubusercontent.com/aws/karpenter/${var.karpenter_version}/pkg/apis/crds/karpenter.sh_provisioners.yaml"
   }
 
-  set {
-    name  = "aws.defaultInstanceProfile"
-    value = aws_iam_instance_profile.karpenter.name
-  }
+  depends_on = [
+    helm_release.karpenter
+  ]
 }
