@@ -23,6 +23,7 @@ provider "github" {
   token = var.github_pat
 }
 
+/*
 provider "flux" {
  kubernetes = {
     host                   = data.aws_eks_cluster.default.endpoint
@@ -37,6 +38,7 @@ provider "flux" {
     }
   }
 }
+*/ 
 
 provider "aws" {
   region = var.region
