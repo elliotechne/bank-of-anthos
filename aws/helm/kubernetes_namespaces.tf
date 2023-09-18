@@ -42,13 +42,13 @@ resource "kubernetes_namespace" "istio-ingress" {
   }
 }
 
-resource "kubernetes_namespace" "cicd" {
+resource "kubernetes_namespace" "argocd" {
   provider   = kubernetes
   metadata {
     labels = {
       istio-injection = "enabled"
     }
-    name = "cicd"
+    name = "argocd"
   }
 }
 

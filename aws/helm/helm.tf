@@ -1,9 +1,9 @@
 resource "helm_release" "argocd" {
-  depends_on      = [kubernetes_namespace.cicd]
+  depends_on      = [kubernetes_namespace.argocd]
   provider        = helm
   repository      = local.argocd-repo
   version         = "5.46.5"
-  namespace       = "cicd"
+  namespace       = "argocd"
   name            = "argocd"
   chart           = "argo-cd"
   cleanup_on_fail = true
