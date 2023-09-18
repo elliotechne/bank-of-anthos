@@ -21,7 +21,7 @@ resource "kubernetes_ingress_v1" "argocd" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "argocd.${rule.value}"
+        host = "cicd.${rule.value}"
         http {
           path {
             backend {
@@ -40,8 +40,8 @@ resource "kubernetes_ingress_v1" "argocd" {
     dynamic "tls" {
       for_each = toset(var.domain_name)
       content {
-        secret_name = "${tls.value}-argocd-tls"
-        hosts       = ["argocd.${tls.value}"]
+        secret_name = "${tls.value}-argo-tls"
+        hosts       = ["cicd.${tls.value}"]
       }
     }
   }

@@ -15,7 +15,7 @@ locals {
       server = {
         config = {
           "admin.enabled" = "true"
-          "url"           = "https://argocd.${var.domain_name[0]}"
+          "url"           = "https://cicd.${var.domain_name[0]}"
           "dex.config" = yamlencode(
             {
               connectors = [

@@ -3,6 +3,9 @@
 
 For anyone curious about Crossplane and terraform in AWS, I have a barebones public repo set up that sets up the following and infra to support the following:
 
+RUN THE FOLLOWING FOR EXTERNAL-DNS CONFIG: 
+
+kubectl create secret generic zerosslclusterissuer --from-literal=secret-key=abc123 -ncert-manager 
 
 EKS Cluster for Crossplane and Terraform provider: 1 min 2 max t3.large called "production" 
 
