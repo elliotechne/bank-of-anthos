@@ -119,7 +119,7 @@ resource "helm_release" "prometheus" {
   provider        = helm
   repository      = local.prometheus-community
   name            = "prometheus"
-  chart           = "prometheus"
+  chart           = "prometheus-community/prometheus"
   cleanup_on_fail = true
   force_update    = true
   namespace       = "kube-system"
