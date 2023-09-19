@@ -3,13 +3,13 @@ locals {
   name            = var.eks_cluster_name
   partition       = data.aws_partition.current.partition
   eks_oidc_provider_url = join("/", [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[2]],
-                                    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[3]],
-                                    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[4]])
+    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[3]],
+  [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[4]])
   eks_oidc_provider_arn = join("/", ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider"],
-                                    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[2]],
-                                    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[3]],
-                                    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[4]])
- 
+    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[2]],
+    [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[3]],
+  [split("/", data.aws_eks_cluster.default.identity[0]["oidc"][0].issuer)[4]])
+
   argocd_dex_google = yamlencode(
     {
       server = {
@@ -55,13 +55,14 @@ locals {
       }
     }
   )
-  istio-repo      = "https://istio-release.storage.googleapis.com/charts"
-  nginx-repo      = "https://kubernetes.github.io/ingress-nginx"
-  jetstack-repo   = "https://charts.jetstack.io"
-  bookinfo-repo   = "https://evry-ace.github.io/helm-charts"
-  argocd-repo     = "https://argoproj.github.io/argo-helm"
-  efs-repo        = "https://kubernetes-sigs.github.io/aws-efs-csi-driver"
-  metrics-server  = "https://kubernetes-sigs.github.io/metrics-server"
+  istio-repo           = "https://istio-release.storage.googleapis.com/charts"
+  nginx-repo           = "https://kubernetes.github.io/ingress-nginx"
+  jetstack-repo        = "https://charts.jetstack.io"
+  bookinfo-repo        = "https://evry-ace.github.io/helm-charts"
+  argocd-repo          = "https://argoproj.github.io/argo-helm"
+  efs-repo             = "https://kubernetes-sigs.github.io/aws-efs-csi-driver"
+  metrics-server       = "https://kubernetes-sigs.github.io/metrics-server"
+  prometheus-community = "https://prometheus-community.github.io/helm-charts"
   egress_all_ports = [
     {
       description = "Allow all outbound"

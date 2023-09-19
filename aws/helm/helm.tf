@@ -78,7 +78,7 @@ resource "helm_release" "aws-load-balancer-controller" {
 
   set_sensitive {
     name  = "enableServiceMutatorWebhook"
-    value = false 
+    value = false
   }
 
 }
@@ -110,6 +110,16 @@ resource "helm_release" "metrics-server" {
   repository      = local.metrics-server
   name            = "metrics-server"
   chart           = "metrics-server"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "kube-system"
+}
+
+resource "helm_release" "prometheus" {
+  provider        = helm
+  repository      = local.prometheus-community
+  name            = "prometheus"
+  chart           = "prometheus"
   cleanup_on_fail = true
   force_update    = true
   namespace       = "kube-system"
@@ -180,7 +190,7 @@ resource "helm_release" "efs" {
   force_update    = true
   namespace       = "kube-system"
   set {
-    name = "node.dnsConfig.nameservers"
+    name  = "node.dnsConfig.nameservers"
     value = "{169.254.169.253}"
   }
 }
@@ -199,8 +209,8 @@ resource "helm_release" "istio-cni" {
 
 
 resource "helm_release" "boa" {
-  count = 0 
-  provider  = helm
+  count    = 0
+  provider = helm
   depends_on = [
     kubernetes_namespace.boa
   ]
@@ -210,11 +220,11 @@ resource "helm_release" "boa" {
 }
 
 resource "helm_release" "nginx-ingress" {
-  provider        = helm
-  repository      = local.nginx-repo
-  name = "ingress-nginx"
-  chart = "ingress-nginx"
-  namespace = "ingress"
-  version = "4.0.13"
-  create_namespace = true 
+  provider         = helm
+  repository       = local.nginx-repo
+  name             = "ingress-nginx"
+  chart            = "ingress-nginx"
+  namespace        = "ingress"
+  version          = "4.0.13"
+  create_namespace = true
 }
