@@ -9,26 +9,6 @@ on:
       - 'terraform/atlantis/**'
 
 jobs:
-  docker:
-    runs-on: ubuntu-latest
-    name: Build docker image
-    steps:
-      - uses: actions/checkout@master
-      - name: Get short SHA
-        id: slug
-        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-      - name: GitHub Package Registry
-        uses: aevea/action-kaniko@master
-        with:
-          registry: ghcr.io
-          username: ${{ secrets.GH_USERNAME }}
-          password: ${{ secrets.PACKAGE_REGISTRY_PAT }}
-          build_file: ./pritunl/Dockerfile
-          image: autotune/pritunl-k8s-tf-do/pritunl
-          tag: ${{ steps.slug.outputs.sha8 }}
-          cache: true
-          cache_registry: cache
-
   tf_fmt:
     name: Deploy 
     runs-on: ubuntu-latest
