@@ -1,6 +1,5 @@
 locals {
   name        = "boa"
   environment = "test"
-  region      = "us-east-1"
+  region      = "nyc3"
 }
-// test
