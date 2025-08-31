@@ -9,9 +9,9 @@ on:
       - 'do/**'
     branches:
       - master
-    paths-ignore:
-      - 'terraform/atlantis.yaml'
-      - 'terraform/atlantis/**'
+    # paths-ignore:
+    #   - 'terraform/atlantis.yaml'
+    #   - 'terraform/atlantis/**'
 
 jobs:
   tf_fmt:
