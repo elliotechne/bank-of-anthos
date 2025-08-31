@@ -57,14 +57,6 @@ variable "domain_name" {
   default     = ["wayofthesys.com"]
 }
 
-variable "atlantis_github_user" {
-  description = "atlantis github user"
-}
-
-variable "atlantis_github_user_token" {
-  description = "atlantis github user_token"
-}
-
 variable "letsencrypt_email" {
   description = "le email"
 }
@@ -86,10 +78,6 @@ variable "github_repo" {
   default = "elliotechne/bank-of-anthos"
 }
 
-variable "github_token" {
-  type = string
-}
-
 variable "sslcom_keyid" {
   type = string
 }
@@ -107,10 +95,6 @@ variable "oauth_client_id" {
 }
 
 variable "oauth_client_secret" {
-  type = string
-}
-
-variable "oauth_cookie_secret" {
   type = string
 }
 
