@@ -1,5 +1,5 @@
 locals {
   name        = "boa"
-  environment = "test"
+  environment = "prod"
   region      = "nyc3"
 }
