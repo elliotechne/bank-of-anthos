@@ -2,6 +2,11 @@ name: Deploy Infrastructure
 
 on:
   push:
+    paths:
+      - 'do/**'
+  pull_request:
+    paths:
+      - 'do/**'
     branches:
       - master
     paths-ignore:
