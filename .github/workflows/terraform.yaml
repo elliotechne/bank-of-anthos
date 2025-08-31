@@ -25,7 +25,7 @@ jobs:
     - name: Terraform Init
       uses: hashicorp/terraform-github-actions@master
       with:
-        tf_actions_version: 0.13.0
+        tf_actions_version: 1.13.1
         tf_actions_working_dir: 'do'
         tf_actions_subcommand: 'init'
       env:
@@ -38,14 +38,14 @@ jobs:
     - name: Terraform Validate
       uses: hashicorp/terraform-github-actions@master
       with:
-        tf_actions_version: 0.13.0
+        tf_actions_version: 1.13.1
         tf_actions_working_dir: 'do'
         tf_actions_subcommand: 'validate'
 
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions@master
       with:
-        tf_actions_version: 0.13.0
+        tf_actions_version: 1.13.1
         tf_actions_working_dir: 'do'
         tf_actions_subcommand: 'apply'
         args: '-var="gh_username=${{ secrets.GH_USERNAME }}" -var="package_registry_pat=${{ secrets.PACKAGE_REGISTRY_PAT }}" -var="aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID}}" -var aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY}}" -var="oauth_client_id=${{ secrets.OAUTH_CLIENT_ID }}" -var=oauth_client_secret=${{ secrets.OAUTH_CLIENT_SECRET }} -var="sslcom_private_hmac_key=${{ secrets.SSLCOM_PRIVATE_KEYID }}" -var=sslcom_keyid=${{ secrets.SSLCOM_KEYID }} -var=sslcom_hmac_key=${{ secrets.SSLCOM_HMAC_KEY }}" -var="do_token=${{ secrets.DO_TOKEN }}" -var="letsencrypt_email"=${{ secrets.LETSENCRYPT_EMAIL }}"'
