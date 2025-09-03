@@ -1,6 +1,6 @@
 # Kubernetes Cluster
 module "cluster" {
-  source          = "terraform-digitalocean-kubernetes"
+  source          = "terraform-do-modules/kubernetes/digitalocean"
   name            = local.name
   environment     = local.environment
   region          = local.region
