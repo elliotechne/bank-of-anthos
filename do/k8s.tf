@@ -4,7 +4,7 @@ module "cluster" {
   name            = local.name
   environment     = local.environment
   region          = local.region
-  cluster_version = "1.27.4-do.0"
+  cluster_version = "1.33.1-do.3"
   vpc_uuid        = module.vpc.id
 
   critical_node_pool = {
