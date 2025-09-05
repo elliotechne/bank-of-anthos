@@ -37,5 +37,4 @@ provider "kubectl" {
   host                   = module.cluster.endpoint
   cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
   token                  = module.cluster.token
-  }
 }
