@@ -8,4 +8,23 @@ resource "helm_release" "boa" {
     kubernetes_namespace.boa
   ]
 }
-// test
+
+resource "helm_release" "external-dns" {
+  name       = "external-dns"
+  repository = "https://kubernetes-sigs.github.io/external-dns/" 
+  chart      = "external-dns"
+  version    = "1.18.0"
+
+      values = [<<EOF
+provider:
+  name: digitalocean
+env:
+  - name: DO_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: DO_TOKEN
+        key: DO_TOKEN
+    EOF
+      ]
+  ]
+}
