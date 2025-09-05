@@ -1,0 +1,6 @@
+apiVersion: eksauth.operators.com/v1
+kind: EksAuthMap
+metadata:
+  name: eksauthmap-sample
+spec:
+  # TODO(user): Add fields here

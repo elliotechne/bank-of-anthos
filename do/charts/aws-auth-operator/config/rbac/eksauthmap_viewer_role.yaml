@@ -1,0 +1,20 @@
+# permissions for end users to view eksauthmaps.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: eksauthmap-viewer-role
+rules:
+- apiGroups:
+  - eksauth.operators.com
+  resources:
+  - eksauthmaps
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - eksauth.operators.com
+  resources:
+  - eksauthmaps/status
+  verbs:
+  - get

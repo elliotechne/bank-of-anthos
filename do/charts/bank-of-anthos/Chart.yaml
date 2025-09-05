@@ -1,0 +1,4 @@
+name: bank-of-anthos 
+description: BankOfAnthos 
+version: 0.0.2
+kubeVersion: ">=1.10.0-0"
