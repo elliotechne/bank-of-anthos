@@ -8,11 +8,11 @@ resource "helm_release" "cert-manager" {
   depends_on = [
     module.cluster,
   ]
-  set {
+  set = {
     name  = "createCustomResource"
     value = "true"
   }
-  set {
+  set = {
     name  = "installCRDs"
     value = "true"
   }
