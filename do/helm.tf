@@ -25,6 +25,5 @@ env:
         name: DO_TOKEN
         key: DO_TOKEN
     EOF
-      ]
   ]
 }
