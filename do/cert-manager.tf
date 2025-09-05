@@ -28,16 +28,18 @@ resource "helm_release" "cluster-issuer" {
   depends_on = [
     helm_release.cert-manager,
   ]
-  set {
-    name  = "letsencrypt_email"
-    value = "${var.letsencrypt_email}"
-  }
-  set {
-    name = ":sslcom_keyid"
-    value = "${var.sslcom_keyid}"
-  }
-  set {
-    name  = "sslcom_private_hmac_key"
-    value = "${var.sslcom_private_hmac_key}"
-  }
+  set = [
+    {
+      name  = "letsencrypt_email"
+      value = "${var.letsencrypt_email}"
+    },
+    {
+      name = "sslcom_keyid"
+      value = "${var.sslcom_keyid}"
+    },
+    {
+      name  = "sslcom_private_hmac_key"
+      value = "${var.sslcom_private_hmac_key}"
+    }
+  ]
 }
