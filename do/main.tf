@@ -21,20 +21,26 @@ provider "digitalocean" {
 
 provider "helm" {
   kubernetes = {
-    host                   = module.cluster.endpoint
-    cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
-    token                  = module.cluster.token 
+    host  = data.digitalocean_kubernetes_cluster.boa.endpoint
+    token = data.digitalocean_kubernetes_cluster.boa.kube_config[0].token
+    cluster_ca_certificate = base64decode(
+      data.digitalocean_kubernetes_cluster.boa.kube_config[0].cluster_ca_certificate
+    )
   }
 }
 
 provider "kubernetes" {
-  host                   =  module.cluster.endpoint
-  cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
-  token                  = module.cluster.token
+  host  = data.digitalocean_kubernetes_cluster.boa.endpoint
+  token = data.digitalocean_kubernetes_cluster.boa.kube_config[0].token
+  cluster_ca_certificate = base64decode(
+    data.digitalocean_kubernetes_cluster.boa.kube_config[0].cluster_ca_certificate
+  )
 }
 
 provider "kubectl" {
-  host                   = module.cluster.endpoint
-  cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
-  token                  = module.cluster.token
+  host  = data.digitalocean_kubernetes_cluster.boa.endpoint
+  token = data.digitalocean_kubernetes_cluster.boa.kube_config[0].token
+  cluster_ca_certificate = base64decode(
+    data.digitalocean_kubernetes_cluster.boa.kube_config[0].cluster_ca_certificate
+  )
 }
