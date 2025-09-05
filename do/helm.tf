@@ -8,3 +8,4 @@ resource "helm_release" "boa" {
     kubernetes_namespace.boa
   ]
 }
+// test
