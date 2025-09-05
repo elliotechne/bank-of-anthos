@@ -9,13 +9,16 @@ resource "helm_release" "cert-manager" {
     module.cluster,
   ]
 
-  dynamic "set" {
-    for_each = var.cert_manager_values
-    content {
-      name  = set.key
-      value = set.value
+  set = [
+    {
+      name  = "createCustomResource"
+      value = "true"
+    },
+    {
+      name  = "installCRDs"
+      value = "true"
     }
-  }
+  ]
 }
 
 resource "helm_release" "cluster-issuer" {
