@@ -1,3 +1,11 @@
+variable "cert_manager_values" {
+  type = map(string)
+  default = {
+    createCustomResource = "true"
+    installCRDs          = "true"
+  }
+}
+
 variable "do_token" {
   description = "Digital Ocean Personal access token"
   type        = string
