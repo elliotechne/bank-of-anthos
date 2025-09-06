@@ -32,6 +32,29 @@ env:
   ]
 }
 
+resource "helm_release" "istio-base" {
+  provider        = helm
+  count           = 0
+  repository      = local.istio-repo
+  name            = "istio-base"
+  chart           = "base"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "istio-system"
+  depends_on      = [helm_release.metrics-server]
+}
+
+resource "helm_release" "istio-cni" {
+  provider        = helm
+  repository      = local.istio-repo
+  name            = "istio-cni"
+  chart           = "cni"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "kube-system"
+  depends_on      = [helm_release.istio-base]
+}
+
 resource "helm_release" "istiod" {
   provider        = helm
   count           = 0
@@ -64,6 +87,38 @@ resource "helm_release" "istiod" {
     },
   ]
   depends_on = [helm_release.istio-base, helm_release.istio-cni]
+}
+
+resource "helm_release" "istio-ingress" {
+  provider        = helm
+  count           = 0
+  repository      = local.istio-repo
+  name            = "istio-ingressgateway"
+  chart           = "gateway"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "istio-ingress"
+  depends_on      = [helm_release.istiod, helm_release.istio-base]
+}
+
+resource "helm_release" "metrics-server" {
+  provider        = helm
+  repository      = local.metrics-server
+  name            = "metrics-server"
+  chart           = "metrics-server"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "kube-system"
+}
+
+resource "helm_release" "prometheus" {
+  provider        = helm
+  repository      = local.prometheus-community
+  name            = "prometheus"
+  chart           = "prometheus-community/prometheus"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "kube-system"
 }
 
 resource "helm_release" "argocd" {
