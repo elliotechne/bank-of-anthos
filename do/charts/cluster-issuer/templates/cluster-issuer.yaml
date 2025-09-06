@@ -15,9 +15,6 @@ spec:
     privateKeySecretRef:
         name: prod 
     solvers:
-    - selector:
-        dnsZones: 
-          - {{ .Values.dns_zone }}
     - http01:
         ingress:
           class: nginx 
