@@ -48,22 +48,23 @@ resource "helm_release" "argocd" {
   ]
   set = [ 
    {
-    name  = "server.extraArgs"
-    value = "{--insecure}"
+     name  = "server.extraArgs"
+     value = "{--insecure}"
    },
 
    {
-    name  = "extensions.enabled"
-    value = "true"
+     name  = "extensions.enabled"
+     value = "true"
    },
 
    {
-    name  = "extensions.contents.name"
-    value = "argo-rollouts"
+     name  = "extensions.contents.name"
+     value = "argo-rollouts"
    },
 
    {
-    name  = "extensions.contents.url"
-    value = "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.1.0/extension.tar"
+     name  = "extensions.contents.url"
+     value = "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.1.0/extension.tar"
    },
+  ]
 }
