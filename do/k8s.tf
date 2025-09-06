@@ -12,7 +12,7 @@ module "cluster" {
       node_count = 1
       min_nodes  = 1
       max_nodes  = 2
-      size       = "s-1vcpu-2gb"
+      size       = "s-2vcpu-4gb"
       labels     = { "cluster" = "critical", }
       tags       = ["demo"]
       taint      = []
