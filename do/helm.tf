@@ -31,3 +31,38 @@ env:
     EOF
   ]
 }
+
+resource "helm_release" "argocd" {
+  depends_on      = [kubernetes_namespace.argocd]
+  provider        = helm
+  repository      = local.argocd-repo
+  version         = "5.46.5"
+  namespace       = "argocd"
+  name            = "argocd"
+  chart           = "argo-cd"
+  cleanup_on_fail = true
+  force_update    = true
+  values = [
+    local.argocd_dex_google,
+    local.argocd_dex_rbac
+  ]
+  set {
+    name  = "server.extraArgs"
+    value = "{--insecure}"
+  }
+
+  set {
+    name  = "extensions.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "extensions.contents.name"
+    value = "argo-rollouts"
+  }
+
+  set {
+    name  = "extensions.contents.url"
+    value = "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.1.0/extension.tar"
+  }
+}
