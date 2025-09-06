@@ -157,4 +157,13 @@ resource "helm_release" "argocd" {
    },
   ]
 }
-// test
+
+resource "helm_release" "nginx-ingress" {
+  provider         = helm
+  repository       = local.nginx-repo
+  name             = "ingress-nginx"
+  chart            = "ingress-nginx"
+  namespace        = "ingress"
+  version          = "4.0.13"
+  create_namespace = true
+}
