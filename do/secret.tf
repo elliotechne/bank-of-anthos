@@ -2,7 +2,7 @@ resource "kubernetes_secret" "eab_hmac" {
   depends_on = [module.cluster, 
                kubernetes_namespace.cert-manager]
   metadata {
-    name      = "zerossl-eab-secret"
+    name      = "zerossl-eab-hmac-key"
     namespace = "cert-manager"
   }
 
