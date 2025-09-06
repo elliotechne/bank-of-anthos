@@ -166,4 +166,15 @@ resource "helm_release" "nginx-ingress" {
   namespace        = "ingress"
   version          = "4.0.13"
   create_namespace = true
+
+  set = [{
+    name  = "cluster.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "metrics.enabled"
+    value = "true"
+  }
+  ]
 }
