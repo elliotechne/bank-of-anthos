@@ -25,7 +25,7 @@ resource "helm_release" "cert-manager" {
 resource "helm_release" "cluster-issuer" {
   name       = "cluster-issuer"
   chart      = "./charts/cluster-issuer"
-  namespace  = "kube-system"
+  namespace  = "cert-manager"
   depends_on = [
     helm_release.cert-manager,
   ]

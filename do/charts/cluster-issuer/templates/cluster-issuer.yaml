@@ -18,13 +18,6 @@ spec:
     - selector:
         dnsZones: 
           - {{ .Values.dns_zone }}
-      dns01:
-        route53:
-          accessKeyID: {{ .Values.access_key_id }} 
-          region: nyc3
-          secretAccessKeySecretRef:
-            name: zerosslclusterissuer 
-            key: secret-key
     - http01:
         ingress:
           class: nginx 
