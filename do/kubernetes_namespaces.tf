@@ -5,3 +5,11 @@ resource "kubernetes_namespace" "boa" {
     name = "boa"
   }
 }
+
+resource "kubernetes_namespace" "cert-manager" {
+  depends_on = [module.cluster]
+  provider   = kubernetes
+  metadata {
+    name = "cert-manager"
+  }
+}

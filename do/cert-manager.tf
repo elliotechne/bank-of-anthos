@@ -2,11 +2,12 @@ resource "helm_release" "cert-manager" {
   name             = "cert-manager"
   repository       = "https://charts.jetstack.io"
   chart            = "cert-manager"
-  version          = "v1.0.1"
-  namespace        = "kube-system"
+  version          = "v1.11.1"
+  namespace        = "cert-manager"
   timeout          = 120
   depends_on = [
     module.cluster,
+    kubernetes_namespace.cert-manager,
   ]
 
   set = [
