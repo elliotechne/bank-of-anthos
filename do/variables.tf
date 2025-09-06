@@ -6,6 +6,21 @@ variable "cert_manager_values" {
   }
 }
 
+variable "name" {
+  type    = string
+  default = "boa"
+}
+
+variable "costcenter" {
+  type = string
+  default = "myteam"
+}
+
+variable "bucket" {
+  type    = string
+  default = "bankofanthos"
+}
+
 variable "do_token" {
   description = "Digital Ocean Personal access token"
   type        = string

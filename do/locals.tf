@@ -1,11 +1,13 @@
 locals {
   bucket_name = var.bucket
+  name        = "boa"
+  region      = "nyc3"
+  bucket      = "bankofanthos"
 
   common_tags = {
     "Name"        = var.name
     "CostCenter"  = var.costcenter
     "Bucket"      = var.bucket
-    "Key"         = var.key
     "Environment" = terraform.workspace
   }
   environment = "Prod"
