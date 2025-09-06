@@ -136,3 +136,13 @@ variable "package_registry_pat" {
 variable "gh_username" {
   type = string
 } 
+
+variable "argocd_oidc_client_id" {
+  description = "ArgoCD OIDC Client ID"
+  type        = string
+}
+
+variable "argocd_oidc_client_secret" {
+  description = "ArgoCD OIDC Client Secret"
+  type        = string
+}
