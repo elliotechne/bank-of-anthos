@@ -13,3 +13,11 @@ resource "kubernetes_namespace" "cert-manager" {
     name = "cert-manager"
   }
 }
+
+resource "kubernetes_namespace" "argocd" {
+  depends_on = [module.cluster]
+  provider   = kubernetes
+  metadata {
+    name = "argocd"
+  }
+}
