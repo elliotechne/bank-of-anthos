@@ -12,3 +12,13 @@ resource "kubernetes_secret" "eab_hmac" {
 
   type = "kubernetes.io/opaque"
 }
+
+resource "kubernetes_secret" "do_token" {
+  metadata {
+    name      = "do-token"
+    namespace = "cert-manager"
+  }
+  data = {
+    DO_TOKEN = var.do_token
+  }
+}

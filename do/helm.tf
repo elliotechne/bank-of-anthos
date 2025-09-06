@@ -16,7 +16,8 @@ resource "helm_release" "external-dns" {
   namespace  = "cert-manager"
   version    = "1.18.0"
   depends_on = [module.cluster, 
-                kubernetes_namespace.cert-manager]
+                kubernetes_namespace.cert-manager,
+                kubernetes_secret.do_token]
 
       values = [<<EOF
 provider:
@@ -25,7 +26,7 @@ env:
   - name: DO_TOKEN
     valueFrom:
       secretKeyRef:
-        name: DO_TOKEN
+        name: do-token 
         key: DO_TOKEN
     EOF
   ]
