@@ -113,14 +113,6 @@ variable "sslcom_private_hmac_key" {
   type = string
 } 
 
-variable "oauth_client_id" {
-  type = string
-}
-
-variable "oauth_client_secret" {
-  type = string
-}
-
 variable "aws_access_key_id" {
   type = string
 }
