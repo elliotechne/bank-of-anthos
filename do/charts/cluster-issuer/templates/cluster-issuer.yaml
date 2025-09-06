@@ -27,5 +27,5 @@ spec:
             key: secret-key
     - http01:
         ingress:
-          class: nginx` 
+          class: nginx 
     
