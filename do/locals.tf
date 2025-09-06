@@ -163,5 +163,5 @@ locals {
     "Bucket"      = var.bucket
     "Environment" = terraform.workspace
   }
-  environment = "Prod"
+  environment = "prod"
 }
