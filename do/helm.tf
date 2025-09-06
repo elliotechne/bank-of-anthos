@@ -170,11 +170,11 @@ resource "helm_release" "nginx-ingress" {
   set = [{
     name  = "cluster.enabled"
     value = "true"
-  }
+  },
 
-  set {
+  {
     name  = "metrics.enabled"
     value = "true"
-  }
+  },
   ]
 }
