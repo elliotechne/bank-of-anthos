@@ -32,6 +32,39 @@ env:
   ]
 }
 
+resource "helm_release" "istiod" {
+  provider        = helm
+  count           = 0
+  repository      = local.istio-repo
+  name            = "istiod"
+  chart           = "istiod"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = "istio-system"
+  set = [ 
+    {
+      name  = "meshConfig.accessLogFile"
+      value = "/dev/stdout"
+    },
+    {
+      name  = "grafana.enabled"
+      value = "true"
+    },
+    {
+      name  = "kiali.enabled"
+      value = "true"
+    },
+    {
+      name  = "servicegraph.enabled"
+      value = "true"
+    },
+    {
+      name  = "tracing.enabled"
+      value = "true"
+    },
+  depends_on = [helm_release.istio-base, helm_release.istio-cni]
+}
+
 resource "helm_release" "argocd" {
   depends_on      = [kubernetes_namespace.argocd]
   provider        = helm
