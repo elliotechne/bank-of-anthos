@@ -65,5 +65,5 @@ resource "helm_release" "argocd" {
    {
     name  = "extensions.contents.url"
     value = "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.1.0/extension.tar"
-   }
+   },
 }
