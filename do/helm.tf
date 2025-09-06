@@ -46,23 +46,24 @@ resource "helm_release" "argocd" {
     local.argocd_dex_google,
     local.argocd_dex_rbac
   ]
-  set {
+  set = [ 
+   {
     name  = "server.extraArgs"
     value = "{--insecure}"
-  }
+   },
 
-  set {
+   {
     name  = "extensions.enabled"
     value = "true"
-  }
+   },
 
-  set {
+   {
     name  = "extensions.contents.name"
     value = "argo-rollouts"
-  }
+   },
 
-  set {
+   {
     name  = "extensions.contents.url"
     value = "https://github.com/argoproj-labs/rollout-extension/releases/download/v0.1.0/extension.tar"
-  }
+   }
 }
