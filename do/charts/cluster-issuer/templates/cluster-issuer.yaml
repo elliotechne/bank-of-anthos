@@ -21,7 +21,7 @@ spec:
       dns01:
         route53:
           accessKeyID: {{ .Values.access_key_id }} 
-          region: us-east-2
+          region: nyc3
           secretAccessKeySecretRef:
             name: zerosslclusterissuer 
             key: secret-key
