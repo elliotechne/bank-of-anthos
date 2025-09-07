@@ -85,7 +85,6 @@ resource "helm_release" "istiod" {
       value = "true"
     },
   ]
-  depends_on = [helm_release.istio-base, helm_release.istio-cni]
 }
 
 resource "helm_release" "istio-ingress" {
