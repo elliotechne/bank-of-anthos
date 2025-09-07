@@ -1,13 +1,14 @@
 resource "kubernetes_ingress_v1" "argocd" {
   depends_on = [
     helm_release.argocd
+    helm_release.cluster_issuer
   ]
   for_each = toset(var.domain_name)
   metadata {
     name      = "${each.key}-argocd-ingress"
     namespace = "argocd"
     annotations = {
-      "kubernetes.io/ingress.class"          = "istio"
+      "kubernetes.io/ingress.class"          = "nginx"
       "ingress.kubernetes.io/rewrite-target" = "/"
       "cert-manager.io/cluster-issuer"       = "zerossl"
     }
