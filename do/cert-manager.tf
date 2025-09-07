@@ -26,7 +26,7 @@ resource "helm_release" "cluster-issuer" {
   name       = "cluster-issuer"
   chart      = "./charts/cluster-issuer"
   namespace  = "cert-manager"
-  version    = "0.2.0"
+  version    = "0.1.9"
   depends_on = [
     helm_release.cert-manager,
   ]
