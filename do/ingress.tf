@@ -1,6 +1,6 @@
 resource "kubernetes_ingress_v1" "argocd" {
   depends_on = [
-    helm_release.argocd
+    helm_release.argocd,
     helm_release.cluster_issuer
   ]
   for_each = toset(var.domain_name)
