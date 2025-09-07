@@ -15,7 +15,12 @@ spec:
     privateKeySecretRef:
         name: prod 
     solvers:
-    - http01:
-        ingress:
-          class: nginx 
+    - dns01:
+        digitalocean:
+          tokenSecretRef:
+            name: do-token
+            key: DO_TOKEN
+  # - http01:
+  #     ingress:
+  #         class: nginx 
     
