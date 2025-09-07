@@ -29,3 +29,11 @@ resource "kubernetes_namespace" "istio-system" {
     name = "istio-system"
   }
 }
+
+resource "kubernetes_namespace" "istio-ingress" {
+  depends_on = [module.cluster]
+  provider   = kubernetes
+  metadata {
+    name = "istio-ingress"
+  }
+}
