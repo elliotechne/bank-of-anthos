@@ -21,3 +21,11 @@ resource "kubernetes_namespace" "argocd" {
     name = "argocd"
   }
 }
+
+resource "kubernetes_namespace" "istio-system" {
+  depends_on = [module.cluster]
+  provider   = kubernetes
+  metadata {
+    name = "istio-system"
+  }
+}
