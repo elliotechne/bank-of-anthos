@@ -7,7 +7,7 @@ resource "kubernetes_secret" "eab_hmac" {
   }
 
   data = {
-    secret = base64encode(var.sslcom_private_hmac_key)
+    secret = var.sslcom_private_hmac_key
   }
 
   type = "kubernetes.io/opaque"
