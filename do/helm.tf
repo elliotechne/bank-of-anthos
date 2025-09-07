@@ -34,7 +34,6 @@ env:
 
 resource "helm_release" "istio-base" {
   provider        = helm
-  count           = 0
   repository      = local.istio-repo
   name            = "istio-base"
   chart           = "base"
@@ -57,7 +56,6 @@ resource "helm_release" "istio-cni" {
 
 resource "helm_release" "istiod" {
   provider        = helm
-  count           = 0
   repository      = local.istio-repo
   name            = "istiod"
   chart           = "istiod"
@@ -91,7 +89,6 @@ resource "helm_release" "istiod" {
 
 resource "helm_release" "istio-ingress" {
   provider        = helm
-  count           = 0
   repository      = local.istio-repo
   name            = "istio-ingressgateway"
   chart           = "gateway"
