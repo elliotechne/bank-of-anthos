@@ -23,7 +23,6 @@ resource "helm_release" "cert-manager" {
 }
 
 resource "helm_release" "cluster-issuer" {
-  count      = 0
   name       = "cluster-issuer"
   chart      = "./charts/cluster-issuer"
   namespace  = "cert-manager"
