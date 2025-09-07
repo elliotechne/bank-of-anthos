@@ -88,6 +88,7 @@ resource "helm_release" "istiod" {
 }
 
 resource "helm_release" "istio-ingress" {
+  depends_on      = [helm_release.istiod, helm_release.istio-base, kubernetes_namespace.istio-system]
   provider        = helm
   repository      = local.istio-repo
   name            = "istio-ingressgateway"
@@ -95,7 +96,6 @@ resource "helm_release" "istio-ingress" {
   cleanup_on_fail = true
   force_update    = true
   namespace       = "istio-ingress"
-  depends_on      = [helm_release.istiod, helm_release.istio-base]
 }
 
 resource "helm_release" "metrics-server" {
