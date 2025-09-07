@@ -4,4 +4,3 @@ module "domain" {
   name   = "wayofthesys.com"
 }
 
-#test
