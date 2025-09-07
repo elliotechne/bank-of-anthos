@@ -33,7 +33,7 @@ env:
 }
 
 resource "helm_release" "istio-base" {
-  depends_on      = [kubernetes_namespace.istio-system]
+  depends_on      = [helm_release.metrics-server, kubernetes_namespace.istio-system]
   provider        = helm
   repository      = local.istio-repo
   name            = "istio-base"
@@ -41,11 +41,10 @@ resource "helm_release" "istio-base" {
   cleanup_on_fail = true
   force_update    = true
   namespace       = "istio-system"
-  depends_on      = [helm_release.metrics-server]
 }
 
 resource "helm_release" "istio-cni" {
-  depends_on      = [kubernetes_namespace.istio-system]
+  depends_on      = [helm_release.istio-base, kubernetes_namespace.istio-system]
   provider        = helm
   repository      = local.istio-repo
   name            = "istio-cni"
@@ -53,11 +52,10 @@ resource "helm_release" "istio-cni" {
   cleanup_on_fail = true
   force_update    = true
   namespace       = "kube-system"
-  depends_on      = [helm_release.istio-base]
 }
 
 resource "helm_release" "istiod" {
-  depends_on      = [kubernetes_namespace.istio-system]
+  depends_on      = [helm_release.istio-base, helm_release.istio-cni, kubernetes_namespace.istio-system]
   provider        = helm
   repository      = local.istio-repo
   name            = "istiod"
