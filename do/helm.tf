@@ -33,6 +33,7 @@ env:
 }
 
 resource "helm_release" "istio-base" {
+  depends_on      = [kubernetes_namespace.istio-system]
   provider        = helm
   repository      = local.istio-repo
   name            = "istio-base"
@@ -44,6 +45,7 @@ resource "helm_release" "istio-base" {
 }
 
 resource "helm_release" "istio-cni" {
+  depends_on      = [kubernetes_namespace.istio-system]
   provider        = helm
   repository      = local.istio-repo
   name            = "istio-cni"
@@ -55,6 +57,7 @@ resource "helm_release" "istio-cni" {
 }
 
 resource "helm_release" "istiod" {
+  depends_on      = [kubernetes_namespace.istio-system]
   provider        = helm
   repository      = local.istio-repo
   name            = "istiod"
