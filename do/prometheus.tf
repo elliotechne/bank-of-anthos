@@ -1,4 +1,4 @@
-resource "helm_release" "prometheus" {
+/* resource "helm_release" "prometheus" {
   depends_on = [kubernetes_namespace.loki]
   name       = "prom-operator"
   repository = "https://prometheus-community.github.io/helm-charts"
@@ -29,3 +29,4 @@ resource "helm_release" "promtail" {
     value = "loki"
   }
 }
+*/
