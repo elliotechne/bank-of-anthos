@@ -58,13 +58,20 @@ jobs:
           [[ "$manifest" == *loadgenerator.yaml ]] && continue
           kubectl apply -f "$manifest"
         done
+        # The manifests enable Google Cloud Trace / Stackdriver exporters,
+        # which need GCP Application Default Credentials and crash outside
+        # GCP (_CLOUD_SDK_MISSING_CREDENTIALS). Turn GCP telemetry off.
+        kubectl set env deployment --all \
+          ENABLE_TRACING=false \
+          ENABLE_METRICS=false \
+          SPRING_CLOUD_GCP_TRACE_ENABLED=false
 
     - name: Wait For Pods
       run: |
         kubectl rollout status statefulset/accounts-db --timeout=300s
         kubectl rollout status statefulset/ledger-db --timeout=300s
         for deploy in frontend contacts userservice ledgerwriter transactionhistory balancereader; do
-          kubectl wait --for=condition=available --timeout=300s "deployment/$deploy"
+          kubectl rollout status "deployment/$deploy" --timeout=300s
         done
         kubectl get pods -o wide
 
