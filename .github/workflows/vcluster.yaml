@@ -58,6 +58,12 @@ jobs:
           [[ "$manifest" == *loadgenerator.yaml ]] && continue
           kubectl apply -f "$manifest"
         done
+        # Inside vind's nested containers the JVM can't find its cgroup mount
+        # and crashes at startup (NPE in CgroupInfo.getMountPoint()). Disable
+        # JVM container detection and set heap/CPU explicitly to stay within
+        # the 512Mi / 500m limits. This only applies to the CI vCluster.
+        kubectl set env deployment/ledgerwriter deployment/balancereader deployment/transactionhistory \
+          JAVA_TOOL_OPTIONS="-XX:-UseContainerSupport -XX:ActiveProcessorCount=1 -Xms128m -Xmx256m"
 
     - name: Wait For Pods
       run: |
