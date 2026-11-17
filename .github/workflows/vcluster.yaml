@@ -80,7 +80,9 @@ jobs:
       run: |
         nohup kubectl port-forward svc/frontend 8080:80 > port-forward.log 2>&1 &
         for i in $(seq 1 30); do
-          if curl -fsS -o /dev/null http://localhost:8080/ready; then
+          # -s without -S: expected connection errors while the
+          # port-forward starts up stay quiet.
+          if curl -fs -o /dev/null http://localhost:8080/ready; then
             echo "Frontend is reachable"; exit 0
           fi
           sleep 2
